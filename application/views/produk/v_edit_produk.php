@@ -18,7 +18,11 @@
             </div>
             <div class="form-group">
                 <label for="">Harga</label>
-                <input type="text" name="harga" class="form-control form-control-user" value="<?php echo $u->harga ?>">
+                <input type="text" name="harga_produk" class="form-control form-control-user" value="<?php echo $u->harga_produk ?>">
+            </div>
+            <div class="form-group">
+                <label for="">Berat</label>
+                <input type="text" name="berat_produk" class="form-control form-control-user" value="<?php echo $u->berat_produk ?>">
             </div>
             <button type="submit" class="btn btn-primary btn-user btn-block">
               Update Produk

@@ -43,6 +43,7 @@ class M_auth extends CI_Model{
 
 			$data_session = array(
 									'logged_in' => TRUE,
+									'username' => $data_login->username,
 									'id_login' => $data_login->NIP,
 									'nama_login' => $data_login->Nama,
 									'Status' => $data_login->Status,
@@ -69,6 +70,7 @@ class M_auth extends CI_Model{
 
 			$data_session = array(
 									'logged_in' => TRUE,
+									'username' => $data_login->username,
 									'id_login' => $data_login->nim,
 									'status' => 'mahasiswa',
 									'nama_login' => $data_login->nama

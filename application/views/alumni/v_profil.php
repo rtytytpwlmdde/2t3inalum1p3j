@@ -69,7 +69,7 @@
                                                     <a  href="<?php echo base_url('alumni/percakapan'); ?>">Percakapan</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('alumni/legalisir'); ?>">Legalisir Online</a>
+                                                    <a  href="<?php echo base_url('legalisir/legalisir'); ?>">Legalisir Online</a>
                                                 </li>
                                                 <li class="list-inline-item dropdown">
                                                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

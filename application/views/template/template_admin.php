@@ -64,7 +64,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('admin/produk'); ?>">
+        <a class="nav-link" href="<?php echo base_url('produk/produk'); ?>">
           <i class="fas fa-fw fa-co"></i>
           <span>Produk</span></a>
       </li>

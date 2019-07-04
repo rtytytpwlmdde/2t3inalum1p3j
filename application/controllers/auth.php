@@ -32,10 +32,10 @@ class auth extends CI_Controller {
 					$status = $this->session->userdata('status');
 					if($status=="admin"){
 						redirect('admin/index');
-					}else if ($status == "operator"){
-						redirect('operator/index');
+					}else if ($status == "recording"){
+						redirect('recording/index');
 					}else{
-						redirect('validator/index');
+						redirect('keuangan/index');
 					}
 				} else if($this->m_auth->cek_user_mahasiswa() == TRUE){ 
 					redirect('alumni/index');

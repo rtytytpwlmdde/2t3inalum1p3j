@@ -59,13 +59,15 @@
                                         <div class="col-md-8 profile-center">
                                             <ul class="list-inline profile-links d-flex justify-content-between w-shadow rounded">
                                                 <li class="list-inline-item profile-active">
-                                                    <a href="#">Timeline</a>
+                                                    <a href="<?php echo base_url('alumni/'); ?>">Timeline</a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a  href="<?php echo base_url('alumni/data_alumni/'); ?>">About</a></li>
-                                                
                                                 <li class="list-inline-item">
-                                                    <a href="#">Legalisir Online</a>
+                                                    <a  href="<?php echo base_url('alumni/percakapan'); ?>">Percakapan</a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a  href="<?php echo base_url('legalisir/legalisir'); ?>">Legalisir Online</a>
                                                 </li>
                                                 <li class="list-inline-item dropdown">
                                                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,28 +86,13 @@
                                             <div class="post border-bottom p-3 bg-white w-shadow">
                                                 <div class="media text-muted ">
                                                     <div class="content">
-                                                           
-                                                            <h5 class="mb-3  text-muted">PEMBAYARAN</h5>
-                                                            <p class="text-muted">Silahkan transfer ke nomor rekening berikut sesuai dengan nominal yang harus dibayar pada detail pesanan.</p>
-                                                            <div class="settings-form">
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <img class="" width="120" height="50" src="<?php echo base_url(); ?>/assets/images/icons/mandiri.png" alt="Paymant image">
-                                                                        
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <div>
-                                                                            <h3 class="">411111******1111</h3>
-                                                                            <span class="text-muted">A.N Sueddi Sihotang</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <h5 class="mb-3  page-title text-muted">KERANJANG</h5>
+                                                            <p class="text-muted">List Pesanan Yang telah dilakukan.</p>
                                                     </div>
                                                 </div>
                                             </div> <br>
                                             <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class="media text-muted ">
+                                                <div class=" text-muted ">
                                                     <div class="content">
                                                         <div class="settings-form ">
                                                             <h6>Detail Pesanan</h6>
@@ -116,41 +103,56 @@
                                                                     <th scope="col">Produk</th>
                                                                     <th scope="col">Jumlah</th>
                                                                     <th scope="col">Harga</th>
+                                                                    <th scope="col">Aksi</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    <?php 
+                                                                    $no= 1;
+                                                                    $total_berat = 0;
+                                                                    $total_harga = 0;
+                                                                    foreach($keranjang as $u){
+                                                                        
+                                                                    $id_transaksi = $u->id_transaksi;?>
                                                                     <tr>
-                                                                    <th scope="row">1</th>
-                                                                        <td>Ijazah</td>
-                                                                        <td>30</td>
-                                                                    <td>Rp 50000 ,-</td>
+                                                                        <td scope="row"><?= $no++; ?></td>
+                                                                        <td><?= $u->nama_produk; ?></td>
+                                                                        <td><?= $u->jumlah_produk; ?></td>
+                                                                        <td hidden ><?= $total_berat += $u->berat_produk_transaksi; ?></td>
+                                                                        <td><?= $total_harga += $u->harga_transaksi; ?></td>
+                                                                        <td>
+                                                                            <a data-toggle="modal" data-target="#modal<?=$u->id_detail_transaksi?>" class="btn btn-warning btn-sm text-white"><i class="fas fa-pencil-alt" title="edit pesanan ini"></i></a>
+                                                                            <a href="<?php echo base_url('legalisir/hapusProdukKeranjang/'.$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="hapus pesanan ini"></i></a>
+                                                                        </td>
                                                                     </tr>
+                                                                    <?php } ?>
                                                                     <tr>
-                                                                    <th scope="row">2</th>
-                                                                        <td>Transkrip</td>
-                                                                        <td>60</td>
-                                                                    <td>Rp 60000 ,-</td>
-                                                                    </tr>
                                                                     <tr>
-                                                                    <th scope="row">3</th>
-                                                                        <td colspan="2">Ongkos kirim</td>
-                                                                        <td>Rp 37500 ,-</td>
+                                                                    <th scope="row">#</th>
+                                                                        <td colspan="3"><strong>Total harga sementara</strong></td>
+                                                                        <td><strong>Rp <?= $total_harga ?> ,-</strong></td>
                                                                     </tr>
-                                                                    <tr>
-                                                                    <th scope="row">4</th>
-                                                                        <td colspan="2"><strong>Total yang harus dibayar</strong></td>
-                                                                        <td><strong>Rp 147500 ,-</strong></td>
+                                                                    <th scope="row">#</th>
+                                                                        <td colspan="4">*Total berat = <?= $total_berat; ?> gram</td>
                                                                     </tr>
+                                                                    <th scope="row">#</th>
+                                                                        <td colspan="4">*Ongkos kirim belum termasuk</td>
+                                                                    </tr>
+
                                                                     
                                                                 </tbody>
                                                             </table>
-                                                                    <small id="emailHelp" class="form-text text-muted">*Lakukan validasi pembayaran dalam 24 jam. Pesanan dianggap gagal jika tidak divalidasi dalam 24 jam</small>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-md-12 text-right">
-                                                    <a href="<?php echo base_url('alumni/pembayaran/'); ?>" class="btn btn-primary btn-sm">Validasi Pembayaran</a>
+                                                    <form action="<?php echo base_url('legalisir/buatPesanan/'); ?>" method="post">
+                                                    <input hidden type="text" name="id_transaksi" value="<?= $id_transaksi; ?>">
+                                                    <input hidden type="text" name="total_harga" value="<?= $total_harga; ?>">
+                                                    <input hidden type="text" name="total_berat" value="<?= $total_berat; ?>">
+                                                    <button type="submit" class="btn btn-primary btn-sm">Lanjut mengisi alamat pengiriman</button>
+                                                    </form>
                                                 </div>
                                             </div> <br>
                                             
@@ -161,3 +163,41 @@
                         </div>
                     </div>
                 </div>
+
+
+<?php  foreach($keranjang as $k){ 
+    $tot_harga=0; ?>
+<div class="modal fade" id="modal<?=$k->id_detail_transaksi?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Produk Pesanan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="<?php echo base_url('legalisir/editProdukKeranjang/'); ?>" method="post">
+        <div class="form-group">
+            <label>Nama Produk</label>
+            <input hidden type="text" name="id_detail_transaksi" class="form-control" value="<?= $k->id_detail_transaksi;?>">
+            <input hidden type="text" name="id_produk" class="form-control" value="<?= $k->id_produk;?>">
+            <input hidden type="text" name="id_transaksi" class="form-control" value="<?= $k->id_transaksi;?>">
+            <input hidden type="text" name="berat_produk" class="form-control" value="<?= $k->berat_produk;?>">
+            <input hidden type="text" name="harga_produk" class="form-control" value="<?= $k->harga_produk;?>">
+            <input disabled type="nama_produk" class="form-control" value="<?= $k->nama_produk;?>">
+        </div>
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input type="text" name="jumlah_produk" class="form-control" value="<?= $k->jumlah_produk; ?>">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Ubah Pesanan</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<?php } ?>

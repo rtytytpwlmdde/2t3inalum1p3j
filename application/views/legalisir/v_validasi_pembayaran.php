@@ -1,3 +1,27 @@
+<?php
+        $notif = $this->session->flashdata('gagal');
+        if($notif != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong>Validasi Pembayaran Tidak Berhasil! </strong> '.$notif.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $notifsukses = $this->session->flashdata('sukses');
+        if($notifsukses != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$notifsukses.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
 <div class="row profile-right-side-content">
                     <div class="user-profile">
                         <div class="profile-header-background">
@@ -8,7 +32,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="row profile-rows">
+                        <div class="row ">
                             <div class="col-md-3">
                                 <div class="profile-info-left">
                                     <div class="text-center">
@@ -51,12 +75,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <div class="profile-info-right">
 
                                     <!-- Posts section -->
                                     <div class="row">
-                                        <div class="col-md-8 profile-center">
+                                        <div class="col-md-12 profile-center">
                                             <ul class="list-inline profile-links d-flex justify-content-between w-shadow rounded">
                                                 <li class="list-inline-item profile-active">
                                                     <a href="<?php echo base_url('alumni/'); ?>">Timeline</a>
@@ -67,7 +91,7 @@
                                                     <a  href="<?php echo base_url('alumni/percakapan'); ?>">Percakapan</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('alumni/legalisir'); ?>">Legalisir Online</a>
+                                                    <a  href="<?php echo base_url('legalisir/legalisir'); ?>">Legalisir Online</a>
                                                 </li>
                                                 <li class="list-inline-item dropdown">
                                                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,67 +108,89 @@
                                             </ul>
                                            
                                             <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class="media text-muted ">
+                                                <div class=" text-muted ">
                                                     <div class="content">
-                                                        <div class="settings-form p-4">
-                                                            <h2>Legalisir Online</h2>
-                                                            <h6>Silahkan isi form berikut untuk keperluan legalisir online</h6>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-heading">
+                                                                <h5 class="mb-3  page-title text-muted">VALIDASI PEMBAYARAN</h5>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <form action="<?php echo base_url('legalisir/validasiPembayaran/'); ?>" method="post" enctype="multipart/form-data">
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Id Transaksi</label>
+                                                                        <input type="text" class="form-control" name="id_transaksi" >
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Nama Bank</label>
+                                                                        <input type="text" class="form-control" name="bank" >
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Jumlah Transfer</label>
+                                                                        <input type="text" class="form-control" name="jumlah_transfer">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Tanggal Transfer</label>
+                                                                        <input type="date" class="form-control" name="tanggal_transfer" >
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Jam Tranfer</label>
+                                                                        <input type="time" class="form-control" name="jam_transfer" >
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="weight">Bukti Tranfer</label>
+                                                                        <input type="file" class="form-control" name="bukti_transfer" >
+                                                                    </div>
+                                                                    <div class="form-group text-right">
+                                                                        <button type="submit" value="upload" class="btn btn-primary">Validasi Pembayaran</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div><br>
-                                            <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class="media text-muted ">
-                                                    <div class="content">
-                                                        <div class="settings-form p-4">
-                                                            <form action="<?php echo base_url('produk/updateProduk'); ?>" method="post" class="mt-4 settings-form">
-                                                            <?php foreach($produk as $u): ?>
-                                                                <div class="row">
-                                                                <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label for="settingsAddress">Nama Produk</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="settingsAddress">Harga</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="settingsAddress">Jumlah</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label for="settingsAddress"><?php echo $u->nama_produk ?></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <small id="emailHelp" class="form-text text-muted">Rp <?php echo $u->harga ?> ,-</small>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <input type="number" name="<?php echo $u->id_produk ?>"  min="5" max="30" class="form-control" id="settingsPhoneNumber" placeholder="Jumlah">
-                                                                            <small id="emailHelp" class="form-text text-muted">*Min 5 Maks 30.</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <?php endforeach ?>
-                                                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                                    Buat Pesanan
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="profile-info-right">
+                                    <!-- Posts section -->
+                                    <div class="row">
+                                        <div class="col-md-12 profile-center"><br>
+                                           
+                                            <div class="post border-bottom p-2 bg-white w-shadow">
+                                                <div class=" text-muted ">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="panel panel-primary">
+                                                                    <div class="panel-heading">
+                                                                        <h6 class="mb-3  page-title text-muted">Alur Transaksi</h6>
+                                                                    </div>
+                                                                    <div class="panel-body" style="font-size:0.8em;">
+                                                                        <p>1. Costumer membuat pesanan <i class='text-success bx bxs-check-circle' ></i></p>
+                                                                        <p>2. Costumer mengisi alamat pengiriman <i class='text-success bx bxs-check-circle' ></i></p>
+                                                                        <p>3. Costumer melakukan pembayaran <i class='bx bx-loader' ></i></p>
+                                                                        <p>4. Pembayaran telah divalidasi <i class='bx bx-loader' ></i></p>
+                                                                        <p>5. Pesanan Di Packing <i class='bx bxs-x-circle' ></i></p>
+                                                                        <p>6. Pesanan Di Kirim <i class='bx bxs-x-circle' ></i></p>
+                                                                        <p>7. Pesanan Sampai Di Tujuan <i class='bx bxs-x-circle' ></i></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>
+            </div>
+

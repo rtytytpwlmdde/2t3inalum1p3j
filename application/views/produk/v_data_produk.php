@@ -8,7 +8,7 @@
   </div>
   <div class="col-sm-6">
     <div class="d-flex flex-row-reverse bd-highlight">
-     <a href="<?php echo base_url('admin/tambah_produk'); ?>" class="btn btn-info">Tambah Produk</a>
+     <a href="<?php echo base_url('produk/tambah_produk'); ?>" class="btn btn-info">Tambah Produk</a>
     </div>
   </div>
 </div>
@@ -20,8 +20,9 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>ID Produk</th>
-            <th>Nama Produk</th>
+            <th>ID </th>
+            <th>Nama </th>
+            <th>Harga</th>
             <th>Harga</th>
             <th>Aksi</th>
           </tr>
@@ -35,7 +36,8 @@
         <td><?php echo $no++ ?></td>
                 <td><?php echo $u->id_produk ?></td>
                 <td><?php echo $u->nama_produk ?></td>
-                <td><?php echo $u->harga ?></td>
+                <td><?php echo $u->harga_produk ?></td>
+                <td><?php echo $u->berat_produk ?></td>
                 <td class="sorting_1" style="">
                     <a href="<?php echo site_url('produk/editProduk/'.$u->id_produk); ?>" class="text-warning" title="Edit">
                     <i class="fas fa-edit"></i>

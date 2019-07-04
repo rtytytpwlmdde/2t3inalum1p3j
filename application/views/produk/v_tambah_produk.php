@@ -16,7 +16,11 @@
             </div>
             <div class="form-group">
                 <label for="">Harga</label>
-                <input type="text" name="harga" class="form-control form-control-user" id="" placeholder="Harga per lembar">
+                <input type="text" name="harga_produk" class="form-control form-control-user" id="" placeholder="Harga per lembar">
+            </div>
+            <div class="form-group">
+                <label for="">Berat</label>
+                <input type="text" name="berat_produk" class="form-control form-control-user" id="" placeholder="Berat per lembar dalam satuan GRAM">
             </div>
             <button type="submit" class="btn btn-primary btn-user btn-block">
               Tambah Produk

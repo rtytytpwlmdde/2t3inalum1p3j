@@ -52,29 +52,34 @@ class Legalisir extends CI_Controller {
     
     function tambahTransaksi()
 	{
-        
+        $id_pemesan = $this->session->userdata('username');
 		$id_produk = $this->input->post('id_produk');
 		$nama_produk = $this->input->post('nama_produk');
 		$harga_produk = $this->input->post('harga_produk');
         $berat_produk = $this->input->post('berat_produk');
-        $status_pesanan = '0';
-        $harga_transaksi = 5*$harga_produk;
-        
-        $id_pemesan = $this->session->userdata('username');
-        $jumlah_produk = 5;
-        $berat_transaksi = 5*$berat_produk;
-
-        //////////////////////// mendapatkan id transaksi
-        $transaksi = $this->m_legalisir->getIdTransaksiTerbesar();
+        $jumlah_produk = $this->input->post('jumlah_produk');
+        $harga_transaksi = $jumlah_produk*$harga_produk;
         $tanggal_transaksi = date("Y-m-d");
-        $id = null;
-        foreach ($transaksi as $u){ echo $id=$u->id_transaksi;}
-        if($id != null){
-            $id_transaksi = $id+1;
-        }else{
-            $kode_tgl = str_replace("-","",$tanggal_transaksi);
-            $id_transaksi = "1".$kode_tgl."0001";
-        }
+        $status_pesanan = '0';
+		$id_transaksi = 0;
+        $berat_transaksi = $jumlah_produk*$berat_produk;
+
+		//////////////////////// mendapatkan id transaksi
+        if($this->m_legalisir->cekKeranjang() == false){
+			if($this->m_legalisir->getIdTransaksiTerbesar() != false){
+				$transaksi = $this->m_legalisir->getIdTransaksiTerbesar();
+				$id = null;
+				foreach ($transaksi as $u){ echo $id=$u->id_transaksi;}
+				$id_transaksi = $id+1;
+			}else{
+				$kode_tgl = str_replace("-","",$tanggal_transaksi);
+				$id_transaksi = "1".$kode_tgl."0001";
+			}
+		}else{
+			$transaksi = $this->m_legalisir->cekKeranjang();
+			foreach ($transaksi as $u){ echo $id=$u->id_transaksi;}
+			$id_transaksi = $id;
+		}
         //////////////////////////
 
         if($this->m_legalisir->cekKeranjang() == false){
@@ -94,23 +99,32 @@ class Legalisir extends CI_Controller {
             );
             $this->m_admin->tambahdata($data_detail_transaksi,'detail_transaksi');
         }else{
-            $transaksi = $this->m_legalisir->cekKeranjang();
-            $id_transaksi1 = null;
-            foreach ($transaksi as $u){ 
-                $id_transaksi1 = $u->id_transaksi;
-            }
-            $data_detail_transaksi = array(
-                'id_transaksi' => $id_transaksi1,
-                'id_produk' => $id_produk,
-                'jumlah_produk' => $jumlah_produk,
-                'status_pesanan' => $status_pesanan,
-                'berat_produk_transaksi' => $berat_transaksi,
-                'harga_transaksi' => $harga_transaksi
-            );
-            $this->m_admin->tambahdata($data_detail_transaksi,'detail_transaksi');
+			if($this->m_legalisir->cekProdukKeranjang($id_transaksi) != false){
+				$data_detail_transaksi = array(
+					'id_transaksi' => $id_transaksi,
+					'id_produk' => $id_produk,
+					'jumlah_produk' => $jumlah_produk,
+					'berat_produk_transaksi' => $berat_transaksi,
+					'harga_transaksi' => $harga_transaksi
+				);
+				$this->m_admin->tambahdata($data_detail_transaksi,'detail_transaksi');
+			}else{
+				$produk = $this->m_legalisir->cekProdukKeranjang($id_transaksi);
+				foreach ($produk as $u){ echo $idx = $u->id_detail_transaksi;}
+				$id_detail_transaksi = $idx;
+				$data_detail_transaksi = array(
+					'id_transaksi' => $id_transaksi,
+					'id_produk' => $id_produk,
+					'jumlah_produk' => $jumlah_produk,
+					'berat_produk_transaksi' => $berat_transaksi,
+					'harga_transaksi' => $harga_transaksi
+				);
+				$where = array('id_detail_transaksi' => $id_detail_transaksi);
+				$this->m_admin->update_data($where,$data_detail_transaksi,'detail_transaksi');
+			}
         }
-		$this->session->set_flashdata('notif', "data transaksi berhasil ditambahkan");
-		redirect('legalisir/legalisir/'.$id_pemesan);
+		$this->session->set_flashdata('sukses', "Produk telah ditambahkan ke dalam daftar pesanan saya");
+		redirect('legalisir/legalisir/');
     }
     
     function keranjang(){
@@ -125,11 +139,18 @@ class Legalisir extends CI_Controller {
 		}
     }
 
-    function hapusProdukKeranjang($id){
-		$where = array('id_detail_transaksi' => $id);
+    function hapusProdukKeranjang($id_transaksi, $id_detail_transaksi){
+		$where = array('id_detail_transaksi' => $id_detail_transaksi);
+		$where_transaksi = array('id_transaksi' => $id_transaksi);
 		$this->m_admin->hapus_data($where,'detail_transaksi');
-		$this->session->set_flashdata('notif', "Data Produk berhasil dihapus");
-		redirect('legalisir/keranjang');
+        if($this->m_legalisir->cekProdukDetailTransaksi($id_transaksi) == true){
+			$this->session->set_flashdata('sukses', "Data Produk berhasil dihapus");
+			redirect('legalisir/keranjang');
+		}else{
+			$this->m_admin->hapus_data($where_transaksi,'transaksi');
+			$this->session->set_flashdata('sukses', "Data Produk dan transaksi berhasil dihapus");
+			redirect('legalisir/legalisir');
+		}
     }
     
     function editProdukKeranjang(){
@@ -339,4 +360,64 @@ class Legalisir extends CI_Controller {
 		$data['main_view'] = 'legalisir/v_detail_pesanan_saya';
 		$this->load->view('template/template_alumni', $data);
 	}
+
+	public function transaksi($status)
+	{
+        if($this->m_legalisir->getDataTransaksi($status) == false){
+            $data['data_transaksi'] = 'kosong';
+        }else{
+            $data['data_transaksi'] = 'ada';
+            $data['transaksi'] = $this->m_legalisir->getDataTransaksi($status);
+        }
+        $data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
+        $data['main_view'] = 'legalisir/v_list_transaksi';
+        $this->load->view('template/template_operator', $data);
+	}
+	
+	public function prosesTransaksi()
+	{
+        $id_transaksi = $this->input->post('id_transaksi');
+        $status_pesanan = $this->input->post('status_pesanan');
+        $nomor_resi = $this->input->post('nomor_resi');
+        $data = array(
+            'id_transaksi' => $id_transaksi,
+            'nomor_resi' => $nomor_resi,
+            'status_pesanan' => $status_pesanan
+        );
+		$where = array('id_transaksi' => $id_transaksi);
+
+		$this->m_admin->update_data($where,$data,'transaksi');
+		$this->session->set_flashdata('sukses', "Status transaksi $id_transaksi telah di ubah");
+		redirect('legalisir/detailTransaksi/'.$id_transaksi);
+	}
+	
+	public function detailTransaksi($id_transaksi)
+	{
+        $data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
+		$data['produk'] = $this->m_legalisir->getProdukPesananSaya($id_transaksi);
+		$data['transaksi'] = $this->m_legalisir->getDetailPesananSaya($id_transaksi);
+		$data['main_view'] = 'legalisir/v_detail_transaksi';
+		$this->load->view('template/template_operator', $data);
+    }
+	
+	public function buktiTransfer($id_transaksi)
+	{
+		$data['transaksi'] = $this->m_recording->getBuktiTransfer($id_transaksi);
+		$this->load->view('legalisir/v_bukti_transfer', $data);
+	}
+	
+	public function verifikasiPembayaran()
+	{
+        $id_transaksi = $this->input->post('id_transaksi');
+        $status_pesanan = '4';
+        $data = array(
+            'id_transaksi' => $id_transaksi,
+            'status_pesanan' => $status_pesanan
+        );
+		$where = array('id_transaksi' => $id_transaksi);
+
+		$this->m_admin->update_data($where,$data,'transaksi');
+		$this->session->set_flashdata('sukses', "Pembayaran transaksi $id_transaksi telah divalidasi");
+		redirect('legalisir/detailTransaksi/'.$id_transaksi);
+    }
 }

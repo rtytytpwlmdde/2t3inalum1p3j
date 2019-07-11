@@ -10,7 +10,7 @@
     <title>Tracert Alumni</title>
 
     <!-- Fonts -->
-  <link href="<?php echo base_url(); ?>/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+     <link href="<?php echo base_url(); ?>/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.2/css/boxicons.min.css' rel='stylesheet'>
 
@@ -293,7 +293,7 @@
                                     <div class="menu-user-image">
                                         <img src="<?php echo base_url(); ?>/assets/images/users/guest.jpg" class="menu-user-img ml-1" alt="Menu Image">
                                     </div>
-                                    <span class="ml-2">Jisoo</span>
+                                    <span class="ml-2"><?php echo $this->session->userdata('username')?></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right nav-drop dropdown-shadow">
                                     <a class="dropdown-item" href="<?php echo base_url('alumni/profile'); ?>"><i class='bx bx-user mr-2'></i> Profile</a>

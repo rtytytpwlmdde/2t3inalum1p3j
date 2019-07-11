@@ -58,8 +58,8 @@ class Recording extends CI_Controller {
 		$where = array('id_transaksi' => $id_transaksi);
 
 		$this->m_admin->update_data($where,$data,'transaksi');
-		$this->session->set_flashdata('notif', "Status transaksi $id_transaksi telah di ubah");
-		redirect('keuangan/detailTransaksi/'.$id_transaksi);
+		$this->session->set_flashdata('sukses', "Status transaksi $id_transaksi telah di ubah");
+		redirect('recording/detailTransaksi/'.$id_transaksi);
     }
 
     public function detailTransaksi($id_transaksi)

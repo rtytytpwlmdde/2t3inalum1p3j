@@ -1,3 +1,27 @@
+<?php
+        $notif = $this->session->flashdata('gagal');
+        if($notif != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong> </strong> '.$notif.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $notifsukses = $this->session->flashdata('sukses');
+        if($notifsukses != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$notifsukses.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
 <div class="row profile-right-side-content">
                     <div class="user-profile">
                         <div class="profile-header-background">
@@ -86,7 +110,7 @@
                                             <div class="post border-bottom p-3 bg-white w-shadow">
                                                 <div class="media text-muted ">
                                                     <div class="content">
-                                                            <h5 class="mb-3  page-title text-muted">KERANJANG</h5>
+                                                            <h5 class="mb-3  page-title text-muted">PESANAN TERTUNDA</h5>
                                                             <p class="text-muted">List Pesanan Yang telah dilakukan.</p>
                                                     </div>
                                                 </div>
@@ -122,7 +146,7 @@
                                                                         <td><?= $total_harga += $u->harga_transaksi; ?></td>
                                                                         <td>
                                                                             <a data-toggle="modal" data-target="#modal<?=$u->id_detail_transaksi?>" class="btn btn-warning btn-sm text-white"><i class="fas fa-pencil-alt" title="edit pesanan ini"></i></a>
-                                                                            <a href="<?php echo base_url('legalisir/hapusProdukKeranjang/'.$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="hapus pesanan ini"></i></a>
+                                                                            <a href="<?php echo base_url('legalisir/hapusProdukKeranjang/'.$id_transaksi."/".$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="hapus pesanan ini"></i></a>
                                                                         </td>
                                                                     </tr>
                                                                     <?php } ?>
@@ -146,12 +170,12 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-12 text-right">
+                                                <div class="col-md-12 text-center">
                                                     <form action="<?php echo base_url('legalisir/buatPesanan/'); ?>" method="post">
                                                     <input hidden type="text" name="id_transaksi" value="<?= $id_transaksi; ?>">
                                                     <input hidden type="text" name="total_harga" value="<?= $total_harga; ?>">
                                                     <input hidden type="text" name="total_berat" value="<?= $total_berat; ?>">
-                                                    <button type="submit" class="btn btn-primary btn-sm">Lanjut mengisi alamat pengiriman</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Selesai dan lanjut mengisi alamat pengiriman</button>
                                                     </form>
                                                 </div>
                                             </div> <br>
@@ -189,7 +213,12 @@
         </div>
         <div class="form-group">
             <label>Jumlah</label>
-            <input type="text" name="jumlah_produk" class="form-control" value="<?= $k->jumlah_produk; ?>">
+            <select required  name="jumlah_produk" id="feInputState" class="">
+                <option value="5" <?php echo ($k->jumlah_produk=='5')?'selected="selected"':''; ?>>5</option>
+                <option value="10" <?php echo ($k->jumlah_produk=='10')?'selected="selected"':''; ?>>10</option>
+                <option value="15" <?php echo ($k->jumlah_produk=='15')?'selected="selected"':''; ?>>15</option>
+                <option value="20" <?php echo ($k->jumlah_produk=='20')?'selected="selected"':''; ?>>20</option>
+            </select>
         </div>
       </div>
       <div class="modal-footer">

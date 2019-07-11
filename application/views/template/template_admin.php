@@ -68,6 +68,11 @@
           <i class="fas fa-fw fa-co"></i>
           <span>Produk</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('rekap/rekapTransaksi'); ?>">
+          <i class="fas fa-fw fa-co"></i>
+          <span>Rekap Transaksi</span></a>
+      </li>
 
 
 

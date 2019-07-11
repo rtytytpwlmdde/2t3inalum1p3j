@@ -295,7 +295,6 @@
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?php echo base_url('auth/logout'); ?>"><i class='bx bx-undo mr-2'></i> Logout</a>
                                 </div>
-                                <a href="<?php echo base_url('rajaongkir'); ?>">ongkir</a>
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -412,16 +411,16 @@
                                                                         </div>
 
                                                                         <div class="form-group">
-                                                                            <label for="to_province">Provinsi </label>
-                                                                            <select required class="form-control" name="to_province" id="to_province">
+                                                                            <label for="to_province">Provinsi </label><br>    
+                                                                            <select required class="select-input" name="to_province" id="to_province">
                                                                                 <option value="" selected="" disabled="">- Select Province -</option>
                                                                                 <?php $this->load->view('rajaongkir/getProvince'); ?>
                                                                             </select>
                                                                         </div>
 
                                                                         <div class="form-group">
-                                                                            <label for="to_city">Kota/Kabupaten </label>
-                                                                            <select required class="form-control" name="destination" id="destination">
+                                                                            <label for="to_city">Kota/Kabupaten </label><br>
+                                                                            <select required class="select-input" style="" name="destination" id="destination">
                                                                                 <option value="" selected="" disabled="">- Select City -</option>
                                                                             </select>
                                                                         </div>

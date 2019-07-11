@@ -56,7 +56,7 @@ class Keuangan extends CI_Controller {
 		$where = array('id_transaksi' => $id_transaksi);
 
 		$this->m_admin->update_data($where,$data,'transaksi');
-		$this->session->set_flashdata('notif', "Pembayaran transaksi $id_transaksi telah divalidasi");
+		$this->session->set_flashdata('sukses', "Pembayaran transaksi $id_transaksi telah divalidasi");
 		redirect('keuangan/detailTransaksi/'.$id_transaksi);
     }
 

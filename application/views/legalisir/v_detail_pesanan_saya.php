@@ -113,6 +113,12 @@
                                                             <h5 class="mb-3  page-title text-muted">DETAIL TRANSAKSI</h5>
                                                                     <?php 
                                                                     foreach ($pesananSaya as $u){ ?>
+                                                                    <?php if($u->status_pesanan == '0' ){?>
+                                                                        <p>Transaksi belum lengkap, silahkan selesaikan proses memilih pesanan </p>
+                                                                        <div class="text-right">
+                                                                            <a href="<?php echo base_url('legalisir/legalisir'); ?>" class="btn btn-primary btn-sm">Lanjut memilih pesanan</a>
+                                                                        </div>
+                                                                    <?php }?>
                                                                     <?php if($u->status_pesanan == '1' ){?>
                                                                         <p>Transaksi belum lengkap, silahkan isi alamat pengiriman dan segera lakukan pembayaran </p>
                                                                         <div class="text-right">

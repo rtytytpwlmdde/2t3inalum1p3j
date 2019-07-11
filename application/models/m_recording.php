@@ -10,6 +10,7 @@ class M_recording extends CI_Model{
         if($status == null){
             $this->db->where('transaksi.status_pesanan >= ','4');
         }else{
+            $this->db->where('transaksi.status_pesanan >= ','4');
             $this->db->where('transaksi.status_pesanan',$status);
         }
         $query=$this->db->get();

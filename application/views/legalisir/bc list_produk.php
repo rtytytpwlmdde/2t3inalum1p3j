@@ -1,6 +1,4 @@
 
-<input  hidden type="text" id="sukses" value="<?php echo $sukses = $this->session->flashdata('sukses');?>">
-
 <div class="row profile-right-side-content">
                     <div class="user-profile">
                         <div class="profile-header-background">
@@ -265,15 +263,12 @@
 </div>
 
 <script>
-    var notifa = document.getElementById("sukses").value;
-    if( notifa == "Produk telah ditambahkan ke dalam daftar pesanan saya" ) {
-        window.onpageshow = function() {
-        if (typeof window.performance != "undefined"
-            && window.performance.navigation.type === 0) {
-            $('#myModal').modal('show');
-        }
-        }
+window.onpageshow = function() {
+    if (typeof window.performance != "undefined"
+        && window.performance.navigation.type === 0) {
+         $('#myModal').modal('show');
     }
+}
 </script>
 <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -283,12 +278,29 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <h1 class=""><i class="fas fa-check-circle text-success"></i></h1>
+                        <label for="settingsAddress" class="text-white">Nama Produk</label>
+                        <h5>Pesanan telah ditambahkan ke dalam daftar pesanan saya</h5>
                         <?php
-        if($sukses != NULL){
+        $notif = $this->session->flashdata('gagal');
+        if($notif != NULL){
             echo '
-            <h5 class="" role="alert">
-              <strong> </strong> '.$sukses.'
-            </h5>
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong> </strong> '.$notif.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $notifsukses = $this->session->flashdata('sukses');
+        if($notifsukses != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$notifsukses.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
             ';
         }
     ?>

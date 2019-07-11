@@ -72,7 +72,7 @@ class M_auth extends CI_Model{
 									'logged_in' => TRUE,
 									'username' => $data_login->username,
 									'id_login' => $data_login->nim,
-									'status' => 'mahasiswa',
+									'status' => 'alumni',
 									'nama_login' => $data_login->nama
 								);
 			$this->session->set_userdata($data_session);

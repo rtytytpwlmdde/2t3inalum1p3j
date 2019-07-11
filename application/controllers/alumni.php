@@ -8,12 +8,19 @@ class Alumni extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('m_admin');
 		$this->load->model('m_produk');
+		if($this->session->userdata('logged_in') == FALSE){
+			redirect('auth/logout');
+		}
 	}
 
 	public function index()
 	{
+		if($this->session->userdata('status') == "alumni"){
 		$data['main_view'] = 'alumni/v_profil';
 		$this->load->view('template/template_alumni', $data);
+		}else{
+			redirect("auth/logout");
+		}
 	}
 
 	public function profile()

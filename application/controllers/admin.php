@@ -8,6 +8,10 @@ class Admin extends CI_Controller{
 		$this->load->model('m_auth');
 		$this->load->model('m_admin');
 		$this->load->model('m_produk');
+		$operator = $this->session->userdata('status');
+		if($operator !="admin"){
+			redirect('auth/logout');
+		}
 	}
 
 	function index(){

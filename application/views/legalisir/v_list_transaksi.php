@@ -4,7 +4,7 @@
         if($notif != NULL){
             echo '
             <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
-              <strong>Validasi Pembayaran Tidak Berhasil! </strong> '.$notif.'
+              <strong>Gagal!</strong> '.$notif.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -42,14 +42,14 @@
                                         <div class="btn-group" role="group">
                                             <a class="btn btn-sm btn-secondary dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</a>
                                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" href="<?php echo base_url('legalisir/export/excel' )?>"><i class="fas fa-file-excel"></i> Excel</a>
+                                            <a class="dropdown-item" data-toggle="modal"  data-target="#modalExport"><i class="fas fa-file-excel"></i> Excel</a>
                                             </div>
                                         </div>
                                             <?php if($this->session->userdata('status') == 'keuangan'){ ?>
                                                 <a href="<?php echo base_url('legalisir/transaksi/4' )?>" class="btn btn-sm btn-success">valid</a>
-                                                <a href="<?php echo base_url('legalisir/transaksi/3' )?>" class="btn btn-sm btn-warning">belum di proses</a>
+                                                <a href="<?php echo base_url('legalisir/transaksi/3' )?>" class="btn btn-sm btn-danger">belum di proses</a>
                                             <?php }else if($this->session->userdata('status') == 'recording'){ ?> 
-                                                <a href="<?php echo base_url('legalisir/transaksi/4' )?>" class="btn btn-sm btn-info">belum diproses</a>
+                                                <a href="<?php echo base_url('legalisir/transaksi/4' )?>" class="btn btn-sm btn-danger">belum diproses</a>
                                                 <a href="<?php echo base_url('legalisir/transaksi/5' )?>" class="btn btn-sm btn-primary">sedang diproses</a>
                                                 <a href="<?php echo base_url('legalisir/transaksi/6' )?>" class="btn btn-sm btn-warning">telah dikirim</a>
                                                 <a href="<?php echo base_url('legalisir/transaksi/7' )?>" class="btn btn-sm btn-success">telah sampai</a>
@@ -178,6 +178,7 @@
         </div>
     </div>
 </div>
+<!-- -->
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
@@ -204,6 +205,41 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalExport" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Filter Data Yang Akan Di Export</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form action="<?php echo base_url('legalisir/exportData/'); ?>" method="post">
+        <div class="modal-body">
+            <div class="" >
+            <label for="from_city">Jenis Export </label>
+            <a id="show" onclick="myFunctionShow()" class="btn btn-sm btn-secondary">Filter Tanggal</a>
+            <a id="hide" onclick="myFunctionHide()" class="btn btn-sm btn-secondary">Semua</a>
+            </div>
+            <p id="demo">Export Data Transaksi Sesuai Tanggal</p>
+            <p id="semua" class="text-danger"></p>
+
+        <div class="form-group form-export " >
+            <label for="from_province">Tanggal mulai </label>
+            <input type="date" name="tanggal_mulai" class="form-control">
+            <label for="from_province">Tanggal Selesai </label>
+            <input type="date" name="tanggal_selesai" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >Export Data</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
   let id_transaksi = $(event.relatedTarget).data('id_transaksi') 
@@ -213,5 +249,28 @@
 $(document).ready(function() {
     $('#tabel').DataTable();
 } );
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $(".form-export").hide();
+    $("#demo").hide();
+  });
+  $("#show").click(function(){
+    $(".form-export").show();
+    $("#demo").hide();
+  });
+});
+</script>
+<script>
+function myFunctionHide() {
+  document.getElementById("demo").innerHTML = "Export Semua Data Transaksi!";
+  document.getElementById("semua").innerHTML = "Export Semua Data Transaksi!";
+}
+function myFunctionShow() {
+  document.getElementById("demo").innerHTML = "Export Data Transaksi Berdasarkan Tanggal!";
+  document.getElementById("semua").innerHTML = "Export Data Transaksi Berdasarkan Tanggal!";
+}
 </script>
 

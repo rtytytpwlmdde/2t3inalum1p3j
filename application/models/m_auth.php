@@ -71,7 +71,7 @@ class M_auth extends CI_Model{
 			$data_session = array(
 									'logged_in' => TRUE,
 									'username' => $data_login->username,
-									'id_login' => $data_login->nim,
+									'nim' => $data_login->nim,
 									'status' => 'alumni',
 									'nama_login' => $data_login->nama
 								);

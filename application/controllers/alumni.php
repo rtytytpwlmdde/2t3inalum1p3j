@@ -44,7 +44,27 @@ class Alumni extends CI_Controller {
 
 	public function data_alumni()
 	{
+		$nim = $this->session->userdata('nim');
 		$data['main_view'] = 'alumni/v_data_alumni';
+		$data['alumni'] = $this->m_produk->tampilDataAlumni($nim);
+		$this->load->view('template/template_alumni', $data);
+	}
+
+	public function lihatIjazah()
+	{
+		$nim = $this->session->userdata('nim');
+		$data['main_view'] = 'alumni/v_data_ijazah';
+		if($this->m_produk->cekIjazah('file') == true){
+			$data['cek_ijazah'] = 'true';
+			if($this->m_produk->cekIjazah('status') == true){
+				$data['cek_validasi'] = 'true';
+			}else{
+				$data['cek_validasi'] = 'false';
+			}
+		}else{
+			$data['cek_ijazah'] = 'false';
+		}
+		$data['ijazah'] = $this->m_produk->tampilDataIjazah()->result();
 		$this->load->view('template/template_alumni', $data);
 	}
 

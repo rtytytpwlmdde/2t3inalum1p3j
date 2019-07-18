@@ -15,10 +15,10 @@
                                             </a>
                                         </li>
                                         <li class="contact">
-                                            <a href="settings-contact.html" class="wrap d-flex align-items-center">
+                                            <a href="<?php echo base_url('alumni/lihatIjazah/'); ?>" class="wrap d-flex align-items-center">
                                                 <i class='bx bx-id-card'></i>
                                                 <div class="meta">
-                                                    <p>Contact Info</p>
+                                                    <p>Ijazah</p>
                                                 </div>
                                             </a>
                                         </li>
@@ -77,18 +77,85 @@
                             </div>
                             <div class="content">
                                 <div class="settings-form p-4">
-                                    <h2>Your Account</h2>
+                                    <h2>Data Diri</h2>
                                     <form action="" method="" class="mt-4 settings-form">
                                         <div class="col-md-6">
+										<?php foreach($alumni as $u): ?>
                                             <div class="form-group">
-                                                <label for="settingsFirstName">First Name</label>
-                                                <input type="text" class="form-control" id="settingsFirstName" placeholder="First Name">
+                                                <label for="settingsFirstName">NIM</label>
+                                                <input type="text" class="form-control" id="settingsFirstName" placeholder="First Name" disabled value="<?php echo $u->nim ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="settingsLastName">Last Name</label>
-                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name">
+                                                <label for="settingsLastName">Nama</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->nama ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Email</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->email ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Jenjang</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->jenjang ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Jurusan</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->nama ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Prodi</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->nama ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Tahun Lulus</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->tahun_lulus ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Tanggal Yudisium</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->tanggal_yudisium ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Alamat</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->alamat ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Tanggal Lahir</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->tanggal_lahir ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Jenis Kelamin</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->jenis_kelamin ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Facebook</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->facebook ?>">
+                                            </div>
+                                        </div>
+										<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="settingsLastName">Twitter</label>
+                                                <input type="text" class="form-control" id="settingsLastName" placeholder="Last Name" disabled value="<?php echo $u->twitter ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -107,6 +174,7 @@
                                             <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
                                         </div>
                                     </form>
+									<?php endforeach ?>
                                 </div>
                             </div>
                         </div>

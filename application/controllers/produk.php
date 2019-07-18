@@ -93,18 +93,5 @@ class Produk extends CI_Controller{
 		redirect('produk/produk');
 		}
 		
-		function tambahTransaksi(){
-			$nama_produk = $this->input->post('nama_produk');
-			$harga_produk = $this->input->post('harga_produk');
-			$berat_produk = $this->input->post('berat_produk');
-			
-			$data = array(
-				'nama_produk' => $nama_produk,
-				'berat_produk' => $berat_produk,
-				'harga_produk' => $harga_produk
-			);
-			//$this->m_admin->tambahdata($data,'produk');
-			$this->session->set_flashdata('notif', "data $nama_produk berhasil ditambahkan");
-			redirect('produk/produk');
-			}
+		
 }

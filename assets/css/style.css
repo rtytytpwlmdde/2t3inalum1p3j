@@ -17,6 +17,17 @@
     box-sizing: border-box;
 }
 
+.upload-file{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    color: rgb(68, 68, 68);
+    background-color: rgb(240, 240, 240);
+    display: inline-block;
+}
+
 html {
     font-size: 100%;
     -webkit-text-size-adjust: 100%;

@@ -16,6 +16,12 @@ class Rajaongkir extends CI_Controller {
 		}
 	}
 
+	public function cekResi()
+	{
+		$this->load->view('cek_ongkir');
+	}
+
+
 	public function getCity($province)
 	{		
 
@@ -56,12 +62,10 @@ class Rajaongkir extends CI_Controller {
 		$destination = $this->input->get('destination');
 		$berat = $this->input->get('berat');
 		$courier = $this->input->get('courier');
-
 		$data = array('origin' => $origin,
 						'destination' => $destination, 
 						'berat' => $berat, 
 						'courier' => $courier
-
 		);
 		
 		$this->load->view('rajaongkir/getCost', $data);

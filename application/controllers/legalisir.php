@@ -56,13 +56,18 @@ class Legalisir extends CI_Controller {
 		}
 	}
 
-	public function pembayaran() //alumni
+	public function pembayaran($id_transaksi) //alumni
 	{
 		if($this->session->userdata('status') == "alumni"){
-			$status_pesanan = '2';
-			$data['keranjang'] = $this->m_legalisir->getTransaksiKeranjang($status_pesanan);
-			$data['main_view'] = 'legalisir/v_pembayaran';
-			$this->load->view('template/template_alumni', $data);
+			if($this->m_legalisir->getTransaksiById($id_transaksi) != false){
+				$data['keranjang'] = $this->m_legalisir->getTransaksiById($id_transaksi);
+				$data['id_transaksi'] = $id_transaksi;
+				$data['main_view'] = 'legalisir/v_pembayaran';
+				$this->load->view('template/template_alumni', $data);
+			}else{
+				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan, periksa kembali id transaksi anda");
+				redirect('legalisir/pesananSaya');
+			}
 		}else{
 			redirect("auth/logout");
 		}
@@ -163,7 +168,7 @@ class Legalisir extends CI_Controller {
 			$status_pesanan = '0';
 			$data['keranjang'] = $this->m_legalisir->getTransaksiKeranjang($status_pesanan);
 			if($this->m_legalisir->cekKeranjang() == false){
-				$this->session->set_flashdata('gagal', "Keranjang Anda KOSONG, silahkan lakukan pemesanan produk yang anda inginkan");
+				$this->session->set_flashdata('gagals', "Keranjang Anda KOSONG, silahkan lakukan transaksi pemesanan produk yang anda inginkan");
 				redirect('legalisir/legalisir');
 			}else{
 				$data['main_view'] = 'legalisir/v_keranjang';
@@ -336,7 +341,7 @@ class Legalisir extends CI_Controller {
 			$where = array('id_transaksi' => $id_transaksi);
 
 			$this->m_admin->update_data($where,$data,'transaksi');
-			redirect('legalisir/pembayaran');
+			redirect('legalisir/pembayaran/'.$id_transaksi);
 		}else{
 			redirect("auth/logout");
 		}
@@ -345,8 +350,18 @@ class Legalisir extends CI_Controller {
 	public function formValidasiPembayaran() //alumni
 	{
 		if($this->session->userdata('status') == "alumni"){
-			$data['main_view'] = 'legalisir/v_validasi_pembayaran';
-			$this->load->view('template/template_alumni', $data);
+			$data['id_transaksi'] = $this->input->post('id_transaksi');
+			if($this->input->post('id_transaksi') == null){
+				$this->session->set_flashdata('gagal', "Lakukan validasi pembayaran kembali");
+				redirect("legalisir/pesananSaya");
+			}else{
+				$transaksi = $this->m_legalisir->getTotalPembayaran($this->input->post('id_transaksi'));
+				$total = 0;
+				foreach($transaksi as $u){$total = $u->total_pembayaran;}
+				$data['total_pembayaran'] = $total;
+				$data['main_view'] = 'legalisir/v_validasi_pembayaran';
+				$this->load->view('template/template_alumni', $data);
+			}
 		}else{
 			redirect("auth/logout");
 		}
@@ -412,6 +427,11 @@ class Legalisir extends CI_Controller {
 	public function pesananSaya() //alumni
 	{
 		if($this->session->userdata('status') == "alumni"){
+			if($this->m_legalisir->getPesananSaya() != false){
+				$data['pesanan'] = 'ada';
+			}else{
+				$data['pesanan'] = 'kosong';
+			}
 			$data['pesananSaya'] = $this->m_legalisir->getPesananSaya();
 			$data['main_view'] = 'legalisir/v_list_pesanan_saya';
 			$this->load->view('template/template_alumni', $data);
@@ -423,30 +443,59 @@ class Legalisir extends CI_Controller {
 	public function detailPesanan($id_transaksi) //alumni
 	{
 		if($this->session->userdata('status') == "alumni"){
-			$data['produk'] = $this->m_legalisir->getProdukPesananSaya($id_transaksi);
-			$data['pesananSaya'] = $this->m_legalisir->getDetailPesananSaya($id_transaksi);
-			$data['main_view'] = 'legalisir/v_detail_pesanan_saya';
-			$this->load->view('template/template_alumni', $data);
+			if($this->m_legalisir->getTransaksiById($id_transaksi) != false){
+				$data['produk'] = $this->m_legalisir->getProdukPesananSaya($id_transaksi);
+				$data['pesananSaya'] = $this->m_legalisir->getDetailPesananSaya($id_transaksi);
+				$data['main_view'] = 'legalisir/v_detail_pesanan_saya';
+				$this->load->view('template/template_alumni', $data);
+			}else{
+				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan, periksa kembali id transaksi anda");
+				redirect('legalisir/pesananSaya');
+			}
 		}else{
 			redirect("auth/logout");
 		}
 	}
 
-	public function transaksi($status) //operator
+
+
+	public function transaksi() //operator
 	{
-		if($this->session->userdata('status') == "keuangan" || $this->session->userdata('status') == "recording" ){
-			if($this->m_legalisir->getDataTransaksi($status) == false){
-				$data['data_transaksi'] = 'kosong';
-			}else{
-				$data['data_transaksi'] = 'ada';
-				$data['transaksi'] = $this->m_legalisir->getDataTransaksi($status);
-			}
-			$data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
-			$data['main_view'] = 'legalisir/v_list_transaksi';
-			$this->load->view('template/template_operator', $data);
+		$this->load->database();
+		$jumlah_data = $this->m_legalisir->jumlah_data();
+		if($this->m_legalisir->jumlah_data() != false){	
+			$data['data_transaksi'] = 'ada';
 		}else{
-			redirect("auth/logout");
+			$data['data_transaksi'] = 'kosong';
 		}
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'/legalisir/transaksi/';
+		$config['total_rows'] = $jumlah_data;
+		$config['per_page'] = 10;
+		$config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-left"><nav><ul class="pagination justify-content-right">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+		$from = $this->uri->segment(3);
+		$this->pagination->initialize($config);	
+		$data['transaksi'] = $this->m_legalisir->getDataTransaksi($config['per_page'],$from);
+		$data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
+		$data['main_view'] = 'legalisir/v_list_transaksi';
+		$this->load->view('template/template_operator', $data);
 	}
 	
 	public function prosesTransaksi() //operator
@@ -511,5 +560,30 @@ class Legalisir extends CI_Controller {
 		}else{
 			redirect("auth/logout");
 		}
-    }
+		}
+		
+		public function resi()
+	{
+		$operator = $this->session->userdata('status');
+		$data['nomor_resi'] = $this->input->post('nomor_resi');
+		if($operator == "alumni"){
+			$this->load->view('v_test',$data);
+		}else if($operator == "keuangan" || $operator == "recording"){
+			$data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
+			$this->load->view('v_cek_resi',$data);
+		}else{
+			redirect("auth/logout");
+		}
+	}
+function getResi()
+	{
+		$waybill = $this->input->get('waybill');
+
+		$data = array('waybill' => $waybill
+
+		);
+		
+		$this->load->view('rajaongkir/getResi', $data);
+	}
+
 }

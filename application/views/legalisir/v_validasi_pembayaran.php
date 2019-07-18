@@ -118,7 +118,9 @@
                                                                 <form action="<?php echo base_url('legalisir/validasiPembayaran/'); ?>" method="post" enctype="multipart/form-data">
                                                                     <div class="form-group">
                                                                         <label for="weight">Id Transaksi</label>
-                                                                        <input type="text" class="form-control" name="id_transaksi" >
+                                                                        <input disabled type="text" class="form-control" value="<?= $id_transaksi ?>" >
+                                                                        <input hidden type="text" name="id_transaksi" class="form-control" value="<?= $id_transaksi; ?>" >
+                                                                        <input hidden type="text" name="jumlah_transfer" class="form-control" value="<?= $total_pembayaran; ?>" >
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="weight">Nama Bank</label>
@@ -126,7 +128,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="weight">Jumlah Transfer</label>
-                                                                        <input type="text" class="form-control" name="jumlah_transfer">
+                                                                        <input type="text" disabled class="form-control" value="Rp <?= $total_pembayaran; ?>,-">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="weight">Tanggal Transfer</label>

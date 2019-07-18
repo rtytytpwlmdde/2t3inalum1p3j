@@ -1,3 +1,27 @@
+<?php
+        $notif = $this->session->flashdata('gagal');
+        if($notif != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong> </strong> '.$notif.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $notifsukses = $this->session->flashdata('sukses');
+        if($notifsukses != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$notifsukses.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
 <div class="row profile-right-side-content">
                     <div class="user-profile">
                         <div class="profile-header-background">
@@ -107,20 +131,24 @@
                                                                 <tbody>
                                                                     <?php 
                                                                     $no = 1;
-                                                                    foreach ($pesananSaya as $u){ ?>
-                                                                    <tr>
-                                                                        <td scope="row"><?= $no++; ?></td>
-                                                                        <?php if($u->status_pesanan < 4){?>
-                                                                        <td title="Transaksi belum complete, silahkan selesaikan pemesanan dan lakukan validasi pembayaran"><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?><i class='bx bxs-error-circle text-warning' style="font-size:2em;"></i></a></td>
-                                                                        <?php }else{?>
-                                                                        <td><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
-                                                                        <?php }
-                                                                        $date=date_create($u->tanggal_transaksi);
-                                                                        ?>
-                                                                        <td><?= date_format($date,"d-m-Y") ; ?></td>
-
-                                                                        <td><?= $u->keterangan_status; ?></td>
-                                                                    </tr>
+                                                                    if($pesanan == 'ada'){
+                                                                        foreach ($pesananSaya as $u){ ?>
+                                                                            <tr>
+                                                                                <td scope="row"><?= $no++; ?></td>
+                                                                                <?php if($u->status_pesanan < 3){?>
+                                                                                <td title="Transaksi belum complete, silahkan selesaikan pemesanan dan lakukan validasi pembayaran"><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?><i class='bx bxs-error-circle text-warning' style="font-size:2em;"></i></a></td>
+                                                                                <?php }else{?>
+                                                                                <td><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
+                                                                                <?php }
+                                                                                $date=date_create($u->tanggal_transaksi);
+                                                                                ?>
+                                                                                <td><?= date_format($date,"d-m-Y") ; ?></td>
+        
+                                                                                <td><?= $u->keterangan_status; ?></td>
+                                                                            </tr>
+                                                                            <?php }
+                                                                    } else{ ?>
+                                                                    <tr><td scope="row">Tidak ada transaksi</td> </tr>
                                                                     <?php } ?>
 
                                                                     

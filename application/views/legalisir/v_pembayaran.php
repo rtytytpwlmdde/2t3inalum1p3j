@@ -110,7 +110,8 @@
                                                 <div class="media text-muted ">
                                                     <div class="content">
                                                         <div class="settings-form ">
-                                                            <h6>Detail Pesanan</h6>
+                                                            <h6 class="font-weight">Detail Pesanan</h6>
+                                                            <h6>ID Transaksi : <?= $id_transaksi; ?></h6>
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
@@ -169,6 +170,7 @@
                                                 <div class="col-md-12 text-right">
                                                     <form action="<?php echo base_url('legalisir/formValidasiPembayaran/'); ?>" method="post">
                                                         <input hidden type="text" name="id_transaksi" value="<?= $id_transaksi; ?>">
+                                                        <input hidden type="text" name="total_pembayaran" value="<?= $total_pembayaran; ?>">
                                                         <button type="submit" class="btn btn-primary btn-sm">Validasi Pembayaran</button>
                                                     </form>
                                                 </div>

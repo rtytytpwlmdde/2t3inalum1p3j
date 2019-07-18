@@ -135,6 +135,8 @@
                                                                     $no= 1;
                                                                     $total_berat = 0;
                                                                     $total_harga = 0;
+                                                                    $harga = 0;
+                                                                    $berat = 0;
                                                                     foreach($keranjang as $u){
                                                                         
                                                                     $id_transaksi = $u->id_transaksi;?>
@@ -142,14 +144,17 @@
                                                                         <td scope="row"><?= $no++; ?></td>
                                                                         <td><?= $u->nama_produk; ?></td>
                                                                         <td><?= $u->jumlah_produk; ?></td>
-                                                                        <td hidden ><?= $total_berat += $u->berat_produk_transaksi; ?></td>
-                                                                        <td><?= $total_harga += $u->harga_transaksi; ?></td>
+                                                                        <td hidden ><?= $berat = $u->berat_produk_transaksi; ?></td>
+                                                                        <td><?= $harga = $u->harga_transaksi * $u->jumlah_produk; ?></td>
                                                                         <td>
                                                                             <a data-toggle="modal" data-target="#modal<?=$u->id_detail_transaksi?>" class="btn btn-warning btn-sm text-white"><i class="fas fa-pencil-alt" title="edit pesanan ini"></i></a>
                                                                             <a href="<?php echo base_url('legalisir/hapusProdukKeranjang/'.$id_transaksi."/".$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="hapus pesanan ini"></i></a>
                                                                         </td>
                                                                     </tr>
-                                                                    <?php } ?>
+                                                                    <?php 
+                                                                        $total_berat += $berat;
+                                                                        $total_harga += $harga;
+                                                                        } ?>
                                                                     <tr>
                                                                     <tr>
                                                                     <th scope="row">#</th>

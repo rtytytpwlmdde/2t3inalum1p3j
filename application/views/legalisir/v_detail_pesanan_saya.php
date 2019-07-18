@@ -128,7 +128,7 @@
                                                                     <?php if($u->status_pesanan == '2' ){?>
                                                                         <p>Transaksi belum lengkap, Segera lakukan pembayaran</p>
                                                                         <div class="text-right">
-                                                                            <a href="<?php echo base_url('legalisir/pembayaran'); ?>" class="btn btn-primary btn-sm">Pembayaran</a>
+                                                                            <a href="<?php echo base_url('legalisir/pembayaran/'.$u->id_transaksi); ?>" class="btn btn-primary btn-sm">Pembayaran</a>
                                                                         </div>
                                                                     <?php }?>
                                                                     <?php if($u->status_pesanan == '3' ){?>
@@ -143,8 +143,16 @@
                                                                     <?php if($u->status_pesanan == '6' ){?>
                                                                         <p>Pesanan sudah dikirimkan ke alamat pengiriman</p>
                                                                     <?php }?>
-                                                                    <?php if($u->status_pesanan == '6' ){?>
+                                                                    <?php if($u->status_pesanan == '7' ){?>
                                                                         <p>Pesanan sudah diterima</p>
+                                                                    <?php }?>
+                                                                    <?php if($u->status_pesanan == '6' || $u->status_pesanan == '7'){?>
+                                                                        <div class="text-right">
+                                                                            <form action="<?php echo base_url('resi'); ?>" method="post">
+                                                                                <input type="text" hidden name="nomor_resi" value="<?= $u->nomor_resi; ?>">
+                                                                                <button type="submit" class="btn btn-primary btn-sm">Lacak Pesanan</button>
+                                                                            </form>
+                                                                        </div>
                                                                     <?php }?>
                                                                     <?php } ?>
                                                     </div>

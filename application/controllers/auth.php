@@ -33,9 +33,9 @@ class auth extends CI_Controller {
 					if($status=="admin"){
 						redirect('admin/index');
 					}else if ($status == "recording"){
-						redirect('legalisir/transaksi/semua');
+						redirect('legalisir/transaksi/');
 					}else{
-						redirect('legalisir/transaksi/semua');
+						redirect('legalisir/transaksi/');
 					}
 				} else if($this->m_auth->cek_user_mahasiswa() == TRUE){ 
 					redirect('alumni/index');

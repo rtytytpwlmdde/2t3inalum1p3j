@@ -1,178 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Cosume API Raja Ongkir Codeigniter</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-</head>
-<body>
-	<br><br><br>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-primary">
-				  <div class="panel-heading">
-						<h3 class="panel-title">Check Delivery Payment</h3>
-					</div>
-				  <div class="panel-body">
-
-						<div class="form-group">
-							<label for="from_province">From Province </label>
-							<select class="form-control" name="from_province" id="from_province">
-								<option value="" selected="" disabled="">- Select Province -</option>
-								<?php $this->load->view('rajaongkir/getProvince2'); ?>
-							</select>
+<div class="content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Tambah Lowongan Pekerjaan</h5>
+              </div>
+              <div class="card-body">
+                <form action="<?php echo base_url(). 'alumni/profil/tambahPekerjaan'; ?>" method="POST">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>NIM</label>
+                        <input disabled type="text" class="form-control" id="feFirstName" placeholder="First Name" value="<?php echo $this->session->userdata('id_login'); ?>"> 
+						<input hidden name="nim" type="text" class="form-control" id="feFirstName" placeholder="First Name" value="<?php echo $this->session->userdata('id_login'); ?>"> 
 						</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Tempat Bekerja</label>
+                        <input name="tempat_kerja" type="text" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Posisi/Jabatan</label>
+                        <input name="posisi" type="text" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Gologan PNS</label>
+                        <input name="golongan_pns" type="text" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Gaji</label>
+                        <input name="pendapatan_per_bulan" type="text" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Mulai Bekerja</label>
+                        <input name="mulai_kerja" type="date" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Berhenti Bekerja</label>
+                        <input name="berhenti_kerja" type="date" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Alamat Bekerja</label>
+                        <input name="alamat_kerja" type="text" class="form-control" placeholder="Ketik...">
+                      </div>
+                    </div>
+                  </div>
+				   <button type="submit" class="btn btn-fill btn-primary">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          
 
-						<div class="form-group">
-							<label for="from_city">From City </label>
-							<select class="form-control" name="from_city" id="origin">
-								<option value="" selected="" disabled="">- Select City -</option>
-							</select>
-						</div>
+	<script>
 
-						<div class="form-group">
-							<label for="to_province">To Province </label>
-							<select class="form-control" name="to_province" id="to_province">
-								<option value="" selected="" disabled="">- Select Province -</option>
-								<?php $this->load->view('rajaongkir/getProvince'); ?>
-							</select>
-						</div>
+  $(document).ready(function(){
 
-						<div class="form-group">
-							<label for="to_city">To City </label>
-							<select class="form-control" name="destination" id="destination">
-								<option value="" selected="" disabled="">- Select City -</option>
-							</select>
-					  </div>
+    $('#jurusan').change(function(){
+      var e = document.getElementById ("jurusan");
+      var id_jurusan = e.options [e.selectedIndex] .value;
+      console.log(id_jurusan)
+      if(id_jurusan != '')
+      {
+        $.ajax({
+          url:"<?php echo site_url();?>/admin/user/get_prodi_by_jurusan_js",
+          method: "POST",
+          data:{id_jurusan:id_jurusan},
+          success:function(data)
+          {
+            $('#prodi').html(data);
+          }
+        })
+      }
+    })
+   
+  })
 
-						<div class="form-group">
-							<label for="courier">Courier </label>
-							<select class="form-control" name="courier" id="courier">
-								<option value="">- Select Courier -</option>
-								<option value="jne">JNE</option>
-								<option value="pos">POS</option>
-								<option value="tiki">TIKI</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="weight">Weight (gram)</label>
-							<input type="text" class="form-control" name="weight" id="weight" value="100">
-						</div>
-
-						<div class="form-group">
-					    <a type="button" onclick="tampil_data('data')" class="btn btn-success">Check In</a>
-						</div>
-				  </div>
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Delivery Payment List</h3>
-					</div>
-					<div class="panel-body">
-						<div id="hasil"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-warning">
-				  <div class="panel-heading">
-				    <h3 class="panel-title">Cek Resi</h3>
-				  </div>
-				  <div class="panel-body">
-				  	<input type="text" name="no_resi" placeholder="No Resi" id="no_resi" class="form-control">
-					<br>
-				    <button type="button" onclick="tampil_resi('data')" class="btn btn-info">Cek Resi</button>
-
-				  </div>
-				</div>
-				<script>
-					function tampil_resi(act){
-					      var resi = $('#no_resi').val();
-
-					      if(resi == ""){
-					      	alert("harap isi data dengan lengkap");
-					      }else{
-					      	$.ajax({
-					          url: "rajaongkir/getResi",
-					          type: "GET",
-					          data : {waybill: resi},
-					          success: function (ajaxData){
-					              //$('#tombol_export').show();
-					              //$('#hasilReport').show();
-					              $("#hasil_resi").html(ajaxData);
-					          }
-					      	});
-					      }
-
-
-					  };
-				</script>
-			</div>
-			<div class="col-md-8">
-				<div class="panel panel-success">
-				  <div class="panel-heading">
-				    <h3 class="panel-title">Cek Resi</h3>
-				  </div>
-				  <div class="panel-body">
-				  	<ol>
-					    <div id="hasil_resi">
-
-					    </div>
-				    </ol>
-				  </div>
-				</div>
-			</div>
-
-		</div>
-		<footer>
-			<div class="row">
-				<div class="col-md-4">
-					<p class="text-center">Copyright © <?php echo date('Y') ?> <a href="http://syabandz.blogspot.com/">Syabandz.Blogspot.Com</a></p>
-				</div>
-			</div>
-		</footer>
-	</div>
-</div><br><br>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-function tampil_data(act) {
-	var w = $('#origin').val();
-	var x = $('#destination').val();
-	var y = $('#weight').val();
-	var z = $('#courier').val();
-
-	$.ajax({
-			url: "rajaongkir/getCost",
-			type: "GET",
-			data : {origin: w, destination: x, berat: y, courier: z},
-			success: function (ajaxData) {
-					$("#hasil").html(ajaxData);
-			}
-	});
-};
-
-
-
-$(document).ready(function() {
-	$("#from_province").click(function() {
-		$.post("<?php echo base_url(); ?>rajaongkir/getCity/"+$('#from_province').val(),function(obj) {
-			$('#origin').html(obj);
-		});			
-	});
-
-	$("#to_province").click(function() {
-		$.post("<?php echo base_url(); ?>rajaongkir/getCity/"+$('#to_province').val(),function(obj) {
-			$('#destination').html(obj);
-		});			
-	});
-});
 </script>
-</body>
-</html>

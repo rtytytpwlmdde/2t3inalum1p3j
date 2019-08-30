@@ -16,40 +16,14 @@
                                 </a>
                             </div>
                         </div>
-                        <ul class="list-unstyled" style="margin-bottom: 0;">
-                            <li class="media post-form w-shadow">
-                                <div class="media-body">
-                                    <div class="form-group post-input">
-                                        <textarea class="form-control" id="postForm" rows="2" placeholder="What's on your mind, Arthur?"></textarea>
-                                    </div>
-                                    <div class="row post-form-group">
-                                        <div class="col-md-9">
-                                            <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                <i class='bx bx-images'></i> <span>Photo/Video</span>
-                                            </button>
-                                            <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                <i class='bx bxs-group'></i> <span>Tag Friends</span>
-                                            </button>
-                                            <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                <i class='bx bxs-map'></i> <span>Check In</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 text-right">
-                                            <button type="button" class="btn btn-primary btn-sm">Publish</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
 
                         <!-- Posts -->
                         <div class="posts-section mb-5">
                             <div class="post border-bottom p-3 bg-white w-shadow">
                                 <div class="media text-muted pt-3">
-                                    <img src="assets/images/users/user-1.jpg" alt="Online user" class="mr-3 post-user-image">
-                                    <div class="media-body pb-3 mb-0 small lh-125">
+                                   <div class="media-body pb-3 mb-0 small lh-125">
                                         <div class="d-flex justify-content-between align-items-center w-100">
-                                            <a href="#" class="text-gray-dark post-user-name">Ծովինար Գրիգորյան</a>
+                                            <a href="#" class="text-gray-dark post-user-name"></a>
                                             <div class="dropdown">
                                                 <a href="#" class="post-more-settings" role="button" data-toggle="dropdown" id="postOptions" aria-haspopup="true" aria-expanded="false">
                                                     <i class='bx bx-dots-horizontal-rounded'></i>
@@ -102,8 +76,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block">3 hours ago <i class='bx bx-globe ml-3'></i></span>
-                                    </div>
+                                       </div>
                                 </div>
                                 <div class="mt-3">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptatem veritatis harum, tenetur, quibusdam voluptatum, incidunt saepe minus maiores ea atque sequi illo veniam sint quaerat corporis totam et. Culpa?</p>
@@ -732,7 +705,7 @@
                     </div>
                     <div class="col-md-3 third-section">
                         <div class="p-3 bg-white rounded w-shadow">
-                            <h6 class="card-title border-bottom border-gray pb-2 mb-0">Online Users</h6>
+                            <h6 class="card-title border-bottom border-gray pb-2 mb-0">Teman</h6>
                             <div class="media text-muted pt-3">
                                 <img src="assets/images/users/user-2.jpg" alt="Online user" class="mr-2 online-user-image">
                                 <div class="media-body pb-3 mb-0 small lh-125">
@@ -764,7 +737,7 @@
                                 </div>
                             </div>
                             <small class="d-block text-right mt-3">
-                                <a href="#">See More</a>
+                                <a href="<?php echo base_url('alumni/mahasiswa'); ?>">See More</a>
                             </small>
                         </div>
 

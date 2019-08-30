@@ -1,127 +1,20 @@
-<div class="row profile-right-side-content">
-                    <div class="user-profile">
-                        <div class="profile-header-background">
-                            <a href="#" class="profile-cover">
-                                <img src="<?php echo base_url(); ?>/assets/images/users/cover/cover1.jpg" alt="Profile Header Background">
-                                <div class="cover-overlay">
-                                    <a href="#" class="btn btn-update-cover"><i class='bx bxs-camera'></i> Update Cover Photo</a>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="row profile-rows">
-                            <div class="col-md-3">
-                                <div class="profile-info-left">
-                                    <div class="text-center">
-                                        <div class="profile-img w-shadow">
-                                            <div class="profile-img-overlay"></div>
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/guest.jpg" alt="Avatar" class="avatar img-circle">
-                                            <div class="profile-img-caption">
-                                                <label for="updateProfilePic" class="upload">
-                                                    <i class='bx bxs-camera'></i> Update
-                                                    <input type="file" id="updateProfilePicInput" class="text-center upload">
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <p class="profile-fullname mt-3">Jisso</p>
-                                        <p class="intro-title text-muted"><i class=' text-primary'></i>online<a href="#"><span class="online-status bg-success"></span></a></p>
-                                    </div>
-                                    
-                                    <div class="intro mt-5 mv-hidden">
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted">Biodata</p>
-                                        </div>
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted"><i class='bx bx-briefcase text-primary'></i> Kapolsek<a href="#">Lowokwaru</a></p>
-                                        </div>
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted"><i class='bx bx-map text-primary'></i> Lives in <a href="#">Pocinki, Erangel</a></p>
-                                        </div>
-                                    </div>
-                                    <div class="intro mt-5 mv-hidden">
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted">Social Accounts</p>
-                                        </div>
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted"><i class='bx bxl-facebook-square facebook-color'></i> <a href="#" target="_blank">facebook.com/sueddii</a></p>
-                                        </div>
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted"><i class='bx bxl-twitter twitter-color'></i> <a href="#" target="_blank">twitter.com/sueddii</a></p>
-                                        </div>
-                                        <div class="intro-item d-flex justify-content-between align-items-center">
-                                            <p class="intro-title text-muted"><i class='bx bxl-instagram instagram-color'></i> <a href="#" target="_blank">instagram.com/sueddii</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="profile-info-right">
-
-                                    <!-- Posts section -->
-                                    <div class="row">
-                                        <div class="col-md-8 profile-center">
-                                            <ul class="list-inline profile-links d-flex justify-content-between w-shadow rounded">
-                                                <li class="list-inline-item profile-active">
-                                                    <a href="<?php echo base_url('alumni/'); ?>">Timeline</a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('alumni/data_alumni/'); ?>">About</a></li>
-                                                <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('alumni/percakapan'); ?>">Percakapan</a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('legalisir/legalisir'); ?>">Legalisir Online</a>
-                                                </li>
-                                                <li class="list-inline-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class='bx bx-dots-vertical-rounded'></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right profile-ql-dropdown">
-                                                        <a href="#" class="dropdown-item">Activity Log</a>
-                                                        <a href="#" class="dropdown-item">Videos</a>
-                                                        <a href="#" class="dropdown-item">Check-Ins</a>
-                                                        <a href="#" class="dropdown-item">Events</a>
-                                                        <a href="#" class="dropdown-item">Likes</a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled" style="margin-bottom: 0;">
-                                                <li class="media post-form w-shadow">
-                                                    <div class="media-body">
-                                                        <div class="form-group post-input">
-                                                            <textarea class="form-control" id="postForm" rows="2" placeholder="What's on your mind?"></textarea>
-                                                        </div>
-                                                        <div class="row post-form-group">
-                                                            <div class="col-md-9">
-                                                                <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                                    <i class='bx bx-images'></i> <span>Photo/Video</span>
-                                                                </button>
-                                                                <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                                    <i class='bx bxs-group'></i> <span>Tag Friends</span>
-                                                                </button>
-                                                                <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                                    <i class='bx bxs-map'></i> <span>Check In</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-3 text-right">
-                                                                <button type="button" class="btn btn-primary btn-sm">Publish</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
                                             <div class="profile-posts-options mt-4 mb-3  d-flex justify-content-between">
                                                 <h6 class="text-muted timeline-title">Posts</h6>
                                                 <div class="timeline-manage">
-                                                    <button type="button" class="btn btn-light btn-sm tmo-buttons"><i class='bx bxs-cog'></i> Manage Posts</button>
-                                                    <button type="button" class="btn btn-light btn-sm tmo-buttons ql-active"><i class='bx bx-align-middle'></i> List View</button>
-                                                    <button type="button" class="btn btn-light btn-sm tmo-buttons"><i class='bx bxs-grid-alt'></i> Grid View</button>
+                                                <a href="<?php echo site_url('alumni/dashboard/open_donasi/'); ?>" class="btn btn-light btn-sm tmo-buttons">
+                                                <i class="bx bxs-cog">Info Open Donasi</i>
+                                                </a>
+                                                <a href="#" class="btn btn-light btn-sm tmo-buttons active">
+                                                <i class="bx bx-align-middle">Info FEB</i>
+                                                </a>
+                                                <a href="<?php echo site_url('alumni/dashboard/lowker/'); ?>" class="btn btn-light btn-sm tmo-buttons">
+                                                <i class="bx bxs-grid-alt">Info Lowker</i>
+                                                </a>
                                                 </div>
                                             </div>
                                             <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class="media text-muted pt-3">
-                                                    <img src="<?php echo base_url(); ?>/assets/images/users/guest.jpg" alt="Online user" class="mr-3 post-user-image">
-                                                    <div class="media-body pb-3 mb-0 small lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
+                                                <div class="media text-muted pt-3" id="info_all">
+                                                    <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="post-type text-muted"><a href="#" class="text-gray-dark post-user-name mr-2">Jisoo</a> updated his cover photo.</span>
                                                             <div class="dropdown">
                                                                 <a href="#" class="post-more-settings" role="button" data-toggle="dropdown" id="postOptions" aria-haspopup="true" aria-expanded="false">
@@ -175,8 +68,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <span class="d-block">3 hours ago <i class='bx bx-globe ml-3'></i></span>
-                                                    </div>
                                                 </div>
                                                 <div class="mt-3">
                                                     <p>Testing testing</p>
@@ -346,78 +237,4 @@
                                                     </div>
                                                 </div>
                                             </div><br>
-                                        </div>
-                                        <div class="col-md-4 third-section"><br>
-                                            <div class="p-3 bg-white rounded w-shadow">
-                                                <h6 class="card-title border-bottom border-gray pb-2 mb-0">Online Users</h6>
-                                                <div class="media text-muted pt-3">
-                                                    <img src="<?php echo base_url(); ?>/assets/images/users/user-2.jpg" alt="Online user" class="mr-2 online-user-image">
-                                                    <div class="media-body pb-3 mb-0  lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <strong class="text-gray-dark"><a href="#" class="smFLname">Sihotang</a></strong>
-                                                            <span class="online-status bg-success"></span>
-                                                        </div>
-                                                        <span class="d-block online-username">@sihotang</span>
-                                                    </div>
-                                                </div>
-                                                <div class="media text-muted pt-3">
-                                                    <img src="<?php echo base_url(); ?>/assets/images/users/user-3.jpg" alt="Online user" class="mr-2 online-user-image">
-                                                    <div class="media-body pb-3 mb-0  lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <strong class="text-gray-dark"><a href="#" class="smFLname">Simarsoit</a></strong>
-                                                            <span class="online-status bg-success"></span>
-                                                        </div>
-                                                        <span class="d-block online-username">@simarsoit</span>
-                                                    </div>
-                                                </div>
-                                                <div class="media text-muted pt-3">
-                                                    <img src="<?php echo base_url(); ?>/assets/images/users/user-1.jpg" alt="Online user" class="mr-2 online-user-image">
-                                                    <div class="media-body pb-3 mb-0  lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <strong class="text-gray-dark"><a href="#" class="smFLname">Nella Karisma</a></strong>
-                                                            <span class="online-status bg-success"></span>
-                                                        </div>
-                                                        <span class="d-block online-username">@karisma</span>
-                                                    </div>
-                                                </div>
-                                                <small class="d-block text-right mt-3">
-                                                    <a href="#">See More</a>
-                                                </small>
-                                            </div>
-
-                                            <!-- Suggestions -->
-                                            <div class="mt-4 p-3 bg-white rounded w-shadow">
-                                                <h6 class="card-title border-bottom border-gray pb-2 mb-0">Group</h6>
-                                                <div class="media text-muted pt-3">
-                                                    <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-4.jpg" alt="Online user" class="mr-2 online-user-image">
-                                                    <div class="media-body pb-3 mb-0  lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <strong class="text-gray-dark" style="line-height: 0;"><a href="#" class="smFLname">FORSTILING</a></strong>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Follow"><i class='bx bxs-plus-circle' style="font-size: 2.5em; color: #969696;"></i></a>
-                                                        </div>
-                                                        <span class="d-block" style="line-height: 10px;">400 anggota</span>
-                                                    </div>
-                                                </div>
-                                                <div class="media text-muted pt-3">
-                                                    <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-3.jpg" alt="Online user" class="mr-2 online-user-image">
-                                                    <div class="media-body pb-3 mb-0  lh-125">
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <strong class="text-gray-dark" style="line-height: 0;"><a href="#" class="smFLname">HMIF</a></strong>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Follow"><i class='bx bxs-plus-circle' style="font-size: 2.5em; color: #969696;"></i></a>
-                                                        </div>
-                                                        <span class="d-block" style="line-height: 10px;">100 anggota</span>
-                                                    </div>
-                                                </div>
-                                                <small class="d-block text-right mt-3">
-                                                    <a href="#">See More</a>
-                                                </small>
-                                            </div>
-
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                     

@@ -9,14 +9,20 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Tracert Alumni</title>
 
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
+    <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
+
     <link href="<?php echo base_url(); ?>/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.2/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css' rel='stylesheet'>
     <link href='https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css' rel='stylesheet'>
 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/chartist/dist/chartist.min.css">
     <!-- Styles -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet">
@@ -25,11 +31,13 @@
     <link href="<?php echo base_url(); ?>/assets/css/settings.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/forms.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/media.css" rel="stylesheet"> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/style/navbar.css">
 </head>
 
 <body class="profile newsfeed">
@@ -42,13 +50,23 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <?php $operator = $this->session->userdata('status');?>
-                    <a class="navbar-brand mr-lg-5 px-4 px-4" href="<?php echo base_url('legalisir/transaksi/'); ?>"><img src="<?php echo base_url(); ?>/assets/images/ub.png" class="mr-3" alt="Logo" width="50" height="50"> Tracert Alumni FEB UB</a>
+                    <a class="navbar-brand mr-lg-5 px-4 px-4" href="<?php echo base_url('legalisir/legalisir/dashboard/'); ?>"><img src="<?php echo base_url(); ?>/assets/images/ub.png" class="mr-3" alt="Logo" width="50" height="50"> Tracert Alumni FEB UB</a>
                     
                     
                     
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="main_menu">
-                        
+                        <ul class="navbar-nav ">
+                            <li><a class="text-secondary" href="<?php echo base_url('legalisir/legalisir/transaksi'); ?>">Transaksi</a></li>
+                        </ul>
+                        <ul class="navbar-nav px-4">
+                            <li><a class="text-secondary" href="<?php echo base_url('resi'); ?>">Cek Resi</a></li>
+                        </ul>
+                        <?php if($this->session->userdata('status') == 'recording'){ ?>
+                            <ul class="navbar-nav">
+                            <li><a class="text-secondary" href="<?php echo base_url('legalisir/recording/ijazah'); ?>">Ijazah</a></li>
+                        </ul>
+                        <?php } ?>
                         <ul class="navbar-nav mr-auto"></ul>
                         <ul class="navbar-nav mr-3">
                             
@@ -68,12 +86,13 @@
                                         <div class="row">
                                             <?php if($transaksi_baru != '0'){?>
                                             <div class="col-md-12 col-sm-12 col-xs-12  ">Terdapat <span class="badge badge-pill badge-primary "><?= $transaksi_baru ?></span> transaksi baru yang belum di proses
-                                                <?php if($operator == 'recording'){?>
-                                                <a href="<?php echo base_url('legalisir/transaksi'); ?>">Lihat semua</a>
+                                            <form action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <?php if($this->session->userdata('status') == 'keuangan'){?>
+                                                    <input type="text" name="status_pesanan" hidden value="3"><button class="btn btn-link " type="submit">lihat semua</button>
+                                                <?php }else{ ?>
+                                                        <input type="text" name="status_pesanan" hidden value="4"><button class="btn btn-link " type="submit">lihat semua</button>
                                                 <?php } ?>
-                                                <?php if($operator == 'keuangan'){?>
-                                                <a href="<?php echo base_url('legalisir/transaksi'); ?>">Lihat semua</a>
-                                                <?php } ?>
+                                            </form>
                                             </div>
                                             
                                             <?php }else{?>
@@ -143,6 +162,7 @@
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<?php echo base_url().'assets/select/js/jquery-2.2.3.min.js'?>"></script>
   
     <!-- Optional -->
     <script type="text/javascript">
@@ -159,6 +179,7 @@
     <script src="<?php echo base_url(); ?>/assets/js/components/components.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
 </body>
 

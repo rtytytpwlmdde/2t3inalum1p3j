@@ -227,6 +227,28 @@ class M_legalisir extends CI_Model{
 			}
 		}
 
+		function getDataIjazah($number,$offset){
+			$status = $this->input->post('validasi_ijazah');
+			$operator = $this->session->userdata('status');
+			$this->db->select('*');
+			if($status == 'terkirim'){
+				$this->db->where('ijazah.validasi_ijazah','terkirim');
+			}else if($status == 'setuju'){
+				$this->db->where('ijazah.validasi_ijazah','setuju');
+			}else if($status == 'tolak'){
+				$this->db->where('ijazah.validasi_ijazah','tolak');
+			}else{
+				$this->db->where('ijazah.validasi_ijazah !=','4');
+			}
+			if($this->db->affected_rows() > 0){
+				$query = $this->db->get('ijazah',$number,$offset);
+				return 	$query->result();	
+			}else{
+				return false;
+			}
+			
+		}
+
 		
 		function getTotalPembayaran($id_transaksi){
 			$this->db->select('total_pembayaran');
@@ -276,6 +298,28 @@ class M_legalisir extends CI_Model{
 			}
 		}
 
+
+		function jumlah_data_ijazah(){
+			$status = $this->input->post('validasi_ijazah');
+			$this->db->select('nomor_ijazah');
+				if($status == 'terkirim'){
+					$this->db->where('ijazah.validasi_ijazah','terkirim');
+				}else if($status == 'setuju'){
+					$this->db->where('ijazah.validasi_ijazah','setuju');
+				}else if($status == 'tolak'){
+					$this->db->where('ijazah.validasi_ijazah','tolak');
+				}else{
+					$this->db->where('ijazah.validasi_ijazah !=','4');
+				}
+			
+			$query = $this->db->get('ijazah');
+			if($this->db->affected_rows() > 0){
+				return 	$query->num_rows();	
+			}else{
+				return false;
+			}
+		}
+
 		// function data($number,$offset){
 		// 	return $query = $this->db->get('transaksi',$number,$offset)->result();		
 		// }
@@ -317,6 +361,34 @@ class M_legalisir extends CI_Model{
 
 		function tampilIjazah(){
 			return $this->db->get('ijazah');
+		}
+
+		function getDataTransaksiPerbulan(){
+			$tahun = $this->input->get('tahun');
+			if($tahun == NULL){
+				$tahun = date("Y");
+			}
+			$this->db->select('id_transaksi ,count(id_transaksi) as transaksiPerbulan');
+			$this->db->select('date_format(tanggal_transaksi,"%m") as bulan');
+			$this->db->from('transaksi');
+			$this->db->where('transaksi.status_pesanan >=','4');
+			$this->db->group_by('bulan');
+			$this->db->where('YEAR(tanggal_transaksi)',$tahun);
+			$query = $this->db->get();
+			return $query->result();
+		}
+	
+		function getDataTransaksiPertahun(){
+			$tahun = $this->input->get('tahun');
+			if($tahun == NULL){
+				$tahun = date("Y");
+			}
+			$this->db->select('id_transaksi ,count(id_transaksi) as transaksiPertahun');
+			$this->db->from('transaksi');
+			$this->db->where('transaksi.status_pesanan >=','4');
+			$this->db->where('YEAR(tanggal_transaksi)',$tahun);
+			$query = $this->db->get();
+			return $query->result();
 		}
 		
 }

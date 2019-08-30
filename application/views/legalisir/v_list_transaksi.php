@@ -51,23 +51,23 @@
                                           </button>
                                           <div class="dropdown-menu dropdown-menu-right">
                                           <?php if($this->session->userdata('status') == 'keuangan'){ ?>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="4"><button class="btn btn-sm btn-success" type="submit">Valid</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="3"><button class="btn btn-sm btn-danger" type="submit">belum di proses</button>
                                                 </form>
                                             <?php }else if($this->session->userdata('status') == 'recording'){ ?> 
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="4"><button class="btn btn-sm btn-danger" type="submit">belum diproses</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="5"><button class="btn btn-sm btn-primary" type="submit">sedang diproses</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="6"><button class="btn btn-sm btn-warning" type="submit">telah dikirim</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="7"><button class="btn btn-sm btn-success" type="submit">telah sampai</button>
                                                 </form>
                                             <?php }?>
@@ -114,14 +114,14 @@
                                                         <tbody>
                                                         <?php if($data_transaksi =="ada"){ ?>
                                                             <?php 		
-                                                            $no = $this->uri->segment('3') + 1;
+                                                            $no = floatval($this->uri->segment('3')) + 1;
                                                             foreach ($transaksi as $u){ 
                                                                 $date=date_create($u->tanggal_transaksi);
                                                                 $tanggal_transfer=date_create($u->tanggal_transfer);
                                                                 ?>
                                                             <tr >
                                                                 <td scope="row"><?= $no++; ?></td>
-                                                                <td><a href="<?php echo base_url('legalisir/detailTransaksi/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
+                                                                <td><a href="<?php echo base_url('legalisir/legalisir/detailTransaksi/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
                                                                 <td><?= $u->nama; ?></td>
                                                                 <td><?= date_format($date,"d-m-Y") ; ?></td>
                                                                 <?php if($this->session->userdata('status') == 'keuangan'){ ?>
@@ -152,18 +152,18 @@
                                                                 <td><?= $u->jam_transfer; ?></td>
                                                                 <td><?= $u->bank; ?></td>
                                                                 <td>
-                                                                    <a target="_blank" rel="noopener noreferrer" href="<?php echo base_url('legalisir/buktiTransfer/'.$u->id_transaksi )?>" class="btn btn-link btn-sm"><i class='bx bxs-file-image' ></i>Gambar</a>
+                                                                    <a target="_blank" rel="noopener noreferrer" href="<?php echo base_url('legalisir/legalisir/buktiTransfer/'.$u->id_transaksi )?>" class="btn btn-link btn-sm"><i class='bx bxs-file-image' ></i>Gambar</a>
                                                                 </td>
                                                                 <?php if($this->session->userdata('status') == 'keuangan'){ ?>
                                                                     <td>
-                                                                        <form action="<?php echo base_url('legalisir/verifikasiPembayaran' )?>" method="post">
+                                                                        <form action="<?php echo base_url('legalisir/legalisir/verifikasiPembayaran' )?>" method="post">
                                                                             <input type="text" hidden name="id_transaksi" value="<?= $u->id_transaksi; ?>">
                                                                             <button type="submit" class="btn btn-primary btn-sm">Validasi</button>
                                                                         </form>
                                                                     </td>
                                                                 <?php } ?>
                                                                 <?php if($this->session->userdata('status') == 'recording'){ ?>
-                                                                    <form action="<?php echo base_url('legalisir/prosesTransaksi' )?>" method="post">
+                                                                    <form action="<?php echo base_url('legalisir/legalisir/prosesTransaksi' )?>" method="post">
                                                                         <td>
                                                                         <?php if($u->status_pesanan == '4'){ ?>
                                                                             <input type="text" hidden name="id_transaksi" value="<?= $u->id_transaksi; ?>">
@@ -223,7 +223,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form action="<?php echo base_url('legalisir/prosesTransaksi/'); ?>" method="post">
+    <form action="<?php echo base_url('legalisir/legalisir/prosesTransaksi/'); ?>" method="post">
       <div class="modal-asd">
         <input type="hidden" class="id_transaksi_modal" name="id_transaksi" id="id_transaksi" value="">
       </div>

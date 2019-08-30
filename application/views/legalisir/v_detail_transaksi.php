@@ -86,6 +86,10 @@
                                                                 <td><?= $u->id_transaksi; ?></td>
                                                             </tr>
                                                             <tr>
+                                                                <td>Alumni</td>
+                                                                <td><?= $u->id_pemesan; ?></td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td>Tanggal transaksi</td>
                                                                 <td><?= $u->tanggal_transaksi; ?></td>
                                                             </tr>

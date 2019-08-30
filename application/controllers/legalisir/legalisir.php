@@ -8,37 +8,40 @@ class Legalisir extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('m_admin');
 		$this->load->model('m_produk');
+		$this->load->model('m_alumni');
+
+		$this->load->model('m_group_chat');
 		$this->load->model('m_legalisir');
 		if($this->session->userdata('logged_in') == FALSE){
 			redirect('auth/logout');
 		}
 	}
 
-	public function index() //alumni
-	{
-		if($this->session->userdata('status') == "alumni"){
-			$data['main_view'] = 'alumni/v_profil';
-			$this->load->view('template/template_alumni', $data);
+	public function dashboard(){
+		if($this->session->userdata('status') == "recording"){
+			$tahun = $this->input->get('tahun');
+			if($tahun == NULL){
+				$tahun = date("Y");
+			}
+			$data['tahun'] = $tahun;
+			$data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
+			$data['transaksiPerbulan'] = $this->m_legalisir->getDataTransaksiPerbulan();
+			$data['transaksiPertahun'] = $this->m_legalisir->getDataTransaksiPertahun();
+			$data['main_view'] = 'legalisir/v_dashboard_recording';
+			$this->load->view('template/template_operator', $data);
 		}else{
 			redirect("auth/logout");
 		}
 	}
 
-	public function profile() //alumni
-	{
-		if($this->session->userdata('status') == "alumni"){
-			$data['main_view'] = 'alumni/v_profil';
-			$this->load->view('template/template_alumni', $data);
-		}else{
-			redirect("auth/logout");
-		}
-	}
 
 	public function legalisir() //alumni
 	{
 		if($this->session->userdata('status') == "alumni"){
 			$data['produk'] = $this->m_produk->tampilProduk()->result();
 			$data['keranjang'] = $this->m_legalisir->getIdProdukDetailTransaksi();
+			$data['alumni'] = $this->m_alumni->tampilalumni();
+			$data['grup'] = $this->m_group_chat->tampilgrup();
 			$data['main_view'] = 'legalisir/v_list_produk';
 			$this->load->view('template/template_alumni', $data);
 		}else{
@@ -62,11 +65,13 @@ class Legalisir extends CI_Controller {
 			if($this->m_legalisir->getTransaksiById($id_transaksi) != false){
 				$data['keranjang'] = $this->m_legalisir->getTransaksiById($id_transaksi);
 				$data['id_transaksi'] = $id_transaksi;
+				$data['alumni'] = $this->m_alumni->tampilalumni();
+				$data['grup'] = $this->m_group_chat->tampilgrup();
 				$data['main_view'] = 'legalisir/v_pembayaran';
 				$this->load->view('template/template_alumni', $data);
 			}else{
 				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan, periksa kembali id transaksi anda");
-				redirect('legalisir/pesananSaya');
+				redirect('legalisir/legalisir/pesananSaya');
 			}
 		}else{
 			redirect("auth/logout");
@@ -157,7 +162,7 @@ class Legalisir extends CI_Controller {
 				}
 			}
 			$this->session->set_flashdata('sukses', "Produk telah ditambahkan ke dalam daftar pesanan saya");
-			redirect('legalisir/legalisir/');
+			redirect('legalisir/legalisir/legalisir/');
 		}else{
 			redirect("auth/logout");
 		}
@@ -166,10 +171,12 @@ class Legalisir extends CI_Controller {
     function keranjang(){ //alumni
 		if($this->session->userdata('status') == "alumni"){
 			$status_pesanan = '0';
+			$data['alumni'] = $this->m_alumni->tampilalumni();
+			$data['grup'] = $this->m_group_chat->tampilgrup();
 			$data['keranjang'] = $this->m_legalisir->getTransaksiKeranjang($status_pesanan);
 			if($this->m_legalisir->cekKeranjang() == false){
 				$this->session->set_flashdata('gagals', "Keranjang Anda KOSONG, silahkan lakukan transaksi pemesanan produk yang anda inginkan");
-				redirect('legalisir/legalisir');
+				redirect('legalisir/legalisir/legalisir');
 			}else{
 				$data['main_view'] = 'legalisir/v_keranjang';
 				$this->load->view('template/template_alumni', $data);
@@ -186,11 +193,11 @@ class Legalisir extends CI_Controller {
 			$this->m_admin->hapus_data($where,'detail_transaksi');
 			if($this->m_legalisir->cekProdukDetailTransaksi($id_transaksi) == true){
 				$this->session->set_flashdata('sukses', "Data Produk berhasil dihapus");
-				redirect('legalisir/keranjang');
+				redirect('legalisir/legalisir/keranjang');
 			}else{
 				$this->m_admin->hapus_data($where_transaksi,'transaksi');
 				$this->session->set_flashdata('sukses', "Data Produk dan transaksi berhasil dihapus");
-				redirect('legalisir/legalisir');
+				redirect('legalisir/legalisir/legalisir');
 			}
 		}else{
 			redirect("auth/logout");
@@ -216,7 +223,7 @@ class Legalisir extends CI_Controller {
 
 			$this->m_admin->update_data($where,$data,'detail_transaksi');
 			$this->session->set_flashdata('notif', "Data produk berhasil di Update");
-			redirect('legalisir/keranjang');
+			redirect('legalisir/legalisir/keranjang');
 		}else{
 			redirect("auth/logout");
 		}
@@ -248,6 +255,8 @@ class Legalisir extends CI_Controller {
 	{
 		if($this->session->userdata('status') == "alumni"){
 			$data['main_view'] = 'legalisir/v_input_alamat_pengiriman';
+			$data['alumni'] = $this->m_alumni->tampilalumni();
+			$data['grup'] = $this->m_group_chat->tampilgrup();
 			$this->load->view('template/template_alumni', $data);
 		}else{
 			redirect("auth/logout");
@@ -341,7 +350,7 @@ class Legalisir extends CI_Controller {
 			$where = array('id_transaksi' => $id_transaksi);
 
 			$this->m_admin->update_data($where,$data,'transaksi');
-			redirect('legalisir/pembayaran/'.$id_transaksi);
+			redirect('legalisir/legalisir/pembayaran/'.$id_transaksi);
 		}else{
 			redirect("auth/logout");
 		}
@@ -359,6 +368,8 @@ class Legalisir extends CI_Controller {
 				$total = 0;
 				foreach($transaksi as $u){$total = $u->total_pembayaran;}
 				$data['total_pembayaran'] = $total;
+				$data['alumni'] = $this->m_alumni->tampilalumni();
+				$data['grup'] = $this->m_group_chat->tampilgrup();
 				$data['main_view'] = 'legalisir/v_validasi_pembayaran';
 				$this->load->view('template/template_alumni', $data);
 			}
@@ -391,7 +402,7 @@ class Legalisir extends CI_Controller {
 		
 				if ( ! $this->upload->do_upload('bukti_transfer')){
 					$this->session->set_flashdata('gagal', "Validasi Pembayaran Gagal! Gambar tidak sesuai persayaratan, periksa kembali bukti transfer anda");
-					redirect('legalisir/formValidasiPembayaran');
+					redirect('legalisir/legalisir/formValidasiPembayaran');
 				}else{                    	            	
 					$file = $this->upload->data();
 					$gambar = $file['file_name'];   
@@ -411,12 +422,12 @@ class Legalisir extends CI_Controller {
 					$this->m_admin->update_data($where,$data,'transaksi');
 					$data = array('upload_data' => $this->upload->data());
 					$this->session->set_flashdata('sukses', "validasi pembayaran telah dikirim, silahkan tunggu beberapa hingga pembayaran divalidasi oleh bagian keuangan");
-					redirect('legalisir/detailPesanan/'.$id_transaksi);
+					redirect('legalisir/legalisir/detailPesanan/'.$id_transaksi);
 				}
 
 			}else{
 				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan, periksa kembali id transaksi anda");
-				redirect('legalisir/formValidasiPembayaran');
+				redirect('legalisir/legalisir/formValidasiPembayaran');
 
 			}
 		}else{
@@ -433,6 +444,8 @@ class Legalisir extends CI_Controller {
 				$data['pesanan'] = 'kosong';
 			}
 			$data['pesananSaya'] = $this->m_legalisir->getPesananSaya();
+			$data['alumni'] = $this->m_alumni->tampilalumni();
+			$data['grup'] = $this->m_group_chat->tampilgrup();
 			$data['main_view'] = 'legalisir/v_list_pesanan_saya';
 			$this->load->view('template/template_alumni', $data);
 		}else{
@@ -446,11 +459,13 @@ class Legalisir extends CI_Controller {
 			if($this->m_legalisir->getTransaksiById($id_transaksi) != false){
 				$data['produk'] = $this->m_legalisir->getProdukPesananSaya($id_transaksi);
 				$data['pesananSaya'] = $this->m_legalisir->getDetailPesananSaya($id_transaksi);
+				$data['alumni'] = $this->m_alumni->tampilalumni();
+				$data['grup'] = $this->m_group_chat->tampilgrup();
 				$data['main_view'] = 'legalisir/v_detail_pesanan_saya';
 				$this->load->view('template/template_alumni', $data);
 			}else{
 				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan, periksa kembali id transaksi anda");
-				redirect('legalisir/pesananSaya');
+				redirect('legalisir/legalisir/pesananSaya');
 			}
 		}else{
 			redirect("auth/logout");
@@ -469,7 +484,7 @@ class Legalisir extends CI_Controller {
 			$data['data_transaksi'] = 'kosong';
 		}
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'/legalisir/transaksi/';
+		$config['base_url'] = base_url().'/legalisir/legalisir/transaksi/';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 10;
 		$config['first_link']       = 'First';
@@ -513,7 +528,7 @@ class Legalisir extends CI_Controller {
 
 			$this->m_admin->update_data($where,$data,'transaksi');
 			$this->session->set_flashdata('sukses', "Status transaksi $id_transaksi telah di ubah");
-			redirect('legalisir/detailTransaksi/'.$id_transaksi);
+			redirect('legalisir/legalisir/detailTransaksi/'.$id_transaksi);
 		}else{
 			redirect("auth/logout");
 		}
@@ -525,12 +540,14 @@ class Legalisir extends CI_Controller {
 			if($this->m_legalisir->cekIdTransaksi($id_transaksi) != false || $id_transkaksi != null){
 				$data['jumlah_transaksi_baru'] = $this->m_legalisir->getJumlahTransaksiBaru();
 				$data['produk'] = $this->m_legalisir->getProdukPesananSaya($id_transaksi);
+				$data['alumni'] = $this->m_alumni->tampilalumni();
+				$data['grup'] = $this->m_group_chat->tampilgrup();
 				$data['transaksi'] = $this->m_legalisir->getDetailPesananSaya($id_transaksi);
 				$data['main_view'] = 'legalisir/v_detail_transaksi';
 				$this->load->view('template/template_operator', $data);
 			}else{
 				$this->session->set_flashdata('gagal', "id transaksi tidak ditemukan");
-				redirect('legalisir/transaksi/semua');
+				redirect('legalisir/legalisir/transaksi/semua');
 			}
 		}else{
 			redirect("auth/logout");
@@ -556,7 +573,7 @@ class Legalisir extends CI_Controller {
 
 			$this->m_admin->update_data($where,$data,'transaksi');
 			$this->session->set_flashdata('sukses', "Pembayaran transaksi $id_transaksi telah divalidasi");
-			redirect('legalisir/detailTransaksi/'.$id_transaksi);
+			redirect('legalisir/legalisir/detailTransaksi/'.$id_transaksi);
 		}else{
 			redirect("auth/logout");
 		}

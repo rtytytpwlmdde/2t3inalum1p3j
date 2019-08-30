@@ -4,10 +4,9 @@
                             <div class="message-sidepanel">
                                 <div class="message-profile">
                                     <div class="wrap">
-                                        <img src="<?php echo base_url(); ?>/assets/images/users/guest.jpg" class="online conv-img" alt="Conversation user" />
-                                        <p>Jisoo</p>
-                                        <i class='bx bx-chevron-down expand-button'></i>
-                                        <div id="status-options">
+                                        <img src="<?php echo base_url('img/alumni_pic/'.$this->session->userdata('foto')); ?>" class="online conv-img" alt="Conversation user" />
+                                        <p><?php echo $this->session->userdata('nama_login') ?></p>
+                                         <div id="status-options">
                                             <ul id="set-online-status">
                                                 <li id="status-online" class="messenger-user-active"><span class="status-circle"></span>
                                                     <p>Online</p>
@@ -23,202 +22,40 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div id="expanded">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    <a href="javascript:void(0)" class="text-dark fs-9"><i class='bx bx-contact text-primary mr-3'></i> Kontak</a>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <a href="javascript:void(0)" class="text-dark fs-9"><i class='bx bx-users text-primary mr-3'></i> Group</a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="message-search position-relative d-flex">
-                                    <label for=""><i class='bx bx-search'></i></label>
-                                    <input type="text" class="form-control search-input" placeholder="Search for conversations..." />
-                                    <button type="button" class="btn btn-create-conversation" data-toggle="modal" data-target="#newConversation"><i class='bx bx-pencil'></i></button>
-                                </div>
-                                <div class="message-contacts">
-                                    <ul class="conversations">
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status online"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-5.png" alt="Conversation user" />
-                                                <span class="unread-messages">3</span>
-                                                <div class="meta">
-                                                    <p class="name">Ruth D. Greene</p>
-                                                    <p class="preview">Great, I’ll see you tomorrow!.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact messenger-user-active">
-                                            <div class="wrap">
-                                                <span class="contact-status busy"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user" />
-                                                <div class="meta">
-                                                    <p class="name">Susan P. Jarvis</p>
-                                                    <p class="preview">This party is going to have a DJ, food, and drinks.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status away"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-7.png" alt="Conversation user" />
-                                                <div class="meta">
-                                                    <p class="name">Kimberly R. Hatfield</p>
-                                                    <p class="preview"><span>You:</span> Yeah, I will be there.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status online"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-8.png" alt="Conversation user" />
-                                                <span class="unread-messages">1</span>
-                                                <div class="meta">
-                                                    <p class="name">Joe S. Feeney</p>
-                                                    <p class="preview">I would really like to bring my friend Jake, if that would be OK.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status busy"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-9.png" alt="Conversation user" />
-                                                <div class="meta">
-                                                    <p class="name">William S. Willmon</p>
-                                                    <p class="preview"><span>You:</span> Sure, what can I help you with?</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-10.png" alt="Conversation user" />
-                                                <span class="unread-messages">4</span>
-                                                <div class="meta">
-                                                    <p class="name">Sean S. Smith</p>
-                                                    <p class="preview">Which of those two is best?</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-11.png" alt="Conversation user" />
-                                                <span class="unread-messages">1</span>
-                                                <div class="meta">
-                                                    <p class="name">Michelle R. Alvarado</p>
-                                                    <p class="preview">You'll need to make an appointment.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status busy"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-12.png" alt="Conversation user" />
-                                                <span class="unread-messages">2</span>
-                                                <div class="meta">
-                                                    <p class="name">Irwin M. Speller</p>
-                                                    <p class="preview">Sure. Here you go.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-5.png" alt="Conversation user" />
-                                                <span class="unread-messages">1</span>
-                                                <div class="meta">
-                                                    <p class="name">Karen E. Nagata</p>
-                                                    <p class="preview">Would you like to exchange it?</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="contact">
-                                            <div class="wrap">
-                                                <span class="contact-status"></span>
-                                                <img src="<?php echo base_url(); ?>/assets/images/users/user-8.png" alt="Conversation user" />
-                                                <div class="meta">
-                                                    <p class="name">Jonathan Sidwell</p>
-                                                    <p class="preview"><span>You:</span> Certainly. This will take only a few seconds.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
+                               
                             </div>
                             <div class="content">
+								<?php 
+												$nama = '';
+												$foto = '';
+												foreach ($alumni as $u){ 
+													$nama= $u->nama;
+													$foto = $u->foto;
+												}
+												$n = $nama;
+												$np = $foto;
+											?>
                                 <div class="contact-profile">
-                                    <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Convarsation user image" />
-                                    <p class="message-profile-name">Susan P. Jarvis</p>
-                                    <div class="social-media">
-                                        <i class='bx bx-phone'></i>
-                                        <i class='bx bx-video'></i>
-                                        <i class='bx bx-info-circle'></i>
-                                        <span class="dropdown">
-                                            <a href="#" role="button" id="message-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class='bx bx-dots-vertical-rounded'></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right fs-9" aria-labelledby="message-options">
-                                                <a href="#" class="dropdown-item">Mute</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a href="#" class="dropdown-item">Delete</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a href="#" class="dropdown-item">Mark as Unread</a>
-                                                <a href="#" class="dropdown-item">Something's wrong</a>
-                                                <a href="#" class="dropdown-item">Ignore Messages</a>
-                                                <a href="#" class="dropdown-item">Block Messages</a>
-                                            </div>
-                                        </span>
-                                    </div>
+                                       <img src="<?php echo base_url('img/alumni_pic/'.$np) ?>" alt="Online user" class="mr-2 online-user-image">
+                                    <p class="message-profile-name"><?php echo $n?></p>
+									
+									
                                 </div>
                                 <div class="messages">
                                     <ul class="messages-content">
-                                        <li class="sent">
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user image" />
-                                            <p>Are you going to the party on Saturday?</p>
-                                        </li>
-                                        <li class="replies">
-                                            <p>I was thinking about it. Are you?</p>
-                                        </li>
-                                        <li class="sent">
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user image" />
-                                            <p>Yeah, I heard it's going to be a lot of fun.</p>
-                                        </li>
-                                        <li class="replies">
-                                            <p>Really? Well, what time does it start?</p>
-                                        </li>
-                                        <li class="sent">
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user image" />
-                                            <p>It starts at 8:00 pm, and I really think you should go.</p>
-                                        </li>
-                                        <li class="replies">
-                                            <p>Well, who else is going to be there?</p>
-                                        </li>
-                                        <li class="sent">
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user image" />
-                                            <p>Everybody from school.</p>
-                                        </li>
-                                        <li class="replies">
-                                            <p>How do you know it's going to be so fun?</p>
-                                        </li>
-                                        <li class="sent">
-                                            <img src="<?php echo base_url(); ?>/assets/images/users/user-6.png" alt="Conversation user image" />
-                                            <p>This party is going to have a DJ, food, and drinks.</p>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <div class="message-input">
                                     <div class="wrap">
                                         <form class="d-inline form-inline">
                                             <div class="input-group-btn">
-                                                <input type="text" class="form-control search-input" placeholder="Type a message..." aria-label="Search" aria-describedby="search-addon">
+											 <input type="text" name="chat_message" id="chat_message" class="form-control search-input" placeholder="Type a message..." aria-label="Search" aria-describedby="search-addon">
                                                 <div class="input-group-append">
-                                                    <button type="button" class="btn search-button" id="send-message"><i class='bx bx-send'></i></button>
+                                                     <?php echo anchor('#', 'Send', array('title' => 'Send this chat message', 'id' => 'submit_message', 'class' => 'btn btn-default bx bx-send')); ?>
                                                 </div>
                                             </div>
                                         </form>
@@ -257,3 +94,68 @@
             </div>
         </div>
     </div>
+	
+<script type="text/javascript" charset="utf-8" async defer>
+  var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold 'our' video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: '',
+    // immediately ask for camera access
+    autoRequestMedia: true,
+    media: {
+        <?php
+        if ($video == 0) {
+            if ($audio == 0) {
+                echo "audio: false,
+                  video: false";
+            } elseif ($audio == 1) {
+                echo "audio: true,
+                  video: false";
+            }
+        } elseif ($video == 1) {
+            if ($audio == 0) {
+                echo "audio: false,
+                  video: true";
+            } elseif ($audio == 1) {
+                echo "audio: true,
+                  video: true";
+            }
+        }
+        ?>
+    }
+  });
+
+  // a peer video has been added
+  webrtc.on('videoAdded', function (video, peer) {
+      console.log('video added', peer);
+      var remotes = document.getElementById('remotesVideos');
+      if (remotes) {
+          var container = document.createElement('div');
+          container.className = 'videoContainer';
+          container.id = 'container_' + webrtc.getDomId(peer);
+          container.appendChild(video);
+
+          // suppress contextmenu
+          video.oncontextmenu = function () { return false; };
+
+          remotes.appendChild(container);
+      }
+  });
+
+  // a peer video was removed
+  webrtc.on('videoRemoved', function (video, peer) {
+      console.log('video removed ', peer);
+      var remotes = document.getElementById('remotesVideos');
+      var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
+      if (remotes && el) {
+          remotes.removeChild(el);
+      }
+  });
+
+  // we have to wait until it's ready
+  webrtc.on('readyToCall', function () {
+    // you can name it anything
+    webrtc.joinRoom('<?php echo $chat_data['topic']; ?>');
+  });
+</script>

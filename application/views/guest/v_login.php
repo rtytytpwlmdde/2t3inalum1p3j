@@ -52,7 +52,7 @@
                             <label class="custom-control material-checkbox">
                                 <input type="checkbox" class="material-control-input">
                                 <span class="material-control-indicator"></span>
-                                <span class="material-control-description">Remember Me</span>
+                                <a href ="<?php echo base_url('register'); ?>" class="material-control-description">Register</a>
                             </label>
                         </div>
                         <div class="col-md-6 text-right">

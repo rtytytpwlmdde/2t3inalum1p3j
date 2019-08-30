@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+        $notif = $this->session->flashdata('notif');
+        if($notif != NULL){
+            echo '
+            <div class="alert alert-accent alert-dismissible fade show mb-0" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fa fa-close text-white"></i></span>
+            </button>
+            <i class="fa fa-info mx-2"></i>
+            <strong>'.$notif.'</strong> 
+            </div>
+            ';
+        }
+    ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,98 +49,92 @@
                         </div>
                     </div>
                 </div>
-                <form action="" method="" class="pt-5">
+                <form action="<?php echo base_url(). 'register/submit'; ?>" method="post" class="pt-5">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="First Name">
+                                <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Last Name">
+                                <input type="text" class="form-control" name="nim" placeholder="NIM">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Email Address">
+                                <input type="text" class="form-control" name="email" placeholder="Email Address">
                             </div>
                         </div>
-                        <div class="col-md-12">
+						<div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Phone Number">
+                                <input  list="list_jurusan" name="id_jurusan" type="text" class="form-control" id="feInputAddress" placeholder="Ketik.."> 
+                                <datalist id="list_jurusan">
+                                    <?php foreach($jurusan as $p): ?>
+                                    <option value="<?php echo $p->id_jurusan?>"><?php echo $p->id_jurusan?> - <?php echo $p->jurusan?></option>
+                                    <?php endforeach ?>
+                                </datalist>
                             </div>
                         </div>
-                        <div class="col-md-4">
+						<div class="col-md-12">
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option value="">- Select Day -</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
+                                <input  list="list_prodi" name="id_prodi" type="text" class="form-control" id="feInputAddress" placeholder="Ketik.."> 
+                                <datalist id="list_prodi">
+                                    <?php foreach($prodi as $p): ?>
+                                    <option value="<?php echo $p->id_prodi?>"><?php echo $p->id_prodi?> - <?php echo $p->prodi?></option>
+                                    <?php endforeach ?>
+                                </datalist>
                             </div>
                         </div>
-                        <div class="col-md-4">
+						<div class="col-md-12">
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option value="">- Select Month -</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
+                                <select required  name="jenjang" id="feInputState" class="form-control ">
+                                    <option value="" selected>Pilih </option>
+                                    <option value="D3">D3</option>
+                                    <option value="D4">D4</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S3">S3</option>
+								</select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+						<div class="col-md-12">
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option value="">- Select Year -</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
+                                <select required  name="angkatan" id="feInputState" class="form-control">
+							<?php
+								$mulai= date('Y') ;
+								for($i = $mulai;$i>$mulai - 50;$i--){
+								$sel = $i == date('Y') ? ' selected="selected"' : '';
+								echo '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
+								}
+								?>
+							</select>
+                            </div>
+                        </div>
+						<div class="col-md-12">
+                            <div class="form-group">
+                                 <select required  name="tahun_lulus" id="feInputState" class="form-control">
+							<?php
+							$mulai= date('Y') ;
+							for($i = $mulai;$i>$mulai - 50;$i--){
+							$sel = $i == date('Y') ? ' selected="selected"' : '';
+							echo '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
+							}
+							?>
+						</select>
+                            </div>
+                        </div>
+						<div class="col-md-12">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="tanggal_yudisium" placeholder="Tanggal Yudisium">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="" placeholder="Confirm Password">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <p class="agree-privacy">By clicking the Sign Up button below you agreed to our privacy policy and terms of use of our website.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <span class="go-login">Already a member? <a href="sign-in.html">Sign In</a></span>
+                            <span class="go-login">Already a member? <a href="<?php echo base_url('auth'); ?>">Sign In</a></span>
                         </div>
                         <div class="col-md-6 text-right">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary sign-up">Sign Up</button>
+                                <button type="submit" class="btn btn-primary sign-up">Sign Up</button>
                             </div>
                         </div>
                     </div>
@@ -138,14 +145,12 @@
             <div class="auth-left-content mt-5 mb-5 text-center">
                 <div class="weather-small text-white">
                     <p class="current-weather"><i class='bx bx-sun'></i> <span>14&deg;</span></p>
-                    <p class="weather-city">Gyumri</p>
+                    <p class="weather-city">Indonesia</p>
                 </div>
-                <div class="text-white mt-5 mb-5">
+                <div class="text-green mt-5 mb-5">
                     <h2 class="create-account mb-3">Create Account</h2>
-                    <p>Enter your personal details and start journey with us.</p>
-                </div>
-                <div class="auth-quick-links">
-                    <a href="#" class="btn btn-outline-primary">Purchase template</a>
+                    <p>Selamat Datang Silahkan untuk Melakukan Pengisian Data Diri.</p>
+					<p>Jika telah Selesai Melakukan Pengisian Silahkan Cek Email Anda</p>
                 </div>
             </div>
         </div>

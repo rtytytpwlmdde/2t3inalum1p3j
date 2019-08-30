@@ -49,9 +49,17 @@
                     
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="main_menu">
-                        <ul class="navbar-nav ">
+                    <ul class="navbar-nav ">
+                            <li><a class="text-secondary" href="<?php echo base_url('legalisir/legalisir/transaksi'); ?>">Transaksi</a></li>
+                        </ul>
+                        <ul class="navbar-nav px-4">
                             <li><a class="text-secondary" href="<?php echo base_url('resi'); ?>">Cek Resi</a></li>
                         </ul>
+                        <?php if($this->session->userdata('status') == 'recording'){ ?>
+                            <ul class="navbar-nav ">
+                            <li><a class="text-secondary" href="<?php echo base_url('legalisir/recording/lihatValidasiIjazah'); ?>">Ijazah</a></li>
+                        </ul>
+                        <?php } ?>
                         <ul class="navbar-nav mr-auto"></ul>
                         <ul class="navbar-nav mr-3">
                             
@@ -144,20 +152,17 @@
                         <div class="row px-4 ">
                             <div class="col-md-12 content">
                                 <br>
-                                <div class="row mb-3">
-                                    <div class="col-12 col-sm-6">
-                                        <h5 class="page-title text-muted">CEK RESI</h5>
+                                <div class="row mb-3 justify-content-md-center">
+                                    <div class="col-12 col-sm-3">
                                     </div>
 																		
                                     <div class="col-12 col-sm-6">
-                                       
-                                    </div>
-                                </div>
-                                <div class="border-bottom p-2 bg-white w-shadow">
+                                        <h5 class="page-title text-muted text-center">CEK RESI</h5>
+                                    <div class="border-bottom p-2 bg-white w-shadow">
                                     <div class=" ">
-                                        <div class="col-md-6 form-inline">
-                                            <input type="text" name="no_resi" value="<?= $nomor_resi; ?>" id="no_resi" class="form-control" style="width:76%;">
-                                            <button type="button" onclick="tampil_resi('data')" class="btn btn-primary mx-sm-3 ">Cek Resi</button> <br>
+                                        <div class="col-md-12 form-inline">
+                                            <input type="text" name="no_resi" value="<?= $nomor_resi; ?>" id="no_resi" class="form-control" style="width:100%;">
+                                            <button type="button" onclick="tampil_resi('data')" class="mt-2 text-center btn btn-primary " style="width:100%;">Cek Resi</button> <br>
                                         </div>
                                         <div class="content">
                                             <div class="col-md-12">
@@ -171,6 +176,12 @@
                                         </div>
                                     </div>
                                 </div><br>
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                       
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

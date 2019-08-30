@@ -359,81 +359,56 @@
                                     <!-- Posts section -->
                                     <div class="row">
                                         <div class="col-md-12 profile-center">
-                                            <ul class="list-inline profile-links d-flex justify-content-between w-shadow rounded">
+                                        <ul style="margin-left:1.5px; margin-right:1.5px;" class="list-inline row profile-links d-flex justify-content-between w-shadow rounded">
                                                 <li class="list-inline-item profile-active">
                                                     <a href="<?php echo base_url('alumni/'); ?>">Timeline</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('alumni/data_alumni/'); ?>">About</a></li>
+                                                    <a  href="<?php echo base_url('alumni/data_alumni/'); ?>">Kuisioner</a></li>
                                                 <li class="list-inline-item">
                                                     <a  href="<?php echo base_url('alumni/percakapan'); ?>">Percakapan</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a  href="<?php echo base_url('legalisir/legalisir'); ?>">Legalisir Online</a>
+                                                    <a  href="<?php echo base_url('legalisir/legalisir/legalisir'); ?>">Legalisir</a>
                                                 </li>
-                                                <li class="list-inline-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class='bx bx-dots-vertical-rounded'></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right profile-ql-dropdown">
-                                                        <a href="#" class="dropdown-item">Activity Log</a>
-                                                        <a href="#" class="dropdown-item">Videos</a>
-                                                        <a href="#" class="dropdown-item">Check-Ins</a>
-                                                        <a href="#" class="dropdown-item">Events</a>
-                                                        <a href="#" class="dropdown-item">Likes</a>
-                                                    </div>
+                                                <li class="list-inline-item">
+                                                    <a  href="<?php echo base_url('alumni/lowker/'); ?>">Lowongan Kerja</a>
                                                 </li>
-                                            </ul>
-                                            <script>
-                                                function tampil_resi(act){
-                                                    var resi = $('#no_resi').val();
-
-                                                    if(resi == ""){
-                                                        alert("harap isi data dengan lengkap");
-                                                    }else{
-                                                        $.ajax({
-                                                        url: "rajaongkir/getResi",
-                                                        type: "GET",
-                                                        data : {waybill: resi},
-                                                        success: function (ajaxData){
-                                                            //$('#tombol_export').show();
-                                                            //$('#hasilReport').show();
-                                                            $("#hasil_resi").html(ajaxData);
-                                                        }
-                                                        });
-                                                    }
-
-
-                                                };
-                                            </script>
+                                            </ul>       
+                                           
                                             <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class=" text-muted ">
-                                                    <div class="content">
-                                                            <h5 class="mb-3  page-title text-muted">LACAK PESANAN</h5>
-                                                    </div>
+                                            <div class=" ">
+                                                <div class="col-md-12 form-inline">
+                                                    <input type="text" name="no_resi" value="<?= $nomor_resi; ?>" id="no_resi" class="form-control" style="width:100%;">
+                                                    <button type="button" style="width:100%;" onclick="tampil_resi('data')" class="mt-2 btn btn-primary ">Cek Resi</button> <br>
                                                 </div>
-                                            </div> <br>
-                                            <div class="post border-bottom p-3 bg-white w-shadow">
-                                                <div class=" text-muted ">
-                                                    <div class="content">
-                                                        <div class="settings-form form-inline">
-                                                            <input type="text" name="no_resi" value="<?= $nomor_resi; ?>" id="no_resi" class="form-control" style="width:76%;">
-                                                            <button type="button" onclick="tampil_resi('data')" class="btn btn-primary mx-sm-3 ">Cek Resi</button> <br>
-
-                                                            <div id="hasil_resi"></div>    
+                                                <div class="content">
+                                                    <div class="col-md-12">
+                                                        <div class="panel-heading py-2"></div>
+                                                        <div class="panel-body">
+                                                            <div class="settings-form">
+                                                                <div id="hasil_resi"></div>    
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div> <br>
-                                            
-                                        </div>
+                                            </div>
+                                            </div>
+
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="profile-info-right">
                                     <!-- Posts section -->
-                                   
+                                    <div class="row">
+                                        <div class="col-md-12 profile-center"><br>
+                                           
+                                           
+
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                            
@@ -441,72 +416,34 @@
                     </div>
                 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-function tampil_data(act) {
-	var w = $('#origin').val();
-	var x = $('#destination').val();
-	var y = $('#weight').val();
-	var z = $('#courier').val();
-	var a = $('#id_transaksi').val();
-	var b = $('#total_harga').val();
-	var c = $('#jalan').val();
 
-	$.ajax({
-			url: "legalisir/tambahAlamatPengiriman",
-			type: "GET",
-			data : {origin: w, destination: x, berat: y, courier: z, id_transaksi: a, total_harga: b, jalan: c},
-			success: function (ajaxData) {
-                window.location.href = 'legalisir/pembayaran';
-			}
-	});
-};
-
-
-
-$(document).ready(function() {
-	$("#from_province").click(function() {
-		$.post("<?php echo base_url(); ?>rajaongkir/getCity/"+$('#from_province').val(),function(obj) {
-			$('#origin').html(obj);
-		});			
-	});
-
-	$("#to_province").click(function() {
-		$.post("<?php echo base_url(); ?>rajaongkir/getCity/"+$('#to_province').val(),function(obj) {
-			$('#destination').html(obj);
-		});			
-	});
-});
-</script>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- New message modal -->
-    <div class="modal fade" id="newMessageModal" tabindex="-1" role="dialog" aria-labelledby="newMessageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header new-msg-header">
-                    <h5 class="modal-title" id="newMessageModalLabel">Start new conversation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body new-msg-body">
-                    <form action="" method="" class="new-msg-form">
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control search-input" rows="5" id="message-text" placeholder="Type a message..."></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer new-msg-footer">
-                    <button type="button" class="btn btn-primary btn-sm">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<script>
+				function tampil_resi(act){
+						var resi = $('#no_resi').val();
+
+						if(resi == ""){
+								alert("harap isi data dengan lengkap");
+						}else{
+								$.ajax({
+								url: "rajaongkir/getResi",
+								type: "GET",
+								data : {waybill: resi},
+								success: function (ajaxData){
+										//$('#tombol_export').show();
+										//$('#hasilReport').show();
+										$("#hasil_resi").html(ajaxData);
+								}
+								});
+						}
+
+
+				};
+		</script>
 
     <!-- Core -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery/jquery-3.3.1.min.js"></script>

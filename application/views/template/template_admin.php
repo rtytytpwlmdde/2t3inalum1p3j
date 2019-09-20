@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url(); ?>/assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/assets/admin/css/admin-style.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>/assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>/assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -26,6 +27,12 @@
   <link href="<?php echo base_url(); ?>/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="<?php echo base_url(); ?>/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   
 </head>
 
 <body id="page-top">
@@ -102,6 +109,11 @@
         <a class="nav-link" href="<?php echo base_url('admin/opendonasi'); ?>">
           <i class="fas fa-coins"></i>
           <span>Open Donasi</span></a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('kuisioner/listKuisioner'); ?>">
+          <i class="fas fa-coins"></i>
+          <span>KUISONERRRRRRRR</span></a>
       </li> 
 	  <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('admin/info_feb'); ?>">
@@ -287,6 +299,7 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
+<script type="text/javascript" src="<?php echo base_url().'assets/ajax/js/jquery-3.2.1.js'?>"></script>
   <script src="<?php echo base_url(); ?>/assets/admin/vendor/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

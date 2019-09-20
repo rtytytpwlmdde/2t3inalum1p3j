@@ -29,10 +29,10 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Detail Pesanan </h1>
             <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
+                <a href="<?php echo site_url('legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
                     <i class='bx bx-money'></i>Semua Pesanan Saya
                 </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
+                <a href="<?php echo site_url('legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
                     <i class='bx bx-info-circle' ></i>Pesanan Tertunda
                 </a>
             </div>
@@ -47,7 +47,7 @@
                     <div class="col mr-2">
                       <div class=" no-gutters align-items-center">
                       <table class="table table-bordered">
-                        <thead>
+                        <thead class="bg-thead text-white">
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Produk</th>
@@ -74,7 +74,7 @@
                                 <td><?= $harga = $u->harga_transaksi * $u->jumlah_produk; ?></td>
                                 <td>
                                     <a data-toggle="modal" data-target="#modal<?=$u->id_detail_transaksi?>" class="btn btn-warning btn-sm text-white"><i class="fas fa-pencil-alt"></i></i></a>
-                                    <a href="<?php echo base_url('legalisir/legalisir/hapusProdukKeranjang/'.$id_transaksi."/".$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <a href="<?php echo base_url('legalisir/hapusProdukKeranjang/'.$id_transaksi."/".$u->id_detail_transaksi); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             <?php 
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <form action="<?php echo base_url('legalisir/legalisir/buatPesanan/'); ?>" method="post">
+            <form action="<?php echo base_url('legalisir/buatPesanan/'); ?>" method="post">
             <input hidden type="text" name="id_transaksi" value="<?= $id_transaksi; ?>">
             <input hidden type="text" name="total_harga" value="<?= $total_harga; ?>">
             <input hidden type="text" name="total_berat" value="<?= $total_berat; ?>">
@@ -128,7 +128,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="<?php echo base_url('legalisir/legalisir/editProdukKeranjang/'); ?>" method="post">
+      <form action="<?php echo base_url('legalisir/editProdukKeranjang/'); ?>" method="post">
         <div class="form-group">
             <label>Nama Produk</label>
             <input hidden type="text" name="id_detail_transaksi" class="form-control" value="<?= $k->id_detail_transaksi;?>">

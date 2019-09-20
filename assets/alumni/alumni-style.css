@@ -1,3 +1,12 @@
+body table tr td{
+
+  color:#3f3f3f;
+}
+
+.bg-thead{
+  background-color: rgb(79, 96, 116);
+}
+
 .bg-biru{
   background-color: rgb(44, 120, 206);
   height: 3.275rem;
@@ -100,7 +109,112 @@
   background-color: #dddfeb;
 }
 
+.btn-orange {
+  color: #fff;
+  background-color: #dfb84e;
+  border-color: #dfb84e;
+}
 
+.btn-orange:hover {
+  color: #fff;
+  background-color: #dba613;
+  border-color: #c5981a;
+}
+
+.btn-orange:focus, .btn-orange.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+}
+
+.btn-orange.disabled, .btn-orange:disabled {
+  color: #fff;
+  background-color: #dfb84e;
+  border-color: #dfb84e;
+}
+
+.btn-orange:not(:disabled):not(.disabled):active, .btn-orange:not(:disabled):not(.disabled).active,
+.show > .btn-orange.dropdown-toggle {
+  color: #fff;
+  background-color: #d4ba26;
+  border-color: #dfb84e;
+}
+
+.btn-orange:not(:disabled):not(.disabled):active:focus, .btn-orange:not(:disabled):not(.disabled).active:focus,
+.show > .btn-orange.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+}
+
+
+.border-left-orange {
+  border-left: 0.25rem solid #cc8b36 !important;
+}
+
+.border-left-orange {
+  border-left: 0.25rem solid #cc8b36 !important;
+}
+
+.badge-orange {
+  color: #fff;
+  background-color: #cc8b36;
+}
+
+a.badge-orange:hover, a.badge-orange:focus {
+  color: #fff;
+  background-color: #cc8b36;
+}
+
+a.badge-orange:focus, a.badge-orange.focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 157, 54, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(204, 152, 54, 0.5);
+}
+
+.badge-pink {
+  color: #fff;
+  background-color: #cc36b8;
+}
+
+a.badge-pink:hover, a.badge-pink:focus {
+  color: #fff;
+  background-color: #cc36b8;
+}
+
+a.badge-pink:focus, a.badge-pink.focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 54, 172, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(204, 54, 197, 0.5);
+}
+
+
+.badge-kuning {
+  color: #fff;
+  background-color: #cacc36;
+}
+
+a.badge-kuning:hover, a.badge-kuning:focus {
+  color: #fff;
+  background-color: #cacc36;
+}
+
+a.badge-kuning:focus, a.badge-kuning.focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(189, 204, 54, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(204, 202, 54, 0.5);
+}
+
+.badge-abu {
+  color: rgb(22, 22, 22);
+  background-color: #4b48481c;
+}
+
+.bg-thead{
+  background-color: rgb(79, 96, 116);
+}
+
+.bg-disabled{
+  background-color: #36363617;
+}
 
 
 

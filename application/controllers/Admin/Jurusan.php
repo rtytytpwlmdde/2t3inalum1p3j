@@ -59,7 +59,7 @@ class Jurusan extends CI_Controller{
 
 		$this->m_jurusan->update_data($where,$data,'jurusan');
 		$this->session->set_flashdata('notif', "Data jurusan $jurusan berhasil di Update");
-		redirect('admin/lihat_jurusan');
+		redirect('admin/jurusan/');
 	}
 	
 	function hapusJurusan($id_jurusan){

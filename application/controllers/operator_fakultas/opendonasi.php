@@ -23,12 +23,12 @@ function __construct(){
 	function index(){
 		$data['main_view'] = 'operator_fakultas/v_open_donasi';
 		$data['opendonasi'] = $this->m_opendonasi->tampilopendonasi()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 
 	function inputOpen(){
 		$data['main_view'] = 'operator_fakultas/v_tambah_open_donasi';
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	function tambahOpen(){
 		$nama_kegiatan = $this->input->post('nama_kegiatan');
@@ -65,7 +65,7 @@ function __construct(){
 		$data['main_view'] = 'operator_fakultas/v_edit_open_donasi';
 		$where = array('id_opendonasi' => $id_opendonasi);
 		$data['opendonasi'] = $this->m_opendonasi->edit_data($where,'opendonasi')->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	
 	function editOpendonasi(){

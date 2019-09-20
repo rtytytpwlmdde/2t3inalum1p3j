@@ -25,14 +25,14 @@ function __construct(){
 		$data['grupchat'] = $this->m_group_chat->grupchat()->result();
 		$data['jurusan'] = $this->m_jurusan->tampilJurusan()->result();
 		$data['prodi'] = $this->m_prodi->tampilProdi()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 	
 	function inputForum(){
 		$data['main_view'] = 'operator_fakultas/v_tambah_forum';
 		$data['jurusan'] = $this->m_jurusan->tampilJurusan()->result();
 		$data['prodi'] = $this->m_prodi->tampilProdi()->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	function tambahForum(){
 		$nama_group = $this->input->post('nama_group');
@@ -64,7 +64,7 @@ function __construct(){
 		$data['groupchat'] = $this->m_group_chat->edit_data($where,'group_chat')->result();
 		$data['jurusan'] = $this->m_jurusan->tampilJurusan()->result();
 		$data['prodi'] = $this->m_prodi->tampilProdi()->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 
 	function edit_data_mahasiswa($where,$table){

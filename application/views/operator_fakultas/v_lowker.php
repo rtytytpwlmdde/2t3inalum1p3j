@@ -1,25 +1,47 @@
-<div class="container-fluid">
+<?php
+        $gagals = $this->session->flashdata('gagals');
+        if($gagals != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong>Gagal!</strong> '.$gagals.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $suksess = $this->session->flashdata('suksess');
+        if($suksess != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$suksess.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
+<div class="container-fluid pt-2 pb-2">
 
-<!-- Page Heading -->
-<div class="row py-2">
-  <div class="col-sm-6">
-    <h1 class="h3 mb-2 text-gray-800">Data Lowongan Pekerjaan</h1>
-  </div>
-   <div class="col-sm-6 text-center text-sm-left mb-4 mb-sm-0">
-  <div  style="float:right" >
-    <div class="d-flex flex-row-reverse bd-highlight">
-    <div id="transaction-history-date-range" class="input-daterange input-group  input-group-sm ml-auto">
-    
-    </div>
-    </div>
-  </div>
-</div>
-  </div>
-</div>
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-  <div class="card-body">
-    <div class="table-responsive">
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Data Lowongan Kerja </h1>
+            <div class="timeline-manage">
+           
+            </div>
+          </div>
+          
+
+
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-12 col-md-12 mb-2">
+              <div class=" h-100 ">
+                <div class="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="100%">
         <thead>
           <tr>
@@ -37,9 +59,9 @@
                     foreach ($lowongankerja as $u){ 
                     ?>
          
-            <td><?php echo $no?></td>
+            <td><?php echo $no++;?></td>
           <td>
-          <a href="<?php echo site_url('admin/lowker/detail_lowker/'.$u->id_lowongan); ?>">
+          <a href="<?php echo site_url('operator_fakultas/lowker/detail_lowker/'.$u->id_lowongan); ?>">
           <?php echo $u->nama_lowongan?>
 					</a></td>
           <td><?php echo $u->lowongan_jabatan?></td>
@@ -51,7 +73,11 @@
         </tbody>
       </table>
     </div>
-  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
 </div>
 
-</div>

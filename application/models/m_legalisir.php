@@ -191,7 +191,9 @@ class M_legalisir extends CI_Model{
 			$this->db->join('status_pesanan','transaksi.status_pesanan = status_pesanan.id_status');
 			$this->db->join('alumni','transaksi.id_pemesan = alumni.username');
 			if($operator == "keuangan"){
-				if($status == null){
+				if($status == '99'){
+					$this->db->where('transaksi.status_pesanan >= ','3');
+				}else if($status == null){
 					$this->db->where('transaksi.status_pesanan >= ','3');
 				}else if($status == '3'){
 					$this->db->where('transaksi.status_pesanan','3');
@@ -205,7 +207,9 @@ class M_legalisir extends CI_Model{
 					return false;
 				}
 			}elseif($operator == "recording"){
-				if($status == null){
+				if($status == '99'){
+					$this->db->where('transaksi.status_pesanan >= ','4');
+				}else if($status == null){
 					$this->db->where('transaksi.status_pesanan >= ','4');
 				}else if($status == '4'){
 					$this->db->where('transaksi.status_pesanan','4');
@@ -229,16 +233,15 @@ class M_legalisir extends CI_Model{
 
 		function getDataIjazah($number,$offset){
 			$status = $this->input->post('validasi_ijazah');
-			$operator = $this->session->userdata('status');
 			$this->db->select('*');
 			if($status == 'terkirim'){
-				$this->db->where('ijazah.validasi_ijazah','terkirim');
+				$this->db->where('validasi_ijazah','terkirim');
 			}else if($status == 'setuju'){
-				$this->db->where('ijazah.validasi_ijazah','setuju');
+				$this->db->where('validasi_ijazah','setuju');
 			}else if($status == 'tolak'){
-				$this->db->where('ijazah.validasi_ijazah','tolak');
+				$this->db->where('validasi_ijazah','tolak');
 			}else{
-				$this->db->where('ijazah.validasi_ijazah !=','4');
+				$this->db->where('validasi_ijazah !=','4');
 			}
 			if($this->db->affected_rows() > 0){
 				$query = $this->db->get('ijazah',$number,$offset);
@@ -269,7 +272,9 @@ class M_legalisir extends CI_Model{
 			$this->db->join('status_pesanan','transaksi.status_pesanan = status_pesanan.id_status');
 			$this->db->join('alumni','transaksi.id_pemesan = alumni.username');
 			if($operator == "keuangan"){
-				if($status == null){
+				if($status == '99'){
+					$this->db->where('transaksi.status_pesanan >= ','3');
+				}else if($status == null){
 					$this->db->where('transaksi.status_pesanan >= ','3');
 				}else if($status == '3'){
 					$this->db->where('transaksi.status_pesanan','3');
@@ -278,7 +283,9 @@ class M_legalisir extends CI_Model{
 				}
 			}
 			if($operator == "recording"){
-				if($status == null){
+				if($status == '99'){
+					$this->db->where('transaksi.status_pesanan >= ','4');
+				}else if($status == null){
 					$this->db->where('transaksi.status_pesanan >= ','4');
 				}else if($status == '4'){
 					$this->db->where('transaksi.status_pesanan','4');
@@ -303,13 +310,13 @@ class M_legalisir extends CI_Model{
 			$status = $this->input->post('validasi_ijazah');
 			$this->db->select('nomor_ijazah');
 				if($status == 'terkirim'){
-					$this->db->where('ijazah.validasi_ijazah','terkirim');
+					$this->db->where('validasi_ijazah','terkirim');
 				}else if($status == 'setuju'){
-					$this->db->where('ijazah.validasi_ijazah','setuju');
+					$this->db->where('validasi_ijazah','setuju');
 				}else if($status == 'tolak'){
-					$this->db->where('ijazah.validasi_ijazah','tolak');
+					$this->db->where('validasi_ijazah','tolak');
 				}else{
-					$this->db->where('ijazah.validasi_ijazah !=','4');
+					$this->db->where('validasi_ijazah !=','4');
 				}
 			
 			$query = $this->db->get('ijazah');
@@ -318,6 +325,39 @@ class M_legalisir extends CI_Model{
 			}else{
 				return false;
 			}
+		}
+
+		function jumlah_data_alumni(){
+			$status = $this->input->post('validasi_ijazah');
+			$this->db->select('*');
+			
+			$query = $this->db->get('alumni');
+			if($this->db->affected_rows() > 0){
+				return 	$query->num_rows();	
+			}else{
+				return false;
+			}
+		}
+
+		function getDataAlumni($number,$offset){
+			$this->db->select('*');
+			$status = $this->input->post('validasi_ijazah');
+			if($status == 'terkirim'){
+				$this->db->where('validasi_ijazah','terkirim');
+			}else if($status == 'setuju'){
+				$this->db->where('validasi_ijazah','setuju');
+			}else if($status == 'tolak'){
+				$this->db->where('validasi_ijazah','tolak');
+			}else{
+				$this->db->where('validasi_ijazah !=','4');
+			}
+			if($this->db->affected_rows() > 0){
+				$query = $this->db->get('alumni',$number,$offset);
+				return 	$query->result();	
+			}else{
+				return false;
+			}
+			
 		}
 
 		// function data($number,$offset){
@@ -360,7 +400,7 @@ class M_legalisir extends CI_Model{
 		}
 
 		function tampilIjazah(){
-			return $this->db->get('ijazah');
+			return $this->db->get('alumni');
 		}
 
 		function getDataTransaksiPerbulan(){

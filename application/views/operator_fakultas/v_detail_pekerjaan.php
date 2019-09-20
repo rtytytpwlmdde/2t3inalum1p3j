@@ -1,36 +1,48 @@
-<!doctype html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
+        $gagals = $this->session->flashdata('gagals');
+        if($gagals != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong>Gagal!</strong> '.$gagals.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $suksess = $this->session->flashdata('suksess');
+        if($suksess != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$suksess.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
+<div class="container-fluid pt-2 pb-2">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-	 <div class="col-sm-6">
-    <h1 class="h3 mb-2 text-gray-800"> Lowongan Pekerjaan</h1>
-  </div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Data Lowongan Kerja </h1>
+            <div class="timeline-manage">
+           
+            </div>
+          </div>
+          
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
-</head>
-<body>
-<div class="table-responsive">
-<div style="min-width: 300px">
-            <div class="row">
-                <div class="col ">
-					<?php foreach($lowongankerja as $u){ ?>
-                    <div class="class=" p-0 pb-3" style="overflow-x:auto;">
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-12 col-md-12 mb-2">
+              <div class=" h-100 ">
+                <div class="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <?php foreach($lowongankerja as $u){ ?>
+                    <div class="p-0" style="overflow-x:auto;">
                         <div class="card">
                             <div class="card-header text-sm-center">
                                 <strong class="text-sm-center"><?php echo $u->nama_lowongan ?></strong>
@@ -43,50 +55,39 @@
 									 <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->website_perusahaan ?></h5>
                                     <div class="location text-sm-left"><i class="fa fa-map-marker"></i> <?php echo $u->alamat_perusahaan ?></div>
                                 </div>
-                                <hr>
                             </div>
                         </div>
                     </div>
-					<?php } ?>
-				</div><!-- .row -->
-            </div><!-- .animated -->
-        </div><!-- .content -->
-		<div class="card-header text-sm-center">
-                                <strong class="text-sm-center">Deskripsi</strong>
-                            </div>
-		<div style="min-width: 300px">
-            <div class="row">
-                <div class="col ">
-					<?php foreach($lowongankerja as $u){ ?>
-                    <div class="class=" p-0 pb-3" style="overflow-x:auto;">
+					<?php } ?><br>
                         <div class="card">
-                            <div class="card-body">
-							
-                                <div class="mx-auto d-block">
-                                     <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->lowongan_jabatan ?></h5>
-									 <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->nama_perusahaan ?></h5>
-									 <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->website_perusahaan ?></h5>
-                                    <div class="location text-sm-left"><i class="fa fa-map-marker"></i> <?php echo $u->alamat_perusahaan ?></div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
+                    <div class="card-header text-sm-center">
+                    <strong class="text-sm-center">Deskripsi</strong>
                     </div>
-					<?php } ?>
-				</div><!-- .row -->
-            </div><!-- .animated -->
+                        <div style="min-width: 300px">
+                    <div class="row">
+                        <div class="col ">
+                            <?php foreach($lowongankerja as $u){ ?>
+                            <div class="" style="overflow-x:auto;">
+                                <div class="">
+                                    <div class="card-body">
+                                        <div class="mx-auto d-block">
+                                            <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->lowongan_jabatan ?></h5>
+                                            <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->nama_perusahaan ?></h5>
+                                            <h5 class="text-sm-left mt-2 mb-1"><?php echo $u->website_perusahaan ?></h5>
+                                            <div class="location text-sm-left"><i class="fa fa-map-marker"></i> <?php echo $u->alamat_perusahaan ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div><!-- .row -->
+                    </div><!-- .animated -->
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
 </div>
 
-   <!-- Right Panel -->
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-
-</body>
-</html>

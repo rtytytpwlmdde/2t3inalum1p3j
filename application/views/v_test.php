@@ -34,7 +34,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <a class="navbar-brand mr-lg-5" href="<?php echo base_url('alumni/'); ?>"><img src="<?php echo base_url(); ?>/assets/images/ub.png" class="mr-3" alt="Logo" width="50" height="50"> Tracert Alumni FEB UB</a>
+                    <a class="navbar-brand mr-lg-5" href="<?php echo base_url('alumni/'); ?>"><img src="<?php echo base_url(); ?>/assets/images/ub.png" class="mr-3" alt="Logo" width="50" height="50"> Tracerts Alumni FEB UB</a>
 
                     
                     <!-- Collect the nav links, forms, and other content for toggling -->

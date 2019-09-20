@@ -1,0 +1,61 @@
+.border-left-orange {
+    border-left: 0.25rem solid #cc8b36 !important;
+  }
+
+  .badge-orange {
+    color: #fff;
+    background-color: #cc8b36;
+  }
+  
+  a.badge-orange:hover, a.badge-orange:focus {
+    color: #fff;
+    background-color: #cc8b36;
+  }
+  
+  a.badge-orange:focus, a.badge-orange.focus {
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 157, 54, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(204, 152, 54, 0.5);
+  }
+
+  .badge-pink {
+    color: #fff;
+    background-color: #cc36b8;
+  }
+  
+  a.badge-pink:hover, a.badge-pink:focus {
+    color: #fff;
+    background-color: #cc36b8;
+  }
+  
+  a.badge-pink:focus, a.badge-pink.focus {
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 54, 172, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(204, 54, 197, 0.5);
+  }
+
+  
+  .badge-kuning {
+    color: #fff;
+    background-color: #cacc36;
+  }
+  
+  a.badge-kuning:hover, a.badge-kuning:focus {
+    color: #fff;
+    background-color: #cacc36;
+  }
+  
+  a.badge-kuning:focus, a.badge-kuning.focus {
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(189, 204, 54, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(204, 202, 54, 0.5);
+  }
+
+  .badge-abu {
+    color: rgb(22, 22, 22);
+    background-color: #4b48481c;
+  }
+
+  .bg-thead{
+    background-color: rgb(79, 96, 116);
+  }

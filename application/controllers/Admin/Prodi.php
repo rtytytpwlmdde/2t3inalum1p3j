@@ -54,12 +54,10 @@ class Prodi extends CI_Controller{
 	
 	function editProdi(){
 		$id_prodi = $this->input->post('id_prodi');
-		$id_jurusan = $this->input->post('id_jurusan');
 		$prodi = $this->input->post('prodi');
 		
 		$data = array(
 			'id_prodi' => $id_prodi,
-			'id_jurusan' => $id_jurusan,
 			'prodi' => $prodi
 		);
 

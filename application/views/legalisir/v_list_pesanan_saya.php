@@ -28,10 +28,10 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Pesanan Saya </h1>
             <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
+                <a href="<?php echo site_url('legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
                     <i class='bx bx-money'></i>Semua Pesanan Saya
                 </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
+                <a href="<?php echo site_url('legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
                     <i class='bx bx-info-circle' ></i>Pesanan Tertunda
                 </a>
             </div>
@@ -46,7 +46,7 @@
                     <div class="col mr-2">
                         <div class=" no-gutters align-items-center">
                         <table class="table table-bordered" style="font-size:1em;">
-                            <thead>
+                            <thead class="bg-thead text-white">
                                 <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">ID Transaksi</th>
@@ -62,9 +62,9 @@
                                         <tr>
                                             <td scope="row"><?= $no++; ?></td>
                                             <?php if($u->status_pesanan < 3){?>
-                                            <td title="Transaksi belum complete, silahkan selesaikan pemesanan dan lakukan validasi pembayaran"><a href="<?php echo base_url('legalisir/legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?><i class='bx bxs-error-circle text-warning' style="font-size:2em;"></i></a></td>
+                                            <td title="Transaksi belum complete, silahkan selesaikan pemesanan dan lakukan validasi pembayaran"><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?><i class='bx bxs-error-circle text-warning' style="font-size:2em;"></i></a></td>
                                             <?php }else{?>
-                                            <td><a href="<?php echo base_url('legalisir/legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
+                                            <td><a href="<?php echo base_url('legalisir/detailPesanan/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
                                             <?php }
                                             $date=date_create($u->tanggal_transaksi);
                                             ?>

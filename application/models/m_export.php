@@ -1,7 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class M_export extends CI_Model {
-  public function view(){
-    return $this->db->get('transaksi')->result(); // Tampilkan semua data yang ada di tabel siswa
+  function exportDataTransaksi(){
+    $jenis = $this->input->post('jenis');
+    $mulai = $this->input->post('mulai');
+    $selesai = $this->input->post('selesai');
+    $this->db->select('*');
+    $this->db->from('transaksi');
+    if($jenis == "semua"){
+    
+    }else{
+      $this->db->where('tanggal_transaksi >=',$mulai);
+      $this->db->where('tanggal_transaksi <=',$selesai);
+    }
+    $query = $this->db->get();
+    return 	$query->result();	
   }
 
   function getListInvoicePengiriman(){
@@ -28,7 +40,7 @@ class M_export extends CI_Model {
     }
   }
 
-  function getDataExportInvoice(){
+function getDataExportInvoice(){
     $this->db->select('*');
     $this->db->from('transaksi');
     $this->db->join('status_pesanan','transaksi.status_pesanan = status_pesanan.id_status');
@@ -73,5 +85,61 @@ function getDatailTransaksiInvoice(){
       return false;
     }
   }
+
+  function exportDataDokumenAlumni(){
+    $status = $this->input->post('status');
+    $this->db->select('nim, nama, dokumen_ijazah, dokumen_transkrip, nomor_ijazah, validasi_ijazah, catatan_ijazah');
+    $this->db->from('alumni');
+    if($status == "semua"){
+
+    }else if($status == "setuju"){
+      $this->db->where('validasi_ijazah','setuju');
+    }else if($status == "terkirim"){
+      $this->db->where('validasi_ijazah','terkirim');
+    }else if($status == "tolak"){
+      $this->db->where('validasi_ijazah','tolak');
+    }else{
+      $this->db->where('validasi_ijazah !=','terkirim');
+      $this->db->where('validasi_ijazah !=','setuju');
+      $this->db->where('validasi_ijazah !=','tolak');
+    }
+    $query = $this->db->get();
+    return 	$query->result();	
+}
+
+function getDataKuisioner($id_kuisioner){
+  $this->db->select('*');
+  $this->db->from('pertanyaan');
+  $this->db->join('tanggapan','pertanyaan.id_pertanyaan = tanggapan.id_pertanyaan');
+  $this->db->join('alumni','tanggapan.id_responden = alumni.nim');
+  $this->db->where('pertanyaan.id_kuisioner',$id_kuisioner);
+  $query = $this->db->get();
+  return 	$query->result();	
+}
+
+function getDetailKuisioner($id_kuisioner){
+  $this->db->select('*');
+  $this->db->from('kuisioner');
+  $this->db->where('kuisioner.id_kuisioner',$id_kuisioner);
+  $query = $this->db->get();
+  return 	$query->result();	
+}
+
+function getJumlahPertanyaan($id_kuisioner){
+		$this->db->select('id_pertanyaan ,count(id_pertanyaan) as jumPertanyaan');
+		$this->db->select('nama_pertanyaan');
+		$this->db->from('pertanyaan');
+		$this->db->where('id_kuisioner',$id_kuisioner);
+		$query = $this->db->get();
+		return $query->result();
+}
+
+function getNamaPertanyaan($id_kuisioner){
+  $this->db->select('nama_pertanyaan, id_pertanyaan');
+  $this->db->from('pertanyaan');
+  $this->db->where('id_kuisioner',$id_kuisioner);
+  $query = $this->db->get();
+  return $query->result();
+}
 
 }

@@ -1,12 +1,50 @@
-<div class="content">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="title">Tambah User</h5>
+<?php
+        $gagals = $this->session->flashdata('gagals');
+        if($gagals != NULL){
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
+              <strong>Gagal!</strong> '.$gagals.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+        $suksess = $this->session->flashdata('suksess');
+        if($suksess != NULL){
+            echo '
+            <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
+              <strong>Sukses! </strong> '.$suksess.'
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            ';
+        }
+    ?>
+    <input  hidden type="text" id="sukses" value="<?php echo $sukses = $this->session->flashdata('sukses');?>">
+<div class="container-fluid pt-2 pb-2">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tambah Operator </h1>
+            <div class="timeline-manage">
+            <div class="btn-group" role="group">
+                 
               </div>
-              <div class="card-body">
-                <form action="<?php echo base_url(). 'admin/user/tambahUser'; ?>" method="POST">
+            </div>
+          </div>
+          
+
+
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-12 col-md-12 mb-2">
+              <div class=" h-100 ">
+                <div class="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <form action="<?php echo base_url(). 'admin/user/tambahUser'; ?>" method="POST">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -62,61 +100,11 @@
                   </div>
 				   <button type="submit" class="btn btn-fill btn-primary">Save</button>
                 </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-user">
-              <div class="card-body">
-                <p class="card-text">
-                  <div class="author">
-                    <div class="block block-one"></div>
-                    <div class="block block-two"></div>
-                    <div class="block block-three"></div>
-                    <div class="block block-four"></div>
-                    <a href="javascript:void(0)">
-                      <h5 class="title">Petunjuk</h5>
-                    </a>
-                    <p class="description">
-                      Ceo/Co-Founder
-                    </p>
+                    </div>
                   </div>
-                </p>
-                <div class="card-description">
-                 1. Jika Status Admin, Operator Fakultas dan Validator maka field Jurusan dan Program Studi Kosong.
-                 </div>
-                 <div class="card-description">
-                 2. Jika Status Operator Jurusan maka field Program Studi kosong.
-                 </div>
-                 <div class="card-description">
-                3. Jika Status Operator Prodi maka semua field wajib diisi.
                 </div>
               </div>
-              </div>
             </div>
+        </div>
+</div>
 
-	<script>
-
-  $(document).ready(function(){
-
-    $('#jurusan').change(function(){
-      var e = document.getElementById ("jurusan");
-      var id_jurusan = e.options [e.selectedIndex] .value;
-      console.log(id_jurusan)
-      if(id_jurusan != '')
-      {
-        $.ajax({
-          url:"<?php echo site_url();?>/admin/user/get_prodi_by_jurusan_js",
-          method: "POST",
-          data:{id_jurusan:id_jurusan},
-          success:function(data)
-          {
-            $('#prodi').html(data);
-          }
-        })
-      }
-    })
-   
-  })
-
-</script>

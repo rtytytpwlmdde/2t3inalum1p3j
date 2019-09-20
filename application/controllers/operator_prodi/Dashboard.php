@@ -16,7 +16,7 @@ function __construct(){
 
 	function index(){
 		$data['main_view'] = 'operator_fakultas/v_dashboard';
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 
 

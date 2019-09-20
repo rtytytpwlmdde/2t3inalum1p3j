@@ -29,10 +29,10 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Pembayaran </h1>
             <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
+                <a href="<?php echo site_url('legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
                     <i class='bx bx-money'></i>Semua Pesanan Saya
                 </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
+                <a href="<?php echo site_url('legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
                     <i class='bx bx-info-circle' ></i>Pesanan Tertunda
                 </a>
             </div>
@@ -140,7 +140,7 @@
             </div>
         </div>
         <div class="col-md-12 text-right">
-            <form action="<?php echo base_url('legalisir/legalisir/formValidasiPembayaran/'); ?>" method="post">
+            <form action="<?php echo base_url('legalisir/formValidasiPembayaran/'); ?>" method="post">
                 <input hidden type="text" name="id_transaksi" value="<?= $id_transaksi; ?>">
                 <input hidden type="text" name="total_pembayaran" value="<?= $total_pembayaran; ?>">
                 <button type="submit" class="btn btn-primary btn-sm">Validasi Pembayaran</button>

@@ -25,28 +25,3 @@
               </div>
             </div>
 
-	<script>
-
-  $(document).ready(function(){
-
-    $('#jurusan').change(function(){
-      var e = document.getElementById ("jurusan");
-      var id_jurusan = e.options [e.selectedIndex] .value;
-      console.log(id_jurusan)
-      if(id_jurusan != '')
-      {
-        $.ajax({
-          url:"<?php echo site_url();?>/admin/user/get_prodi_by_jurusan_js",
-          method: "POST",
-          data:{id_jurusan:id_jurusan},
-          success:function(data)
-          {
-            $('#prodi').html(data);
-          }
-        })
-      }
-    })
-   
-  })
-
-</script>

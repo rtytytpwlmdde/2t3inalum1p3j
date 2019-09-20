@@ -16,7 +16,7 @@
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+        <thead class="bg-thead text-white">
           <tr>
 						<th> No </th>
                         <th> ID </th>
@@ -46,9 +46,8 @@
                         <td><?php echo $u->prodi ?></td>
                         
 						<td >
-						<a href="<?php echo site_url('admin/prodi/updateProdi/'.$u->id_prodi); ?>" type="button"  rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon" title="Edit">
-                        <i class="fa fa-edit"></i>
-						</a>
+            <a  data-toggle="modal" title="Edit" data-id_prodi="<?= $u->id_prodi; ?>"  data-prodi="<?= $u->prodi; ?>" class="open-modalEditJurusan btn btn-sm btn-info" href="#modalEditJurusan" > <i class="fa fa-edit"></i></a>
+						
 						<a href="<?php echo site_url('admin/prodi/hapusProdi/'.$u->id_prodi); ?>" type="button"  rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" onclick="return deletechecked();" title="Hapus">
                         <i class="fa fa-trash"></i>
                         </a>
@@ -62,3 +61,41 @@
 </div>
 
 </div>
+
+
+<div class="modal fade" id="modalEditJurusan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Program Studi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="<?php echo base_url(). 'admin/prodi/editProdi'; ?>" method="POST">
+        <div class="modal-body">
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Nama Program Srudi</label>
+                  <div class="col-md-9"> 
+                    <input type="hidden" id="id_prodi" name="id_prodi" value="">
+                    <input class="form-control"  id="prodi" name="prodi" value="">
+                  </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button  type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+$(document).on("click", ".open-modalEditJurusan", function () {
+     var id_prodi = $(this).data('id_prodi');
+     $(".modal-body #id_prodi").val( id_prodi );
+     var prodi = $(this).data('prodi');
+     $(".modal-body #prodi").val( prodi );
+});
+</script>

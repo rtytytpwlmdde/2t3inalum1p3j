@@ -1,78 +1,122 @@
-<!doctype html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-	 <div class="col-sm-6">
-    <h1 class="h3 mb-2 text-gray-800"> Lowongan Pekerjaan</h1>
-  </div>
-  <div class="col-sm-12">
-    <div class="d-flex flex-row-reverse bd-highlight">
-     <a href="<?php echo base_url('admin/info_feb/inputinfofeb'); ?>" class="btn btn-info">Tambah Data Operator</a>
-    </div>
-  </div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
-</head>
-<body>
- 
-<div style="min-width: 600px">
-            <div class="row">
-                <div class="col ">
-					<?php foreach($info_feb as $u){ ?>
-                    <div class="class=" p-0 pb-3" style="overflow-x:auto;">
-                        <div class="card">
-                            <div class="card-header text-sm-center">
-                                <strong class="text-sm-center">Kegiatan</strong>
-                            </div>
-                            <div class="card-body">
-							
-                                <div class="mx-auto d-block">
-									<h5 class="text-sm-left mt-2 mb-1"><?php echo $u->keterangan ?></h5>
-									<div class="location text-sm-left"><i class="fa fa-map-marker"></i> <?php echo $u->link ?></div>
-                                </div>
-                                <hr>
-                            </div>
-							<div class="td-actions text-right">
-                                    <a href="<?php echo site_url('admin/info_feb/updateInfo/'.$u->id_informasi); ?>"type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon">
-                                    <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="<?php echo site_url('admin/info_feb/hapusInfo/'.$u->id_informasi); ?>" type="button"  rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" onclick="return deletechecked();" title="Hapus">
-                                    <i class="fa fa-trash"></i>
-                                    </a>
-                            </div>
-                        </div>
+<div class="content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Tambah User</h5>
+              </div>
+              <div class="card-body">
+                <form action="<?php echo base_url(). 'admin/user/tambahUser'; ?>" method="POST">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                      </div>
                     </div>
-					<?php } ?>
-				</div><!-- .row -->
-            </div><!-- .animated -->
-        </div><!-- .content -->
-</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input name="password" type="text" class="form-control" placeholder="Password">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-md-1">
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select required  name="status" id="feInputState" class="form-control ">
+                                    <option value="" selected>Pilih </option>
+                                    <option value="admin">admin</option>
+                                    <option value="operator_fakultas">operator fakultas</option>
+                                    <option value="operator_jurusan">operator jurusan</option>
+                                    <option value="operator_prodi">operator prodi</option>
+                                    <option value="validator">validator</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-md-1">
+                      <div class="form-group-md-12">
+                        <label>Jurusan</label>
+                        <input  list="list_dosen" name="id_jurusan" type="text" class="form-control" id="feInputAddress" placeholder="Ketik.."> 
+                                <datalist id="list_dosen">
+                                    <?php foreach($jurusan as $p): ?>
+                                    <option value="<?php echo $p->id_jurusan?>"><?php echo $p->id_jurusan?> - <?php echo $p->jurusan?></option>
+                                    <?php endforeach ?>
+                                </datalist>
+						</div>
+                    </div>
+                    <div class="col-md-4 pl-md-1">
+                      <div class="form-group-md-12">
+                        <label>Program Studi </label>
+                        <input  list="list_jurusan" name="id_prodi" type="text" class="form-control" id="feInputAddress" placeholder="Ketik.."> 
+                                <datalist id="list_jurusan">
+                                    <?php foreach($prodi as $p): ?>
+                                    <option value="<?php echo $p->id_prodi?>"><?php echo $p->id_prodi?> - <?php echo $p->prodi?></option>
+                                    <?php endforeach ?>
+                                </datalist>
+                      </div>
+                    </div>
+                  </div>
+				   <button type="submit" class="btn btn-fill btn-primary">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="card-body">
+                <p class="card-text">
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="javascript:void(0)">
+                      <h5 class="title">Petunjuk</h5>
+                    </a>
+                    <p class="description">
+                      Ceo/Co-Founder
+                    </p>
+                  </div>
+                </p>
+                <div class="card-description">
+                 1. Jika Status Admin, Operator Fakultas dan Validator maka field Jurusan dan Program Studi Kosong.
+                 </div>
+                 <div class="card-description">
+                 2. Jika Status Operator Jurusan maka field Program Studi kosong.
+                 </div>
+                 <div class="card-description">
+                3. Jika Status Operator Prodi maka semua field wajib diisi.
+                </div>
+              </div>
+              </div>
+            </div>
 
-   <!-- Right Panel -->
+	<script>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
+  $(document).ready(function(){
 
+    $('#jurusan').change(function(){
+      var e = document.getElementById ("jurusan");
+      var id_jurusan = e.options [e.selectedIndex] .value;
+      console.log(id_jurusan)
+      if(id_jurusan != '')
+      {
+        $.ajax({
+          url:"<?php echo site_url();?>/admin/user/get_prodi_by_jurusan_js",
+          method: "POST",
+          data:{id_jurusan:id_jurusan},
+          success:function(data)
+          {
+            $('#prodi').html(data);
+          }
+        })
+      }
+    })
+   
+  })
 
-</body>
-</html>
+</script>

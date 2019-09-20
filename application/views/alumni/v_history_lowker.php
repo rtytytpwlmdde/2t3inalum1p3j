@@ -42,7 +42,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">
-                        <a  class="text-primary " href="<?php echo site_url('admin/lowker/detail_lowker/'.$u->id_lowongan); ?>">
+                        <a  class="text-primary " href="<?php echo site_url('alumni/lowker/detail_lowker/'.$u->id_lowongan); ?>">
                         <h4 class="page-title font-weight-bold text-primary"><?php echo $u->nama_lowongan ?> </h4>
                         </a>
                         <span class="h6 text-primary"><?php echo $u->nama_perusahaan ?></span><br>

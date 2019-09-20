@@ -17,7 +17,7 @@ class Profil extends CI_Controller{
 	function index(){
 			$data['main_view'] = 'operator_fakultas/v_profil';
 			$data['user'] = $this->m_profil->getDataProfil();   
-			$this->load->view('template/template_operator_fakultas', $data);
+			$this->load->view('template/template_operator', $data);
 		}
 		
 		function update_password(){

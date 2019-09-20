@@ -29,10 +29,10 @@
             <h1 class="h3 mb-0 text-gray-800">Detail Pesanan </h1>
             
             <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
+                <a href="<?php echo site_url('legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
                     <i class='bx bx-money'></i>Semua Pesanan Saya
                 </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
+                <a href="<?php echo site_url('legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
                     <i class='bx bx-info-circle' ></i>Pesanan Tertunda
                 </a>
             </div>

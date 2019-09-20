@@ -22,12 +22,12 @@ function __construct(){
 	function index(){
 		$data['main_view'] = 'operator_fakultas/v_lowker';
 		$data['lowongankerja'] = $this->m_lowker->tampillowker();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 
 	function inputLowker(){
 		$data['main_view'] = 'operator_fakultas/v_tambah_lowker';
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	function tambahLowker(){
 		$nama_lowongan = $this->input->post('nama_lowongan');
@@ -76,7 +76,7 @@ function __construct(){
 		$data['provinsi'] = $this->m_negara->tampilprovinsi()->result();
 		$data['kota'] = $this->m_negara->tampilkota()->result();
 		$data['alumni'] = $this->m_alumni->edit_data($where,'alumni')->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 
 	function edit_data_mahasiswa($where,$table){
@@ -118,6 +118,6 @@ function __construct(){
 	function detail_lowker($id){
 			$data['main_view'] = 'operator_fakultas/v_detail_pekerjaan';
 			$data['lowongankerja'] = $this->m_lowker->dataPeminjamanMahasiswa($id);
-			$this->load->view('template/template_operator_fakultas',$data);
+			$this->load->view('template/template_operator',$data);
 	}
 }

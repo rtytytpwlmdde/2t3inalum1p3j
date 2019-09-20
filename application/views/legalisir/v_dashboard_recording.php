@@ -1,20 +1,21 @@
 <?php
-        $gagals = $this->session->flashdata('gagals');
-        if($gagals != NULL){
+        $notif = $this->session->flashdata('gagal');
+        $operator = $this->session->userdata('status');
+        if($notif != NULL){
             echo '
             <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
-              <strong>Gagal!</strong> '.$gagals.'
+              <strong>Gagal!</strong> '.$notif.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             ';
         }
-        $suksess = $this->session->flashdata('suksess');
-        if($suksess != NULL){
+        $notifsukses = $this->session->flashdata('sukses');
+        if($notifsukses != NULL){
             echo '
             <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
-              <strong>Sukses! </strong> '.$suksess.'
+              <strong>Sukses! </strong> '.$notifsukses.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -22,78 +23,71 @@
             ';
         }
     ?>
-    <input  hidden type="text" id="sukses" value="<?php echo $sukses = $this->session->flashdata('sukses');?>">
-<div class="container-fluid pt-2 pb-2">
+            <div class="row ">
+                <div class="col-md-12">
 
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Legalisir Online</h1>
-            <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
-                    <i class='bx bx-money'></i>Semua Pesanan Saya
-                </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
-                    <i class='bx bx-info-circle' ></i>Pesanan Tertunda
-                </a>
-            </div>
-          </div>
-          
-<?php foreach ($produk as $u){?>
-        <div class="row">
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-info  h-100 ">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                        <form action="<?php echo base_url('legalisir/legalisir/tambahTransaksi/'); ?>" method="post" onsubmit="openModal()" id="myForm">
-                            <div class="row profile-rows">
-                            <div class="col-md-4">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col">
-                                        <div class="text-xs font-weight-bold" style="font-size: 0.9em;"><?= $u->nama_produk; ?></div>
+                        <!-- Posts section -->
+                        <div class="row px-4 ">
+                            <div class="col-md-12 content">
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                    <div class="timeline-manage">
+                                        <form class="form-inline py-2" action="<?php  echo base_url('legalisir/dashboard'); ?>" method="get">
+                                            <div class="form-group">
+                                                <input type="text" required name="tahun" class="form-control" placeholder="<?php echo $tahun; ?>">
+                                                <button type="submit" class="btn btn-light"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class=" bg-white w-shadow" >
+                                        <h6 class="text-muted">Grafik Jumlah Transaksi</h6>
+                                            <div class="ct-chart-transaksi " id="chartTransaksiRecording"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3  ">
+                                        <div class=" bg-white w-shadow" >
+                                        <h6 class="text-muted">Detail Jumlah Transaksi</h6>
+                                            <table class="table table-sm table-bordered">
+                                                <tr>
+                                                    <td>Bulan</td>
+                                                    <td>Jumlah Transaksi</td>
+                                                </tr>
+                                                    <?php 
+                                                    for($i=1; $i<13; $i++){
+                                                        $result = 0;
+                                                    foreach($transaksiPerbulan as $u){
+                                                        if($i == $u->bulan){ 
+                                                            $result = $u->transaksiPerbulan;
+                                                        }
+                                                    }
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $i;?></td>
+                                                            <td><?php  if($result == 0){
+                                                        echo "0";
+                                                    }else{
+                                                        echo $result."";
+                                                    }?></td>
+                                                        </tr>
+                                                    <?php 
+                                                    } ?>
+                                            
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="text-gray-800" style="font-size: 0.8em;"><?= "Rp".$u->harga_produk; ?></div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="text-gray-800" style="font-size: 0.8em;"><?= $u->berat_produk; ?></div>
-                            </div>
-                            <div class="col-md-2">
-                            <select class="form-control" style="width:70px;" required name="jumlah_produk" id="exampleFormControlSelect1">
-                                <option value="">0</option>
-                                <option>5</option>
-                                <option>10</option>
-                                <option>15</option>
-                                <option>20</option>
-                            </select>
-                            </div>
-                            <div class="col-md-2">
-                                <input hidden type="text" name="id_produk" value="<?= $u->id_produk; ?>">
-                                <input hidden type="text" name="harga_produk" value="<?= $u->harga_produk; ?>">
-                                <input hidden type="text" name="berat_produk" value="<?= $u->berat_produk; ?>">
-                                <div class="text-center align-items-center">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm identifyingClass">Pesan</button>
-                                </div>
-                            </div>
-                            </div>
-                        </form>
-                      </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-        </div>
-<?php } ?>
+                
+                
+    </div>
 </div>
-
-
-
-
+<!-- -->
 
 
 <script>
@@ -169,3 +163,5 @@ $(function() {
 new Chartist.Bar('#chartTransaksiRecording', data, options, responsiveOptions);
 });
 </script>
+
+

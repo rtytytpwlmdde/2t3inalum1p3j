@@ -24,12 +24,12 @@ function __construct(){
 	function index(){
 		$data['main_view'] = 'operator_fakultas/v_paket_kuisioner';
 		$data['paket_kuisioner'] = $this->m_paket_kuisioner->paket_kuisioner()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 	
 	function inputPaket(){
 		$data['main_view'] = 'operator_fakultas/v_tambah_paketkuisioner';
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	function tambahPaket(){
 		$nama_paket = $this->input->post('nama_paket');
@@ -53,7 +53,7 @@ function __construct(){
 		$data['main_view'] = 'operator_fakultas/v_edit_paketkuisioner';
 		$where = array('id_paket' => $id_paket);
 		$data['paket_kuisioner'] = $this->m_paket_kuisioner->edit_data($where,'paket_soal')->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 
 	function edit_data_mahasiswa($where,$table){

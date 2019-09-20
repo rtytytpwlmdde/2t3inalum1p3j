@@ -265,7 +265,7 @@
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="" width="100%" cellspacing="100%">
-        <thead>
+        <thead class="bg-thead text-white">
           <tr>
           <th>No</th>
           <th>Tempat Kerja</th>

@@ -35,9 +35,9 @@ class auth extends CI_Controller {
 					}else if ($status == "gugusjaminanmutu"){
 						redirect('gugusjaminanmutu/dashboard');
 					}else if ($status == "recording"){
-						redirect('legalisir/legalisir/dashboard');
+						redirect('legalisir/dashboard');
 					}else{
-						redirect('legalisir/legalisir/transaksi');
+						redirect('legalisir/transaksi');
 					}
 				/*}else if ($this->m_auth->cek_user_pegawai() == TRUE){
 					$id_jurusan = $this->session->userdata('id_jurusan');

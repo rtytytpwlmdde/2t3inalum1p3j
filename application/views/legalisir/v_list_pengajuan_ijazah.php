@@ -55,7 +55,7 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <table class="table table-bordered">
-                                                        <thead>
+                                                        <thead class="bg-thead text-white">
                                                             <tr class="text-center">
                                                             <th scope="col">No</th>
                                                             <th scope="col">Nomor Ijazah</th>

@@ -3,6 +3,22 @@
  * Copyright 2019 Arthur Minasyan
  * Licensed under MIT (https://github.com/ArtMin96/argon-social/blob/master/LICENSE.md)
  */
+.napbar{
+    background-color: #d6dde6;
+}
+
+.napbar-atas{
+    background-color: #006eff;
+}
+
+.text-biru{
+    color: #eef4fc;
+    font-family: calibri;
+}
+.text-biru:hover{
+    color: #ffffff;
+
+}
 
 .message-right-side {
     width: 100%;
@@ -14,7 +30,7 @@
 }
 
 .conversations {
-    padding: 2rem 0;
+    padding: 0.7rem 0;
 }
 
 .messages-content {
@@ -381,6 +397,9 @@
 #message-frame .message-sidepanel .message-profile .wrap #status-options ul li#status-busy.messenger-user-active span.status-circle:before {
     border: 1px solid #e74c3c
 }
+.aaaaaaaaaaaaaaaaaaaaaaaaaa{
+
+}
 
 #message-frame .message-sidepanel .message-profile .wrap #status-options ul li#status-offline span.status-circle {
     background: #95a5a6
@@ -426,7 +445,8 @@
 #message-frame .message-sidepanel .message-contacts {
     height: 100%;
     overflow-y: scroll;
-    overflow-x: hidden
+    background-color: #5d5c60;
+    overflow-x: hidden;
 }
 
 @media screen and (max-width:735px) {
@@ -580,6 +600,14 @@
     bottom: 0
 }
 
+.aaaaaaaaaaaa{
+    
+}
+
+
+
+
+
 @media screen and (max-width:735px) {
     #message-frame .message-sidepanel .contacts-bottom button {
         float: none;
@@ -624,29 +652,18 @@
     }
 }
 
-#message-frame .content {
-    float: right;
-    width: 60%;
+
+#message-frame  {
+    float: left;
+    width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
     background-color: #fff
 }
 
-@media screen and (max-width:735px) {
-    #message-frame .content {
-        width: calc(100% - 58px);
-        min-width: 300px !important
-    }
-}
 
-@media screen and (min-width:900px) {
-    #message-frame .content {
-        width: calc(100% - 340px)
-    }
-}
-
-#message-frame .content .contact-profile .message-profile-name {
+#message-frame  .contact-profile .message-profile-name {
     line-height: 60px
 }
 
@@ -679,6 +696,18 @@
     cursor: pointer
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 #message-frame .content .contact-profile .social-media i:nth-last-child(1) {
     margin-right: 2rem
 }
@@ -693,7 +722,7 @@
     min-height: calc(100% - 93px);
     max-height: calc(100% - 93px);
     overflow-y: scroll;
-    overflow-x: hidden
+    overflow-x: hidden;
 }
 
 @media screen and (max-width:735px) {
@@ -773,6 +802,17 @@
 #message-frame .content .message-input .wrap {
     position: relative
 }
+
+
+
+
+
+
+
+
+
+
+
 
 #message-frame .content .message-input .wrap input {
     float: left;

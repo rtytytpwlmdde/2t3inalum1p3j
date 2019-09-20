@@ -1,20 +1,20 @@
 <?php
-        $notif = $this->session->flashdata('gagal');
-        if($notif != NULL){
+        $gagals = $this->session->flashdata('gagal');
+        if($gagals != NULL){
             echo '
             <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
-              <strong>Validasi Pembayaran Tidak Berhasil! </strong> '.$notif.'
+              <strong>Gagal!</strong> '.$gagals.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             ';
         }
-        $notifsukses = $this->session->flashdata('sukses');
-        if($notifsukses != NULL){
+        $suksess = $this->session->flashdata('sukses');
+        if($suksess != NULL){
             echo '
             <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
-              <strong>Sukses! </strong> '.$notifsukses.'
+              <strong>Sukses! </strong> '.$suksess.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -22,18 +22,14 @@
             ';
         }
     ?>
-<div class=" "> 
-        <div class="">
-            <div class="row ">
-                <div class="col-md-12">
-                    <div class="profile-info-right">
+    <input  hidden type="text" id="sukses" value="<?php echo $sukses = $this->session->flashdata('sukses');?>">
+<div class="container-fluid pt-2 pb-2">
 
-                        <!-- Posts section -->
-                        <div class="row px-4">
-                            <div class="col-md-12 profile-center">
-                                <br>
-                                <h5 class="mb-3  page-title text-muted">TRANSAKSI</h5>
-                                <?php 
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Detail Transaksi </h1>
+            <div class="timeline-manage badge badge-secondary">
+            <?php 
                                     foreach ($transaksi as $u){ ?>
                                     <?php if($u->status_pesanan == '1' ){?>
                                         <p>Transaksi belum lengkap, silahkan isi alamat pengiriman dan segera lakukan pembayaran </p>
@@ -69,15 +65,18 @@
                                         </div>
                                     <?php }?>
                                     <?php } ?>
+            </div>
+          </div>
+          
 
-                                <div class=" border-bottom p-2 bg-white w-shadow">
-                                    <div class=" ">
-                                        <div class="content">
-                                            <div class="col-md-12">
-                                                <div class="panel-heading">
-                                                </div>
-                                                <div class="panel-body">
-                                                    <table class="table table-bordered">
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-12 col-md-12 mb-2">
+              <div class=" h-100 ">
+                <div class="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <table class="table table-bordered">
                                                         <tbody>
                                                             <?php 
                                                             foreach ($transaksi as $u){ ?>
@@ -170,19 +169,12 @@
                                                             
                                                         </tbody>
                                                     </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><br>
-                            </div>
-                        </div>
                     </div>
+                  </div>
                 </div>
-                
-                
+              </div>
             </div>
         </div>
-    </div>
 </div>
+
 

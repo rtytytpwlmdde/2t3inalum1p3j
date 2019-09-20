@@ -29,10 +29,10 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Legalisir Online</h1>
             <div class="timeline-manage">
-                <a href="<?php echo site_url('legalisir/legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
+                <a href="<?php echo site_url('legalisir/pesananSaya/'); ?>" class="btn btn-light btn-sm  ">
                     <i class='bx bx-money'></i>Semua Pesanan Saya
                 </a>
-                <a href="<?php echo site_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
+                <a href="<?php echo site_url('legalisir/keranjang/'); ?>" class="btn btn-light btn-sm ">
                     <i class='bx bx-info-circle' ></i>Pesanan Tertunda
                 </a>
             </div>
@@ -47,7 +47,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class=" no-gutters align-items-center">
-                        <form action="<?php echo base_url('legalisir/legalisir/tambahTransaksi/'); ?>" method="post" onsubmit="openModal()" id="myForm">
+                        <form action="<?php echo base_url('legalisir/tambahTransaksi/'); ?>" method="post" onsubmit="openModal()" id="myForm">
                             <div class="row profile-rows">
                             <div class="col-md-4">
                                 <div class="row no-gutters align-items-center">
@@ -156,7 +156,7 @@
             <div class="row text-center">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-secondary" data-dismiss="modal">Tambahkan pesanan lagi?</button>
-                    <a href="<?php echo base_url('legalisir/legalisir/keranjang/'); ?>" class="btn btn-primary">Lanjut ke pembayaran</a>
+                    <a href="<?php echo base_url('legalisir/keranjang/'); ?>" class="btn btn-primary">Lanjut ke pembayaran</a>
                 </div>
             </div>  
       </div>

@@ -1,21 +1,20 @@
 <?php
-        $notif = $this->session->flashdata('gagal');
-        $operator = $this->session->userdata('status');
-        if($notif != NULL){
+        $gagals = $this->session->flashdata('gagals');
+        if($gagals != NULL){
             echo '
             <div class="alert alert-danger alert-dismissible fade show bg-danger text-white" role="alert">
-              <strong>Gagal!</strong> '.$notif.'
+              <strong>Gagal!</strong> '.$gagals.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             ';
         }
-        $notifsukses = $this->session->flashdata('sukses');
-        if($notifsukses != NULL){
+        $suksess = $this->session->flashdata('suksess');
+        if($suksess != NULL){
             echo '
             <div class="alert alert-success alert-dismissible fade show bg-success text-white" role="alert">
-              <strong>Sukses! </strong> '.$notifsukses.'
+              <strong>Sukses! </strong> '.$suksess.'
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -23,26 +22,23 @@
             ';
         }
     ?>
-<div class=" "> 
-        <div class="">
-            <div class="row ">
-                <div class="col-md-12">
-                    <div class="">
+    <input  hidden type="text" id="sukses" value="<?php echo $sukses = $this->session->flashdata('sukses');?>">
+<div class="container-fluid pt-2 pb-2">
 
-                        <!-- Posts section -->
-                        <div class="row px-4 ">
-                            <div class="col-md-12 content">
-                                <br>
-                                <div class="row mb-3">
-                                    <div class="col-12 col-sm-6">
-                                        <h5 class="page-title text-muted">TRANSAKSI</h5>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="btn-group d-flex flex-row-reverse" role="group" style="  float:right; width:50%" aria-label="Button group with nested dropdown">
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-sm btn-secondary dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</a>
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Transaksi Legalisir Online </h1>
+            <div class="timeline-manage">
+            <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn btn-sm btn-success dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-excel"></i> Excel</a>
                                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" data-toggle="modal"  data-target="#modalExport"><i class="fas fa-file-excel"></i> Excel</a>
+                                            <form  class="dropdown-item" action="<?php echo base_url('leges/export/exportDataTransaksi/' )?>" method="post">
+                                                <input type="hidden" name="jenis" value="semua"><button class="btn btn-sm btn-primary" type="submit">Semua</button>
+                                            </form>
+                                            <form class="dropdown-item " action="">
+
+                                            <a class="btn btn-sm btn-warning text-white" data-toggle="modal"  data-target="#modalExport"><i class="fas fa-file-excel"></i> Filter By Date</a>
+                                            </form>
                                             </div>
                                         </div>
                                         <div class="btn-group">
@@ -51,60 +47,62 @@
                                           </button>
                                           <div class="dropdown-menu dropdown-menu-right">
                                           <?php if($this->session->userdata('status') == 'keuangan'){ ?>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="4"><button class="btn btn-sm btn-success" type="submit">Valid</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="3"><button class="btn btn-sm btn-danger" type="submit">belum di proses</button>
                                                 </form>
                                             <?php }else if($this->session->userdata('status') == 'recording'){ ?> 
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
+                                                    <input type="text" name="status_pesanan" hidden value="99"><button class="btn btn-sm btn-success" type="submit">Semua</button>
+                                                </form>
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="4"><button class="btn btn-sm btn-danger" type="submit">belum diproses</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="5"><button class="btn btn-sm btn-primary" type="submit">sedang diproses</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="6"><button class="btn btn-sm btn-warning" type="submit">telah dikirim</button>
                                                 </form>
-                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/legalisir/transaksi/' )?>" method="post">
+                                                <form  class="dropdown-item" action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
                                                     <input type="text" name="status_pesanan" hidden value="7"><button class="btn btn-sm btn-success" type="submit">telah sampai</button>
                                                 </form>
                                             <?php }?>
                                           </div>
                                         </div>
                                         
+    <?php if($this->session->userdata('status') == 'recording'){ ?>
                                         <div class="btn-group">
-                                          <form   action="<?php echo base_url('export/listInvoice/' )?>" method="post">
+                                          <form   action="<?php echo base_url('legalisir/export/listInvoice/' )?>" method="post">
                                               <input type="text" name="status" hidden value="1"><button class="btn btn-sm btn-primary" type="submit">Cetak Invoice</button>
                                           </form>
                                             
                                         </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="border-bottom p-2 bg-white w-shadow">
-                                    <div class=" ">
-                                                <div class="col-md-4">
-                                                    <input id="myInput" type="text" class="form-control py-2" placeholder="Search.." >
-                                                </div>
-                                        <div class="content">
-                                            <div class="col-md-12">
-                                                <div class="panel-heading py-2">
-                                                </div>
-                                                <div class="panel-body" >
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered " style="width:100%" id="myTable">
-                                                        <thead>
+    <?php } ?>
+            </div>
+          </div>
+          
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-12 col-md-12 mb-2">
+              <div class=" h-100 ">
+                <div class="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="table-responsive no-gutters align-items-center">
+                      <table class="table table-bordered " style="width:100%" id="myTable">
+                                                        <thead class="bg-thead text-white">
                                                             <tr class="text-center">
                                                             <th scope="col">#</th>
                                                             <th scope="col">ID Transaksi</th>
                                                             <th scope="col">Alumni</th>
-                                                            <th scope="col">Tanggal Transaksi</th>
+                                                            <th scope="col">Tgl Transaksi</th>
                                                             <th scope="col">Status</th>
-                                                            <th scope="col">Total Pembayaran</th>
-                                                            <th scope="col">Jumlah Transfer</th>
-                                                            <th scope="col">Tanggal Transfer</th>
+                                                            <th scope="col">Total</th>
+                                                            <th scope="col">Transfer</th>
+                                                            <th scope="col">Tgl Transfer</th>
                                                             <th scope="col">Jam Transfer</th>
                                                             <th scope="col">Bank</th>
                                                             <th scope="col">Bukti Transfer</th>
@@ -114,14 +112,14 @@
                                                         <tbody>
                                                         <?php if($data_transaksi =="ada"){ ?>
                                                             <?php 		
-                                                            $no = floatval($this->uri->segment('3')) + 1;
+                                                            $no = (int)$this->uri->segment('3') + 1;
                                                             foreach ($transaksi as $u){ 
                                                                 $date=date_create($u->tanggal_transaksi);
                                                                 $tanggal_transfer=date_create($u->tanggal_transfer);
                                                                 ?>
                                                             <tr >
                                                                 <td scope="row"><?= $no++; ?></td>
-                                                                <td><a href="<?php echo base_url('legalisir/legalisir/detailTransaksi/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
+                                                                <td><a href="<?php echo base_url('legalisir/detailTransaksi/'.$u->id_transaksi )?>"><?= $u->id_transaksi; ?></a></td>
                                                                 <td><?= $u->nama; ?></td>
                                                                 <td><?= date_format($date,"d-m-Y") ; ?></td>
                                                                 <?php if($this->session->userdata('status') == 'keuangan'){ ?>
@@ -152,18 +150,18 @@
                                                                 <td><?= $u->jam_transfer; ?></td>
                                                                 <td><?= $u->bank; ?></td>
                                                                 <td>
-                                                                    <a target="_blank" rel="noopener noreferrer" href="<?php echo base_url('legalisir/legalisir/buktiTransfer/'.$u->id_transaksi )?>" class="btn btn-link btn-sm"><i class='bx bxs-file-image' ></i>Gambar</a>
+                                                                    <a target="_blank" rel="noopener noreferrer" href="<?php echo base_url('legalisir/buktiTransfer/'.$u->id_transaksi )?>" class="btn btn-link btn-sm"><i class='bx bxs-file-image' ></i>Gambar</a>
                                                                 </td>
                                                                 <?php if($this->session->userdata('status') == 'keuangan'){ ?>
                                                                     <td>
-                                                                        <form action="<?php echo base_url('legalisir/legalisir/verifikasiPembayaran' )?>" method="post">
+                                                                        <form action="<?php echo base_url('legalisir/verifikasiPembayaran' )?>" method="post">
                                                                             <input type="text" hidden name="id_transaksi" value="<?= $u->id_transaksi; ?>">
                                                                             <button type="submit" class="btn btn-primary btn-sm">Validasi</button>
                                                                         </form>
                                                                     </td>
                                                                 <?php } ?>
                                                                 <?php if($this->session->userdata('status') == 'recording'){ ?>
-                                                                    <form action="<?php echo base_url('legalisir/legalisir/prosesTransaksi' )?>" method="post">
+                                                                    <form action="<?php echo base_url('legalisir/prosesTransaksi' )?>" method="post">
                                                                         <td>
                                                                         <?php if($u->status_pesanan == '4'){ ?>
                                                                             <input type="text" hidden name="id_transaksi" value="<?= $u->id_transaksi; ?>">
@@ -192,26 +190,19 @@
 
                                                             
                                                         </tbody>
-                                                    </table></div>
+                                                    </table>
+                      </div>
                                                     <?php 
-                                                    echo $this->pagination->create_links();
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><br>
-                            </div>
-                        </div>
+                                                    echo $this->pagination->create_links(); ?>
                     </div>
+                  </div>
                 </div>
-                
-                
+              </div>
             </div>
         </div>
-    </div>
 </div>
-<!-- -->
+
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
@@ -223,7 +214,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form action="<?php echo base_url('legalisir/legalisir/prosesTransaksi/'); ?>" method="post">
+    <form action="<?php echo base_url('legalisir/prosesTransaksi/'); ?>" method="post">
       <div class="modal-asd">
         <input type="hidden" class="id_transaksi_modal" name="id_transaksi" id="id_transaksi" value="">
       </div>
@@ -243,26 +234,18 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Filter Data Yang Akan Di Export</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
-    <form action="<?php echo base_url('export/listInvoice/'); ?>" method="post">
+    <form action="<?php echo base_url('leges/export/exportDataTransaksi/'); ?>" method="post">
         <div class="modal-body">
-            <div class="" >
-            <label for="from_city">Jenis Export </label>
-            <a id="show" onclick="myFunctionShow()" class="btn btn-sm btn-secondary">Filter Tanggal</a>
-            <a id="hide" onclick="myFunctionHide()" class="btn btn-sm btn-secondary">Semua</a>
-            </div>
             <p id="demo">Export Data Transaksi Sesuai Tanggal</p>
             <p id="semua" class="text-danger"></p>
 
         <div class="form-group form-export " >
+            <input type="hidden" name="jenis" value="date">
             <label for="from_province">Tanggal mulai </label>
-            <input type="date" name="tanggal_mulai" class="form-control">
+            <input type="date" name="mulai" class="form-control">
             <label for="from_province">Tanggal Selesai </label>
-            <input type="date" name="tanggal_selesai" class="form-control">
+            <input type="date" name="selesai" class="form-control">
         </div>
       </div>
       <div class="modal-footer">
@@ -318,4 +301,6 @@ $(document).ready(function(){
   });
 });
 </script>
+
+
 

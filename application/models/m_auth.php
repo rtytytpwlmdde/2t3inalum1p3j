@@ -16,6 +16,7 @@ class M_auth extends CI_Model{
 			$data_session = array(
 									'logged_in' => TRUE,
 									'username' => $data_login->username,
+									'id_prodi' => $data_login->id_prodi,
 									'status' => $data_login->status
 								);
 			$this->session->set_userdata($data_session);

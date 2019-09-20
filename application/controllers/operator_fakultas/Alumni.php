@@ -22,7 +22,7 @@ function __construct(){
 		$data['main_view'] = 'operator_fakultas/v_pencarian_alumni';
 		$data['mahasiswa'] = $this->m_alumni->tampilrestmahasiswa()->result();
 		$data['jurusan'] = $this->m_jurusan->tampilJurusan()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 	}
 
 	function cek_alumni(){
@@ -38,7 +38,7 @@ function __construct(){
 			$data['provinsi'] = $this->m_negara->tampilprovinsi()->result();
 			$data['kota'] = $this->m_negara->tampilkota()->result();
 			$data['main_view'] = 'operator_fakultas/v_data_mahasiswa';
-			$this->load->view('template/template_operator_fakultas', $data);
+			$this->load->view('template/template_operator', $data);
 		}else{ 	 
 			$this->session->set_flashdata('notif', "Gagal - NIP/NIM tidak terdaftar");
 			redirect('operator_fakultas/alumni');
@@ -51,7 +51,7 @@ function __construct(){
 		$data['provinsi'] = $this->m_negara->tampilprovinsi()->result();
 		$data['kota'] = $this->m_negara->tampilkota()->result();
 		$data['main_view'] = 'operator_fakultas/v_tambah_alumni';
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 	function tambahMahasiswa(){
 		$nim = $this->input->post('nim');
@@ -154,7 +154,7 @@ function __construct(){
 		$data['provinsi'] = $this->m_negara->tampilprovinsi()->result();
 		$data['kota'] = $this->m_negara->tampilkota()->result();
 		$data['alumni'] = $this->m_alumni->edit_data($where,'alumni')->result();
-		$this->load->view('template/template_operator_fakultas',$data);
+		$this->load->view('template/template_operator',$data);
 	}
 
 	function edit_data_mahasiswa($where,$table){
@@ -233,7 +233,7 @@ function __construct(){
 	function reset_password(){
 		$data['main_view'] = 'operator_fakultas/v_reset_password';
 		$data['alumni'] = $this->m_alumni->tampilrestmahasiswa()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 
 		}
 		function resetaksi(){
@@ -242,7 +242,7 @@ function __construct(){
 			if($cek1 > 0){
 				$data['mahasiswa'] = $this->m_alumni->get_alumni_nim($nim);
 				$data['main_view'] = 'operator_fakultas/v_reset_pass';
-				$this->load->view('template/template_operator_fakultas', $data);
+				$this->load->view('template/template_operator', $data);
 			}else{ 	 
 				$this->session->set_flashdata('notif', "Gagal - NIP/NIM tidak terdaftar");
 				redirect('operator_fakultas/alumni/reset_password');
@@ -282,7 +282,7 @@ function __construct(){
 		$data['negara'] = $this->m_negara->tampilnegara()->result();
 		$data['provinsi'] = $this->m_negara->tampilprovinsi()->result();
 		$data['kota'] = $this->m_negara->tampilkota()->result();
-		$this->load->view('template/template_operator_fakultas', $data);
+		$this->load->view('template/template_operator', $data);
 		}
 
 

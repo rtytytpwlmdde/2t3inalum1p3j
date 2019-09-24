@@ -109,10 +109,10 @@ function getDatailTransaksiInvoice(){
 
 function getDataKuisioner($id_kuisioner){
   $this->db->select('*');
-  $this->db->from('pertanyaan');
-  $this->db->join('tanggapan','pertanyaan.id_pertanyaan = tanggapan.id_pertanyaan');
+  $this->db->from('tanggapan');
   $this->db->join('alumni','tanggapan.id_responden = alumni.nim');
-  $this->db->where('pertanyaan.id_kuisioner',$id_kuisioner);
+  $this->db->join('pertanyaan','tanggapan.id_pertanyaan = pertanyaan.id_pertanyaan');
+  $this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
   $query = $this->db->get();
   return 	$query->result();	
 }

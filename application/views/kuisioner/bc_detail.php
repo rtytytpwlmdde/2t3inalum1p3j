@@ -1,667 +1,313 @@
-
-
 <div class="container-fluid">
-<?php 
-  $status_operator = $this->session->userdata('status');
-  $operator_prodi = $this->session->userdata('id_prodi');
 
-?>
-  <!-- Page Heading -->
-  <div class="row pt-2">
-    <div class="col-sm-6">
-      <h1 class="h3 mb-2 text-gray-800">Detail Kuisioner</h1> 
-      <h5 class="h5 mb-2 text-gray-600"><?= $nama_kuisioner; ?></h5>
-  <?php foreach($jumPertanyaan as $s){  $nomor =  $s->jumPertanyaan+1; } ?>
-    </div>
-    <div class="col-sm-6">
-      <div class="d-flex flex-row-reverse bd-highlight mb-1">
-            <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url('kuisioner/previewKuisioner/'.$id_kuisioner); ?>"><i class="fas fa-eye"></i> Preview</a>
-            <a class="btn btn-sm btn-primary text-white "  data-toggle="modal" data-target="#modalTambahPertanyaan">Tambah Pertanyaan</a>
-      </div>
-    </div>
-  </div>
-  <!-- DataTales Example -->
-  <?php foreach ($kuisioner as $u){?>
-    <?php if($u->jenis_pertanyaan == '1'){?>
-    <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
-          <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
-              <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info  h-100 ">
-                  <div class="card-body">
-                    <div class=" no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class=" no-gutters align-items-center">
-                              <div class="row profile-rows">
-                                <div class="col-md-1"  style="max-width: 50px">
-                                    <div class="text-gray-800 py-2" style="font-size: 1.8em;">
-                                      <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="text-gray-800" >
-                                    <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
-                                  </div>
-                                    <div class="text-gray-800" >
-                                    <input type="text" class=" form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-warning"><?= $u->nama_jenis_pertanyaan; ?></span><br>
-                                      <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
-                                        <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
-                                      <?php }else{?>
-                                        <span class="text-danger"><?= $u->prodi; ?> </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
-                                        <a title="hapus pertanyaan ini" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
-                                    </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
+            <h1 class="h3 mb-0 text-gray-800">Dashboarsd</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
-    <?php }else{?>
-      <div class="row">
+
+          <!-- Content Row -->
+          <div class="row">
+
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-secondary  h-100 ">
-                <div class="card-body bg-disabled">
-                  <div class=" no-gutters align-items-center">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                            <div class="row profile-rows">
-                              <div class="col-md-1"  style="max-width: 50px">
-                                  <div class="text-gray-800 py-2" style="font-size: 1.8em;">
-                                    <a><?= $u->nomor_pertanyaan;?></a>
-                                </div>
-                              </div>
-                              <div class="col-md-11">
-                                <div class="text-gray-800" >
-                                  <a  class="text-dark" ><?= $u->nama_pertanyaan;?></a>
-                                </div>
-                                <div class="text-gray-800" >
-                                    <input type="text" class=" form-control">
-                                </div>
-                              </div>
-                            </div>
-                      </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Kuisioner</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($jumlahKuisioner as $u){ echo $u->jumKuisioner; }?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-    <?php } ?>
-  <?php } ?>
 
-  <?php if($u->jenis_pertanyaan == '2'){?>
-    <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
-          <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
-              <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info  h-100 ">
-                  <div class="card-body">
-                    <div class=" no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class=" no-gutters align-items-center">
-                              <div class="row profile-rows">
-                                <div class="col-md-1" style="max-width: 50px">
-                                    <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="text-gray-800" >
-                                      <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                          data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
-                                    </div>
-                                    <div class="text-gray-800" >
-                                      <textarea class="form-control"  name="nama_pertanyaan" rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-primary"><?= $u->nama_jenis_pertanyaan; ?></span><br>
-                                      <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
-                                        <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
-                                      <?php }else{?>
-                                        <span class="text-danger"><?= $u->prodi; ?> </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
-                                        <a title="hapus pertanyaan ini" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
-                                    </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-    <?php }else{ ?>
-      <div class="row">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-secondary  h-100 ">
-                <div class="card-body bg-disabled">
-                  <div class=" no-gutters align-items-center">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                            <div class="row profile-rows">
-                              <div class="col-md-1" style="max-width: 50px">
-                                  <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a ><?= $u->nomor_pertanyaan;?></a>
-                                </div>
-                              </div>
-                              <div class="col-md-11">
-                                  <div class="text-gray-800" >
-                                    <a  ><?= $u->nama_pertanyaan;?></a>
-                                  </div>
-                                  <div class="text-gray-800" >
-                                    <textarea class="form-control"  name="nama_pertanyaan" rows="3"></textarea>
-                                  </div>
-                              </div>
-                            </div>
-                      </div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pertanyaan</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($jumlahPertanyaan as $u){ echo $u->jumPertanyaan; }?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-    <?php } ?>
-  <?php } ?>
 
-
-  <?php if($u->jenis_pertanyaan == '3'){?>
-    <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
-          <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
-              <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info  h-100 ">
-                  <div class="card-body">
-                    <div class=" no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class=" no-gutters align-items-center">
-                              <div class="row profile-rows">
-                                <div class="col-md-1" style="max-width: 50px">
-                                    <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="text-gray-800 mb-1 h5" >
-                                    <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
-                                  </div>
-                                  <?php foreach ($pilihan_jawaban as $cb){
-                                    if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                    <div class="text-gray-800 ml-3" >
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          <a style="cursor: pointer;"  data-toggle="modal" title="klik untuk mengedit atau menghapus pilihan jawaban ini" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pilihan_jawaban="<?= $cb->id_pilihan_jawaban; ?>" data-nama_pilihan_jawaban="<?= $cb->nama_pilihan_jawaban; ?>"
-                                            class="open-modalEditJawabanPertanyaan text-dark" href="#modalEditJawabanPertanyaan" ><?= $cb->nama_pilihan_jawaban; ?>
-                                          </a>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  <?php } } ?>
-                                  <a data-toggle="modal"  style="cursor: pointer; font-size:0.8em;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" data-jenis="<?= $u->jenis_pertanyaan; ?>" class="open-modalTambahPilihanJawaban text-primary ml-3" href="#modalTambahPilihanJawaban"><i class="fas fa-plus-circle"></i> tambah jawaban</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-info"><?= $u->nama_jenis_pertanyaan; ?></span><br>
-                                      <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
-                                        <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
-                                      <?php }else{?>
-                                        <span class="text-danger"><?= $u->prodi; ?> </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
-                                        <a title="hapus pertanyaan ini" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
-                                    </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-      <?php }else{ ?>
-        <div class="row">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-secondary  h-100 ">
-                <div class="card-body bg-disabled">
-                  <div class=" no-gutters align-items-center">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                            <div class="row profile-rows">
-                              <div class="col-md-1" style="max-width: 50px">
-                                  <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a><?= $u->nomor_pertanyaan;?></a>
-                                </div>
-                              </div>
-                              <div class="col-md-11">
-                                  <div class="text-gray-800 mb-1 h5" >
-                                  <a ><?= $u->nama_pertanyaan;?></a>
-                                </div>
-                                <?php foreach ($pilihan_jawaban as $cb){
-                                  if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                  <div class="text-gray-800 ml-3" >
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                      <label class="form-check-label" for="defaultCheck1">
-                                        <a ><?= $cb->nama_pilihan_jawaban; ?></a>
-                                      </label>
-                                    </div>
-                                  </div>
-                                <?php } } ?>
-                              </div>
-                            </div>
-                      </div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Responden</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php foreach($jumlahResponden as $u){ echo $u->jumResponden; }?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-      <?php } ?>
-  <?php } ?>
 
-  <?php if($u->jenis_pertanyaan == '4'){?>
-    <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
-          <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
-              <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info  h-100 ">
-                  <div class="card-body">
-                    <div class=" no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class=" no-gutters align-items-center">
-                              <div class="row profile-rows">
-                                <div class="col-md-1" style="max-width: 50px">
-                                    <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="text-gray-800 mb-1 h5" >
-                                    <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
-                                  </div>
-                                  <?php foreach ($pilihan_jawaban as $cb){
-                                    if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                    <div class="text-gray-800 " >
-                                      <div class="form-check" >
-                                        <label class="btn btn-sm dropdown-toggle" for="defaultCheck1" style="background-color: #4b48481c">
-                                          <a style="cursor: pointer;"  data-toggle="modal" title="klik untuk mengedit atau menghapus pilihan jawaban ini" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pilihan_jawaban="<?= $cb->id_pilihan_jawaban; ?>" data-nama_pilihan_jawaban="<?= $cb->nama_pilihan_jawaban; ?>"
-                                            class="open-modalEditJawabanPertanyaan text-dark" href="#modalEditJawabanPertanyaan" ><?= $cb->nama_pilihan_jawaban; ?>
-                                          </a>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  <?php } } ?>
-                                  <a data-toggle="modal"  style="cursor: pointer; font-size:0.8em;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" data-jenis="<?= $u->jenis_pertanyaan; ?>" class="ml-3 open-modalTambahPilihanJawaban text-primary" href="#modalTambahPilihanJawaban"><i class="fas fa-plus-circle"></i> tambah jawaban</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-kuning"><?= $u->nama_jenis_pertanyaan; ?></span><br>
-                                      <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
-                                        <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
-                                      <?php }else{?>
-                                        <span class="text-danger"><?= $u->prodi; ?> </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
-                                        <a title="hapus pertanyaan ini" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
-                                    </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-    <?php }else{ ?>
-      <div class="row ">
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-secondary  h-100 ">
-                <div class="card-body bg-disabled">
-                  <div class=" no-gutters align-items-center">
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                            <div class="row profile-rows">
-                              <div class="col-md-1" style="max-width: 50px">
-                                  <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a><?= $u->nomor_pertanyaan;?></a>
-                                </div>
-                              </div>
-                              <div class="col-md-11">
-                                  <div class="text-gray-800 mb-1 h5" >
-                                  <a ><?= $u->nama_pertanyaan;?></a>
-                                </div>
-                                  <div class="text-gray-800 " >
-                                    <div class="form-group">
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <?php foreach ($pilihan_jawaban as $cb){
-                                            if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                            <option><?= $cb->nama_pilihan_jawaban; ?></option>
-                                             <?php } } ?>
-                                        </select>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>
-                      </div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-    <?php } ?>
-  <?php } ?>
+          </div>
 
-  <?php if($u->jenis_pertanyaan == '5'){?>
-    <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
+          <!-- Content Row -->
+
           <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
-              <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info  h-100 ">
-                  <div class="card-body">
-                    <div class=" no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class=" no-gutters align-items-center">
-                              <div class="row profile-rows">
-                                <div class="col-md-1" style="max-width: 50px">
-                                    <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="text-gray-800 mb-1 h5" >
-                                      <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                        data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
-                                  </div>
-                                  <?php foreach ($pilihan_jawaban as $cb){
-                                    if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                    <div class="text-gray-800 ml-3" >
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          <a style="cursor: pointer;"  data-toggle="modal" title="klik untuk mengedit atau menghapus pilihan jawaban ini" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pilihan_jawaban="<?= $cb->id_pilihan_jawaban; ?>" data-nama_pilihan_jawaban="<?= $cb->nama_pilihan_jawaban; ?>"
-                                            class="open-modalEditJawabanPertanyaan text-dark" href="#modalEditJawabanPertanyaan" ><?= $cb->nama_pilihan_jawaban; ?>
-                                          </a>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  <?php } } ?>
-                                  <a data-toggle="modal"  style="cursor: pointer; font-size:0.8em;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" data-jenis="<?= $u->jenis_pertanyaan; ?>" class="open-modalTambahPilihanJawaban text-primary ml-3" href="#modalTambahPilihanJawaban"><i class="fas fa-plus-circle"></i> tambah jawaban</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-pink"><?= $u->nama_jenis_pertanyaan; ?></span><br>
-                                      <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
-                                        <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
-                                      <?php }else{?>
-                                        <span class="text-danger"><?= $u->prodi; ?> </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
-                                        <a title="hapus pertanyaan ini" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
-                                    </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                   </div>
                 </div>
-              </div>
-          </div>
-    <?php }else{?>
-      <div class="row">
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-12 col-md-12 mb-2">
-              <div class="card border-left-secondary  h-100 ">
-                <div class="card-body bg-disabled">
-                  <div class=" no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class=" no-gutters align-items-center">
-                            <div class="row profile-rows">
-                              <div class="col-md-1" style="max-width: 50px">
-                                  <div class="text-gray-800 py-2" style="font-size: 1.8em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
-                                      data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" ><?= $u->nomor_pertanyaan;?></a>
-                                </div>
-                              </div>
-                              <div class="col-md-8">
-                                  <div class="text-gray-800 mb-1 h5" >
-                                    <a><?= $u->nama_pertanyaan;?></a>
-                                </div>
-                                <?php foreach ($pilihan_jawaban as $cb){
-                                  if($cb->id_pertanyaan == $u->id_pertanyaan){?>
-                                  <div class="text-gray-800 ml-3" >
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" value="" id="defaultCheck1">
-                                      <label class="form-check-label" for="defaultCheck1">
-                                        <a><?= $cb->nama_pilihan_jawaban; ?> </a>
-                                      </label>
-                                    </div>
-                                  </div>
-                                <?php } } ?>
-                              </div>
-                            </div>
-                      </div>
-                    </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                <div class="chart-pie pt-4 pb-2"  style="height:207px;">
+                      <div id="chartStatusPeminjaman" height="130" style="max-width: 100% !important;" class="ct-chart-status-peminjaman"></div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-    <?php } ?>
-  <?php } ?>
 
-
-  <?php } ?>
-
-
-<!-- modal tambah pertanyaan -------------------------------------------------------------------------------------------------------- -->
-  <div class="modal fade" id="modalTambahPertanyaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Pertanyaan</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?php echo base_url(). 'kuisioner/tambahPertanyaan'; ?>" method="POST">
-        <div class="modal-body">
-              <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Nama Pertanyaan</label>
-                  <div class="col-md-9">
-                    <textarea class="form-control"  name="nama_pertanyaan" rows="3"></textarea>
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
                   </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Jenis Pertanyaan</label>
-                  <div class="col-md-9"> 
-                      <select name="jenis_pertanyaan" class="form-control">
-                          <?php foreach ($jenis_pertanyaan as $p){?>
-                          <option value="<?= $p->id_jenis_pertanyaan; ?>"><?= $p->nama_jenis_pertanyaan ?></option>
-                          <?php } ?>
-                      </select>
-                    <input type="hidden" name="id_kuisioner"  value="<?= $id_kuisioner; ?>" class="form-control">
-                    <input type="hidden" name="nomor_pertanyaan"  value="<?= $nomor; ?>" class="form-control">
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
                   </div>
-              </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button  type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-<!-- modal tambah pertanyaan -------------------------------------------------------------------------------------------------------- -->
-
-<!-- modal tambah pilihan jawaban -------------------------------------------------------------------------------------------------------- -->
-<div class="modal fade" id="modalTambahPilihanJawaban" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Pilihan Jawaban</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?php echo base_url(). 'kuisioner/tambahJawabanPertanyaan'; ?>" method="POST">
-        <div class="modal-body">
-              <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Pilihan Jawaban</label>
-                  <div class="col-md-9">
-                    <input type="hidden" name="id_kuisioner" id="id_kuisioner" value=""/>
-                    <input type="hidden" name="id_pertanyaan" id="id_pertanyaan" value=""/>
-                    <input type="hidden" id="jenis" name="jenis_pertanyaan" value="">
-                    <input class="form-control"  name="jawaban" >
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Referral
+                    </span>
                   </div>
+                </div>
               </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button  type="submit" class="btn btn-primary">Tambahkan Pilihan Jawaban</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-<!-- modal tambah pertanyaan -------------------------------------------------------------------------------------------------------- -->
-<!-- modal edit hapus pilihan jawaban -------------------------------------------------------------------------------------------------------- -->
-<div class="modal fade" id="modalEditJawabanPertanyaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ubah Hapus Pilihan Jawaban</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?php echo base_url(). 'kuisioner/ubahJawabanPertanyaan'; ?>" method="POST">
-        <div class="modal-body">
-              <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Pilihan Jawaban</label>
-                  <div class="col-md-9">
-                    <input type="hidden" name="id_kuisioner" id="id_kuisioner" value=""/>
-                    <input type="hidden" name="id_pilihan_jawaban" id="id_pilihan_jawaban" value=""/>
-                    <input class="form-control" id="nama_pilihan_jawaban"  name="nama_pilihan_jawaban" value="">
-                  </div>
-              </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button  type="submit" class="btn btn-primary">Ubah Pilihan Jawaban</button>
-        </form>
-        <form action="<?php echo base_url(). 'kuisioner/hapusPilihanJawaban'; ?>" method="POST">
-          <div hidden class="modal-body">
-            <input type="" name="id_kuisioner" id="id_kuisioner" value=""/>
-            <input type="" name="id_pilihan_jawaban" id="id_pilihan_jawaban" value=""/>
+            </div>
           </div>
-          <button  type="submit" class="btn btn-outline-danger" title="hapus pilihan jawaban ini"><i class="fas fa-trash"></i></button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- modal tambah pertanyaan -------------------------------------------------------------------------------------------------------- -->
 
+          <!-- Content Row -->
+          <div class="row">
 
-<div class="modal fade" id="modalEditPertanyaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Pertanyaan</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?php echo base_url(). 'kuisioner/ubahPertanyaan'; ?>" method="POST">
-        <div class="modal-body">
-              <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Pertanyaan</label>
-                  <div class="col-md-9">
-                    <input type="hidden" name="id_kuisioner" id="id_kuisioner" value=""/>
-                    <input type="hidden" name="id_pertanyaan" id="id_pertanyaan" value=""/>
-                    <input class="form-control" id="nama_pertanyaan"  name="nama_pertanyaan" value="">
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                </div>
+                <div class="card-body">
+                  <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
+                  <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-              </div>
-              <div hidden class="form-group row">
-                  <label class="col-md-3 col-form-label">Nomor Pertanyaan</label>
-                  <div class="col-md-9">
-                    <input class="form-control" id="nomor_pertanyaan"  name="nomor_pertanyaan" value="">
+                  <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
+                  <div class="progress mb-4">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
+                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
+                  <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
+                  <div class="progress mb-4">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
+                  <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
               </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button  type="submit" class="btn btn-primary">Update Pertanyaan</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
+              <!-- Color System -->
+              <div class="row">
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-primary text-white shadow">
+                    <div class="card-body">
+                      Primary
+                      <div class="text-white-50 small">#4e73df</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                      Success
+                      <div class="text-white-50 small">#1cc88a</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-info text-white shadow">
+                    <div class="card-body">
+                      Info
+                      <div class="text-white-50 small">#36b9cc</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                      Warning
+                      <div class="text-white-50 small">#f6c23e</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                      Danger
+                      <div class="text-white-50 small">#e74a3b</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="card bg-secondary text-white shadow">
+                    <div class="card-body">
+                      Secondary
+                      <div class="text-white-50 small">#858796</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url(); ?>/assets/admin/img/undraw_posting_photo.svg" alt="">
+                  </div>
+                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+                </div>
+              </div>
+
+              <!-- Approach -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                </div>
+                <div class="card-body">
+                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
+                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <script>
+        var data = {
+  // A labels array that can contain any sort of values
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  // Our series array that contains series objects or in this case series data arrays
+  series: [
+    [5, 2, 4, 2, 0]
+  ]
+};
+
+// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+// as you saw in the previous example
+var options = {
+  width: 300,
+  height: 200
+};
+
+// Create a new line chart object where as first parameter we pass in a selector
+// that is resolving to our chart container element. The Second parameter
+// is the actual data object. As a third parameter we pass in our custom options.
+new Chartist.Line('.ct-chart', data, options);
+        </script>
 
 <script>
-$(document).on("click", ".open-modalTambahPilihanJawaban", function () {
-     var id_kuisioner = $(this).data('id_kuisioner');
-     $(".modal-body #id_kuisioner").val( id_kuisioner );
-     var id_pertanyaan = $(this).data('id_pertanyaan');
-     $(".modal-body #id_pertanyaan").val( id_pertanyaan );
-     var jenis = $(this).data('jenis');
-     $(".modal-body #jenis").val( jenis );
+$(function() {
+
+new Chartist.Pie('.ct-chart-status-peminjaman', {
+  series: [ 10,20,70]
+}, {
+  donut: true,
+  donutWidth: 60,
+  donutSolid: true,
+  startAngle: 270,
+  showLabel: true
 });
-</script>
-<script>
-$(document).on("click", ".open-modalEditJawabanPertanyaan", function () {
-     var id_kuisioner = $(this).data('id_kuisioner');
-     $(".modal-body #id_kuisioner").val( id_kuisioner );
-     var id_pilihan_jawaban = $(this).data('id_pilihan_jawaban');
-     $(".modal-body #id_pilihan_jawaban").val( id_pilihan_jawaban );
-     var nama_pilihan_jawaban = $(this).data('nama_pilihan_jawaban');
-     $(".modal-body #nama_pilihan_jawaban").val( nama_pilihan_jawaban );
-});
-</script>
-<script>
-$(document).on("click", ".open-modalEditPertanyaan", function () {
-     var id_kuisioner = $(this).data('id_kuisioner');
-     $(".modal-body #id_kuisioner").val( id_kuisioner );
-     var id_pertanyaan = $(this).data('id_pertanyaan');
-     $(".modal-body #id_pertanyaan").val( id_pertanyaan );
-     var nama_pertanyaan = $(this).data('nama_pertanyaan');
-     $(".modal-body #nama_pertanyaan").val( nama_pertanyaan );
-     var nomor_pertanyaan = $(this).data('nomor_pertanyaan');
-     $(".modal-body #nomor_pertanyaan").val( nomor_pertanyaan );
+
+new Chartist.Bar('#chartStatusPeminjaman', data, options, responsiveOptions);
 });
 </script>

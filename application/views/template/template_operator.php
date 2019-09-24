@@ -9,14 +9,19 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Alumni - FEB</title>
+  <title>Alumni - FEB</title><script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+    </script> 
   <link rel="icon" href="<?php echo base_url() ?>/assets/images/ub.png">
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url() ?>/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
  
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+
   <link href="<?php echo base_url() ?>/assets/alumni/sb-admin-2.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url() ?>/assets/alumni/alumni-style.css" rel="stylesheet" type="text/css">
   
@@ -43,10 +48,6 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
-
-     
-
-
       <!-- Nav Item - Tables -->
     <?php if($this->session->userdata('status') == 'recording'){ ?>
       <li class="nav-item">
@@ -344,12 +345,8 @@
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url()?>/assets/admin/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="<?php echo base_url()?>/assets/admin/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-area-demo.js"></script>
-  <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-pie-demo.js"></script>
+  <!-- Page level plugins -->">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
 </body>
 

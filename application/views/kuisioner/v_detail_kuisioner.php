@@ -13,10 +13,14 @@
       <h5 class="h5 mb-1 text-gray-600"><?= $nama_kuisioner; ?></h5>
   <?php foreach($jumPertanyaan as $s){  $nomor =  $s->jumPertanyaan+1; } ?>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-2">
+    <button class="btn btn-sm btn-danger scrool-down ">Scrool Down</button> 
+    </div>
+    <div class="col-sm-4">
       <div class="d-flex flex-row-reverse bd-highlight mb-1">
             <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url('kuisioner/previewKuisioner/'.$id_kuisioner.'/'.$id_section); ?>"><i class="fas fa-eye"></i> Preview</a>
             <a class="btn btn-sm btn-primary text-white "  data-toggle="modal" data-target="#modalTambahPertanyaan">Tambah Pertanyaan</a>
+            
       </div>
     </div>
   </div>
@@ -46,6 +50,10 @@
                                         <div class="text-gray-800" >
                                         <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
                                             data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
+                                      </div>
+                                      
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
                                       </div>
                                         <div class="text-gray-800" >
                                         <input type="text" class=" form-control">
@@ -92,6 +100,9 @@
                                     <div class="text-gray-800" >
                                       <a  class="text-dark" ><?= $u->nama_pertanyaan;?></a>
                                     </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                     <div class="text-gray-800" >
                                         <input type="text" class=" form-control">
                                     </div>
@@ -128,6 +139,9 @@
                                           <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
                                               data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
                                         </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                         <div class="text-gray-800" >
                                           <textarea class="form-control"  name="nama_pertanyaan" rows="3"></textarea>
                                         </div>
@@ -168,6 +182,9 @@
                                       <div class="text-gray-800 py-2" style="font-size: 1.4em;"> <a ><?= $u->nomor_pertanyaan;?></a>
                                     </div>
                                   </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                   <div class="col-md-11">
                                       <div class="text-gray-800" >
                                         <a  ><?= $u->nama_pertanyaan;?></a>
@@ -208,6 +225,9 @@
                                         <div class="text-gray-800 mb-1 h5" >
                                         <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
                                             data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
+                                      </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
                                       </div>
                                       <?php foreach ($pilihan_jawaban as $cb){
                                         if($cb->id_pertanyaan == $u->id_pertanyaan){?>
@@ -264,6 +284,9 @@
                                       <div class="text-gray-800 mb-1 h5" >
                                       <a ><?= $u->nama_pertanyaan;?></a>
                                     </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                     <?php foreach ($pilihan_jawaban as $cb){
                                       if($cb->id_pertanyaan == $u->id_pertanyaan){?>
                                       <div class="text-gray-800 ml-3" >
@@ -307,6 +330,9 @@
                                         <div class="text-gray-800 mb-1 h5" >
                                         <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
                                             data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
+                                      </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
                                       </div>
                                       <?php foreach ($pilihan_jawaban as $cb){
                                         if($cb->id_pertanyaan == $u->id_pertanyaan){?>
@@ -362,6 +388,9 @@
                                       <div class="text-gray-800 mb-1 h5" >
                                       <a ><?= $u->nama_pertanyaan;?></a>
                                     </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                       <div class="text-gray-800 " >
                                         <div class="form-group">
                                             <select class="form-control" id="exampleFormControlSelect1">
@@ -400,6 +429,9 @@
                                             data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
                                       </div>
                                     </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                     <div class="col-md-8">
                                         <div class="text-gray-800 mb-1 h5" >
                                           <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
@@ -461,6 +493,115 @@
                                       <div class="text-gray-800 mb-1 h5" >
                                         <a><?= $u->nama_pertanyaan;?></a>
                                     </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
+                                    <?php foreach ($pilihan_jawaban as $cb){
+                                      if($cb->id_pertanyaan == $u->id_pertanyaan){?>
+                                      <div class="text-gray-800 ml-3" >
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="" id="defaultCheck1">
+                                          <label class="form-check-label" for="defaultCheck1">
+                                            <a><?= $cb->nama_pilihan_jawaban; ?> </a>
+                                          </label>
+                                        </div>
+                                      </div>
+                                    <?php } } ?>
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        <?php } ?>
+      <?php } ?>
+
+      <?php if($u->jenis_pertanyaan == '6'){?>
+        <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
+              <div class="row">
+                  <!-- Earnings (Monthly) Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-2">
+                    <div class="card border-left-info  h-100 ">
+                      <div class="card-body">
+                        <div class=" no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <div class=" no-gutters align-items-center">
+                                  <div class="row profile-rows">
+                                    <div class="col-md-2" style="max-width: 50px">
+                                        <div class="text-gray-800 py-2" style="font-size: 1.4em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
+                                            data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
+                                      </div>
+                                    </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
+                                    <div class="col-md-8">
+                                        <div class="text-gray-800 mb-1 h5" >
+                                          <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
+                                            data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
+                                      </div>
+                                      <?php foreach ($pilihan_jawaban as $cb){
+                                        if($cb->id_pertanyaan == $u->id_pertanyaan){?>
+                                        <div class="text-gray-800 ml-3" >
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                              <a style="cursor: pointer;"  data-toggle="modal" title="klik untuk mengedit atau menghapus pilihan jawaban ini" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pilihan_jawaban="<?= $cb->id_pilihan_jawaban; ?>" data-nama_pilihan_jawaban="<?= $cb->nama_pilihan_jawaban; ?>"
+                                                class="open-modalEditJawabanPertanyaan text-dark" href="#modalEditJawabanPertanyaan" ><?= $cb->nama_pilihan_jawaban; ?>
+                                              </a>
+                                            </label>
+                                          </div>
+                                        </div>
+                                      <?php } } ?>
+                                      <a data-toggle="modal"  style="cursor: pointer; font-size:0.8em;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" data-jenis="<?= $u->jenis_pertanyaan; ?>" class="open-modalTambahPilihanJawaban text-primary ml-3" href="#modalTambahPilihanJawaban"><i class="fas fa-plus-circle"></i> tambah jawaban</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-pink"><?= $u->nama_jenis_pertanyaan; ?></span><br>
+                                          <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
+                                            <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
+                                          <?php }else{?>
+                                            <span class="text-danger"><?= $u->prodi; ?> </span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
+                                            <a title="hapus pertanyaan ini" href="<?php echo base_url('kuisioner/hapusPertanyaan/'.$u->id_kuisioner.'/'.$u->id_pertanyaan.'/'.$u->id_section);?>" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        <?php }else{?>
+          <div class="row">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-12 col-md-12 mb-2">
+                  <div class="card border-left-secondary  h-100 ">
+                    <div class="card-body bg-disabled">
+                      <div class=" no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class=" no-gutters align-items-center">
+                                <div class="row profile-rows">
+                                  <div class="col-md-2" style="max-width: 50px">
+                                      <div class="text-gray-800 py-2" style="font-size: 1.4em;"> <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
+                                          data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" ><?= $u->nomor_pertanyaan;?></a>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <div class="text-gray-800 mb-1 h5" >
+                                        <a><?= $u->nama_pertanyaan;?></a>
+                                    </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
                                     <?php foreach ($pilihan_jawaban as $cb){
                                       if($cb->id_pertanyaan == $u->id_pertanyaan){?>
                                       <div class="text-gray-800 ml-3" >
@@ -544,6 +685,13 @@
                       </select>
                     <input type="hidden" name="id_kuisioner"  value="<?= $id_kuisioner; ?>" class="form-control">
                     <input type="hidden" name="nomor_pertanyaan"  value="<?= $nomor; ?>" class="form-control">
+                  </div>
+              </div>
+              
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Keterangan</label>
+                  <div class="col-md-9"> 
+                    <input type="text " name="keterangan_pertanyaan"  class="form-control">
                   </div>
               </div>
         </div>
@@ -699,3 +847,14 @@ $(document).on("click", ".open-modalEditPertanyaan", function () {
      $(".modal-body #nomor_pertanyaan").val( nomor_pertanyaan );
 });
 </script>
+
+<script> 
+        $(document).ready(function() { 
+            $(".scrool-down").click(function() { 
+                $("html, body").animate({ 
+                    scrollTop: $( 
+                      'html, body').get(0).scrollHeight 
+                }, 1000); 
+            }); 
+        }); 
+    </script> 

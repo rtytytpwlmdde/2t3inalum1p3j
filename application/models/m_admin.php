@@ -18,5 +18,9 @@ class M_admin extends CI_Model{
     function hapus_data($where,$table){
 		$this->db->where($where);
 		$this->db->delete($table);
-	}	
+  }	
+  
+  function update_all_data($data,$table){
+    $this->db->update($table,$data);
+}
 }

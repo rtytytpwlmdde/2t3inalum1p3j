@@ -195,7 +195,7 @@ foreach($idsection as $u){
                                   if($cb->id_pertanyaan == $u->id_pertanyaan){?>
                                   <div class="text-gray-800 ml-3" >
                                     <div class="form-check">
-                                      <input class="form-check-input" <?= $cb->nama_pilihan_jawaban; ?> type="radio" name="pertanyaan<?=$u->id_pertanyaan?>" id="defaultCheck1">
+                                      <input class="form-check-input" value="<?= $cb->nama_pilihan_jawaban; ?>" type="radio" name="pertanyaan<?=$u->id_pertanyaan?>" id="defaultCheck1">
                                       <label class="form-check-label" for="defaultCheck1">
                                         <?= $cb->nama_pilihan_jawaban; ?> 
                                       </label>

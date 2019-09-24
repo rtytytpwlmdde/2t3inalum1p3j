@@ -124,7 +124,7 @@ class Report extends CI_Controller {
         $write->save('php://output');
     }
 
-    function exportsReport($id_kuisioner){
+    function exportReport($id_kuisioner){
        	// Load plugin PHPExcel nya
     include APPPATH.'third_party/PHPExcel/PHPExcel.php';
     
@@ -139,7 +139,7 @@ class Report extends CI_Controller {
                  ->setKeywords("Data Alumni");
     // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
     
-    $excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA DOKUMEN ALUMNI"); // Set kolom A1 dengan tulisan "DATA SISWA"
+    $excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA DOKUMEN KUISIONER"); // Set kolom A1 dengan tulisan "DATA SISWA"
     $excel->getActiveSheet()->mergeCells('A1:H1'); // Set Merge Cell pada kolom A1 sampai E1
     $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
     $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
@@ -151,6 +151,9 @@ class Report extends CI_Controller {
     $nama_pertanyaan[] = null;
     $id_pertanyaan[] = null;
     $kolom[] = null;
+    $posisi[] = null;
+    $data_nama_pertanyaan[] = null;
+    $data_id_pertanyaan[] = null;
     $number = 0;
     $noPertanyaan = 0;
     foreach($pertayaan as $u){ $jumPertanyaan = $u->jumPertanyaan; 
@@ -167,7 +170,8 @@ class Report extends CI_Controller {
         if($noPertanyaan == $jumPertanyaan){
             break;
         }
-        $kolom[$noPertanyaan] = $i;
+        $kolom[$id_pertanyaan[$noPertanyaan]] = $i;
+        $posisi[$noPertanyaan] = $id_pertanyaan[$noPertanyaan];
         $excel->setActiveSheetIndex(0)->setCellValue($i.'3', $nama_pertanyaan[$noPertanyaan]); 
         $excel->getActiveSheet()->getColumnDimension($i)->setWidth(30); // Set width kolom A
         $noPertanyaan++;
@@ -178,21 +182,65 @@ class Report extends CI_Controller {
     
     ////////////////////////
     $dataKuisioner = $this->m_export->getDataKuisioner($id_kuisioner);
-    $responden = 0;
-    $no = 1; // Untuk penomoran tabel, di awal set dengan 1
+    $responden[] = null;
+    $alumni = 'null';
+    $first = null;
+    $last = 'D';
+    #
+    
+    $cek = 0;
+    $no = 0; // Untuk penomoran tabel, di awal set dengan 1
     $nomor_pertanyaan = 0; // Untuk penomoran tabel, di awal set dengan 1
     $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
-    foreach($dataKuisioner as $data){ // Lakukan looping pada variabel siswa
-        $excel->setActiveSheetIndex(0)->setCellValue('A'.$numrow, $no); // menjadi masalah karena statik
-        $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $data->id_responden);
-        $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, $data->nama);
-        $excel->setActiveSheetIndex(0)->setCellValue($kolom[$nomor_pertanyaan].$numrow, $data->nama_pertanyaan);
-        $nomor_pertanyaan++; // Tambah 1 setiap kali looping
-      $responden++;
-      $no++;
+    // foreach($dataKuisioner as $data){ // Lakukan looping pada variabel siswa
+    //     $excel->setActiveSheetIndex(0)->setCellValue('A'.$numrow, $no); // menjadi masalah karena statik
+    //     $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $data->id_responden);
+    //     $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, $data->nama);
+        
+        foreach($question as $asd){
+            $data_nama_pertanyaan[$nomor_pertanyaan] = $asd->nama_pertanyaan;
+            $data_id_pertanyaan[$nomor_pertanyaan] = $asd->id_pertanyaan;
+           
+            $nomor_pertanyaan++;
+        }
+        
+        foreach($dataKuisioner as $data){ // Lakukan looping pada variabel siswa
+            $responden[$cek] = $data->id_responden;
+            for ($a = $last; $a < 'ZZ'; $a++) {
+                $first = $a;
+                if($no == $jumPertanyaan){
+                    break;
+                }
+                $excel->setActiveSheetIndex(0)->setCellValue('A'.$numrow, $numrow-3); // menjadi masalah karena statik
+                $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $data->id_responden);
+                $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, $data->nama); 
+                
+                if($kolom[$data->id_pertanyaan] == $a){
+                    $excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, $data->tanggapan);
+                    $no++;
+                    break;
+                }else{
+                    $excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, '--');
+                    $no++;
+                }
+            }
+            if($cek != 0 ){
+                if($responden[$cek] != $responden[$cek-1]){
+                    $no = 0;
+                    $first = 'C';
+                    $col = 1;
+                    $numrow++;
+                }
+            }
+            $last = $first;
+            $last++;
+            $cek++;
+        }
+       
+   // $no++;
        // Tambah 1 setiap kali looping
       //$numrow++; // Tambah 1 setiap kali looping
-    }
+    
     // Set width kolom
     
     // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
@@ -210,7 +258,7 @@ class Report extends CI_Controller {
     $write->save('php://output');
 }
 
-    function exportReport($id_kuisioner){ 
+    function exportRepsort($id_kuisioner){ 
         $responden = 0;
         $no = 1; // Untuk 
         $nomor_pertanyaan = 0; // Untuk penomoran tabel, di awal set dengan 1
@@ -226,6 +274,7 @@ class Report extends CI_Controller {
             if($data->id_pertanyaan == $asd->id_pertanyaan){
                 echo $no.")".$asd->nama_pertanyaan." ------------ ".$data->tanggapan;
                 echo "<br>";
+                break;
             }else{
                 echo $no.")".$asd->nama_pertanyaan."000000000000000000000000000000000000000000000000000000000000null";
                 echo "<br>";
@@ -239,6 +288,35 @@ class Report extends CI_Controller {
             // Tambah 1 setiap kali looping
             //$numrow++; // Tambah 1 setiap kali looping
             }
+
+
+            // foreach($dataKuisioner as $data){ // Lakukan looping pada variabel siswa
+            //     $excel->setActiveSheetIndex(0)->setCellValue('A'.$numrow, $no); // menjadi masalah karena statik
+            //     $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $data->id_responden);
+            //     $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, '$data->nama');
+            //     $print = '---';
+            //     for ($a = $last; $a < 'ZZ'; $a++) {
+            //         $first = $a;
+            //         if($responden == $jumPertanyaan){
+            //             break;
+            //         }
+            //         $print = $data->tanggapan.", a: ".$a.", responden : ".$responden.", kolom :".$kolom[$responden];
+            //         //$excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, $data_nama_pertanyaan[$responden]);
+            //         if($kolom[$responden] == $a){
+            //             //$excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, $kolom);
+            //             $excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, $print);
+            //             $responden++;
+            //             break;
+            //         }else{
+            //             $excel->setActiveSheetIndex(0)->setCellValue($a.$numrow, '--');
+            //             $responden++;
+            //             $last = $first;
+            //             $last++;
+            //         }
+            //     }
+            //     $last = $first;
+            //     $last++;
+            // }
         }
     }
 }

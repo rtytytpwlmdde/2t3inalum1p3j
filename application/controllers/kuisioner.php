@@ -22,7 +22,13 @@ class Kuisioner extends CI_Controller {
 			}else if($this->session->userdata('status') == 'operator_fakultas' || $this->session->userdata('status') == 'operator_prodi'){
 				$this->load->view('template/template_operator', $data);
 			}else{
-				$this->load->view('template/template_alumni', $data);
+				$id_kuisioner = 0;
+				$id_section = 0;
+				$kuisioner = $this->m_kuisioner->getDataListKuisioner();
+				foreach($kuisioner as $u){
+					$id_kuisioner = $u->id_kuisioner;
+				}
+				redirect('kuisioner/detailKuisioner/'.$id_kuisioner.'/0');
 			}
     }
 
@@ -45,7 +51,7 @@ class Kuisioner extends CI_Controller {
 		$nama_kuisioner = $this->input->post('nama_kuisioner');
 		$id_kuisioner = null;
 		$data_kuisioner = array(
-			'nama_kuisioner' => $nama_kuisioner
+			'nama_kuisioner' => $nama_kuisioner,
 		);
 		$this->m_admin->tambahdata($data_kuisioner,'kuisioner');
 		$kuisioner = $this->m_kuisioner->getIdKuisioner($nama_kuisioner);
@@ -147,6 +153,7 @@ class Kuisioner extends CI_Controller {
 			$nama_pertanyaan = $this->input->post('nama_pertanyaan');
 			$jenis_pertanyaan = $this->input->post('jenis_pertanyaan');
 			$nomor_pertanyaan = $this->input->post('nomor_pertanyaan');
+			$keterangan_pertanyaan = $this->input->post('keterangan_pertanyaan');
 			
 			$data = array(
 				'id_kuisioner' => $id_kuisioner,
@@ -155,6 +162,7 @@ class Kuisioner extends CI_Controller {
 				'id_prodi' => $id_prodi,
 				'level_pertanyaan' => $level_pertanyaan,
 				'jenis_pertanyaan' => $jenis_pertanyaan,
+				'keterangan_pertanyaan' => $keterangan_pertanyaan,
 				'nomor_pertanyaan' => $nomor_pertanyaan
 			);
 			$this->m_admin->tambahdata($data,'pertanyaan');
@@ -271,8 +279,10 @@ class Kuisioner extends CI_Controller {
 						'tanggapan' => $tanggapan
 					);
 					$this->m_admin->tambahdata($data,'tanggapan');
+
 				}
 			}
+			
 			$this->session->set_flashdata('notif', "tanggapan berhasil disimpan");
 			redirect('kuisioner/getNextSectionKuisioner/'.$id_kuisioner.'/'.$id_section.'/'.$id_responden.'/'.$no_section);
 		}
@@ -379,6 +389,21 @@ class Kuisioner extends CI_Controller {
 			$this->m_admin->update_data($where,$data,'section');
 			$this->session->set_flashdata('notif', "section berhasil disimpan");
 			redirect('kuisioner/detailKuisioner/'.$id_kuisioner.'/'.$id_section);
+		}
+
+
+		function editStatusKuisioner($id_kuisioner){	
+			$data_online = array(
+				'status_kuisioner' => 'online',
+			);
+			$data_hide = array(
+				'status_kuisioner' => 'hide',
+			);
+			$where = array('id_kuisioner' => $id_kuisioner);
+			$this->m_admin->update_all_data($data_hide,'kuisioner');
+			$this->m_admin->update_data($where,$data_online,'kuisioner');
+			redirect('kuisioner/listKuisioner/');
+
 		}
 
 

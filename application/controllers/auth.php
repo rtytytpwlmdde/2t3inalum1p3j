@@ -27,7 +27,7 @@ class auth extends CI_Controller {
 					if($status=="admin"){
 						redirect('admin/dashboard');
 					}else if ($status == "operator_fakultas"){
-						redirect('operator_fakultas/dashboard');
+						redirect('tracer/dashboard');
 					}else if ($status == "operator_jurusan"){
 						redirect('operator_jurusan/dashboard');
 					}else if ($status == "operator_prodi"){

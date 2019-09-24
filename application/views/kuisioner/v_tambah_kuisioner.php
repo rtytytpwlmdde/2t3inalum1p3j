@@ -18,7 +18,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Nama Kuisioner</label>
-                        <input name="nama_kuisioner" type="text" class="form-control" >
+                        <input required name="nama_kuisioner" type="text" class="form-control" >
                       </div>
                     </div>
                   </div>

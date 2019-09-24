@@ -14,6 +14,9 @@ class M_kuisioner extends CI_Model{
 	function getDataListKuisioner(){
 		$this->db->select('*');
 		$this->db->from('kuisioner');
+		if($this->session->userdata('status') == 'alumni'){
+			$this->db->where('kuisioner.status_kuisioner','online');
+		}
 		$query = $this->db->get();
 		return $query->result();
 	}

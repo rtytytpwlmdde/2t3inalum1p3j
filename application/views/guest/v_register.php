@@ -18,20 +18,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="assets/images/logo-16x16.png" />
+    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>/assets/images/ub.png" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Argon - Social Network</title>
+    <title>Alumni - FEB UB</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.2/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Styles -->
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/components.css" rel="stylesheet">
-    <link href="assets/css/auth.css" rel="stylesheet">
-    <link href="assets/css/media.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/components.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/auth.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/forms.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/media.css" rel="stylesheet">
 </head>
 
 <body>
@@ -144,10 +145,8 @@
         <div class="col-md-6 auth-bg-image d-flex justify-content-center align-items-center">
             <div class="auth-left-content mt-5 mb-5 text-center">
                 <div class="weather-small text-white">
-                    <p class="current-weather"><i class='bx bx-sun'></i> <span>14&deg;</span></p>
-                    <p class="weather-city">Indonesia</p>
                 </div>
-                <div class="text-green mt-5 mb-5">
+                <div class="text-white mt-5 mb-5">
                     <h2 class="create-account mb-3">Create Account</h2>
                     <p>Selamat Datang Silahkan untuk Melakukan Pengisian Data Diri.</p>
 					<p>Jika telah Selesai Melakukan Pengisian Silahkan Cek Email Anda</p>
@@ -156,10 +155,11 @@
         </div>
     </div>
 
+ 
     <!-- Core -->
-    <script src="assets/js/jquery/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/popper/popper.min.js"></script>
-    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/popper/popper.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/bootstrap/bootstrap.min.js"></script>
     <!-- Optional -->
-    <script src="assets/js/app.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/app.js"></script>
 </body></html>

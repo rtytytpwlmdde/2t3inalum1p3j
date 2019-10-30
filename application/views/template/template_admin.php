@@ -77,21 +77,6 @@
           </div>
         </div>
       </li>
-	  <li class="nav-item dropdown">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKuisioner" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa fa-book"></i>
-          <span>Kuisioner</span>
-        </a>
-        <div id="collapseKuisioner" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Users:</h6>
-            <a class="collapse-item" href="<?php echo base_url('admin/paket_kuisioner'); ?>">Kuisioner Fakultas</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/paket_kuisioner'); ?>">Kuisioner Jurusan</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/paket_kuisioner'); ?>">Kuisioner Program Studi</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/paket_kuisioner/pencarian'); ?>">Review Kuisioner</a>
-          </div>
-        </div>
-      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#lowonganPekerjaan" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-briefcase"></i>
@@ -105,25 +90,10 @@
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('admin/opendonasi'); ?>">
-          <i class="fas fa-coins"></i>
-          <span>Open Donasi</span></a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('kuisioner/listKuisioner'); ?>">
-          <i class="fas fa-coins"></i>
-          <span>KUISONERRRRRRRR</span></a>
-      </li> 
 	  <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('admin/info_feb'); ?>">
           <i class="fas fa-newspaper"></i>
           <span>Info FEB</span></a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('admin/laporan'); ?>">
-        <i class="fas fa-print"></i>
-          <span>Print Laporan</span></a>
       </li>
 		<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masterdata" aria-expanded="true" aria-controls="collapseTwo">

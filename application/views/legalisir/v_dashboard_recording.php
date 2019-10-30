@@ -52,8 +52,8 @@
                                         <h6 class="text-muted">Detail Jumlah Transaksi</h6>
                                             <table class="table table-sm table-bordered">
                                                 <tr>
-                                                    <td>Bulan</td>
-                                                    <td>Jumlah Transaksi</td>
+                                                    <td class="text-center">Bulan</td>
+                                                    <td class="text-center">Transaksi</td>
                                                 </tr>
                                                     <?php 
                                                     for($i=1; $i<13; $i++){
@@ -65,8 +65,13 @@
                                                     }
                                                     ?>
                                                         <tr>
-                                                            <td><?php echo $i;?></td>
-                                                            <td><?php  if($result == 0){
+                                                            <td class="text-center">
+                                                            <?php 
+                                                            $monthNum = $i;
+                                                            $monthName = date("M", mktime(0, 0, 0, $monthNum, 10));
+                                                            echo $monthName;
+                                                            ?></td>
+                                                            <td class="text-center"><?php  if($result == 0){
                                                         echo "0";
                                                     }else{
                                                         echo $result."";

@@ -39,7 +39,7 @@
     <ul class="navbar-nav bg-gradient-lighst sidebar sidebar-light accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand  d-flex align-items-center justify-content-center bg-biru" href="index.html">
+      <a class="sidebar-brand  d-flex align-items-center justify-content-center bg-biru" href="<?php echo base_url('legalisir/transaksi'); ?>">
         <div class="sidebar-brand-icon ">
           <img src="<?php echo base_url(); ?>/assets/images/ub.png" width="35" height="35" alt="">
         </div>
@@ -104,11 +104,6 @@
         <a class="nav-link" href="<?php echo base_url('operator_fakultas/lowker'); ?>">
           <i class="fas fa-briefcase"></i>
           <span>Lowongan Pekerjaan</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/laporan'); ?>">
-          <i class="fas fa-print"></i>
-          <span>Print Laporan</span></a>
       </li>
 		<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoMasterData" aria-expanded="true" aria-controls="collapseTwo">

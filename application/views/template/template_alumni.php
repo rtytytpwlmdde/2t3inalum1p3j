@@ -18,6 +18,12 @@
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url() ?>/assets/alumni/sb-admin-2.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url() ?>/assets/alumni/alumni-style.css" rel="stylesheet" type="text/css">
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Include JS file. -->
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js'></script>
+
 
 </head>
 
@@ -45,11 +51,11 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/dashboard'); ?>">
+        <a class="nav-link" href="<?php echo base_url('info/timeline'); ?>">
             <i class="fas fa-circle-notch"></i>
           <span>Beranda</span></a>
       </li>
-      <li class="nav-item">
+      <li hidden class="nav-item">
         <a class="nav-link" href="<?php echo base_url('alumni/dashboard'); ?>">
             <i class="fas fa-comment-alt"></i>
           <span>Percakapan</span></a>
@@ -65,37 +71,27 @@
           <span>Legalisir</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/lowker/'); ?>">
+        <a class="nav-link" href="<?php echo base_url('lowker/listLowker/'); ?>">
         <i class="fas fa-briefcase"></i>
           <span>Lowongan Kerja</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/profil/index/'.$this->session->userdata('id_login')); ?>">
+        <a class="nav-link" href="<?php echo base_url('alumni/detailAlumni/'.$this->session->userdata('id_login')); ?>">
         <i class="far fa-id-card"></i>
           <span>Data Diri</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/profil/informasilulusan/'.$this->session->userdata('id_login')); ?>">
+        <a class="nav-link" href="<?php echo base_url('alumni/pendidikan/'.$this->session->userdata('id_login')); ?>">
         <i class="fas fa-graduation-cap"></i>
           <span>Data Pendidikan</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/profil/riwayatpekerjaan/'.$this->session->userdata('id_login')); ?>">
+        <a class="nav-link" href="<?php echo base_url('alumni/riwayatpekerjaan/'.$this->session->userdata('id_login')); ?>">
         <i class="fas fa-chalkboard-teacher"></i>
           <span>Riwayat Pekerjaan</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/profil/editpassword/'.$this->session->userdata('id_login')); ?>">
-        <i class="fas fa-lock"></i>
-          <span>Password</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('alumni/profil/editfoto/'.$this->session->userdata('id_login')); ?>">
-        <i class="fas fa-camera-retro"></i>
-          <span>Foto</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('leges/alumni/lihatIjazah'); ?>">
+        <a class="nav-link" href="<?php echo base_url('alumni/ijazah/'.$this->session->userdata('id_login').'/ijazah'); ?>">
         <i class="fas fa-upload"></i>
           <span>Ijazah</span></a>
       </li>
@@ -356,6 +352,7 @@
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-area-demo.js"></script>
   <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-pie-demo.js"></script>
+  <script type="text/javascript" src="<?php echo base_url().'/assets/select/js/jquery-2.2.3.min.js'?>"></script>
 
 </body>
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>/assets/images/ub.png" />
+    <link rel="icon" type="image/png" href="assets/images/ub.png" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Tracert Alumni FEB UB</title>
 
@@ -49,6 +49,9 @@
                             <a href="forgot-password.html">Forgot password?</a>
                         </div>
                         <div class="col-md-6">
+                            <label class="custom-control material-checkbox">
+                                <input type="checkbox" class="material-control-input">
+                                <span class="material-control-indicator"></span>
                                 <a href ="<?php echo base_url('register'); ?>" class="material-control-description">Register</a>
                             </label>
                         </div>

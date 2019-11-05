@@ -1,56 +1,43 @@
 <?php 
 
 class M_lowker extends CI_Model{
-	function tampillowker(){
-        $this->db->select('*');	
-		$this->db->from('lowonganpekerjaan');
-		$this->db->where('lowonganpekerjaan.status','valid');
-		$query = $this->db->get();
-		return $query->result();
-    }
-	function data_lowker(){
-        $this->db->select('*');	
-		$this->db->from('lowonganpekerjaan');
-		$this->db->where('lowonganpekerjaan.status','BelumValid');
-		$query = $this->db->get();
-		return $query->result();
-    }
-	 function tambahdata($data,$table){
-		$this->db->insert($table,$data);
-	}
-	function hapus_data($where,$table){
-		$this->db->where($where);
-		$this->db->delete($table);
-	}	
-	function update_data($where,$data,$table){
-		$this->db->where($where);
-		$this->db->update($table,$data);
-	}
-	function edit_data($where,$table){
-	return $this->db->get_where($table,$where);	
-	}
-	function get_data_history_lowker(){
-		$username = $this->session->userdata('username');
-		$this->db->select('*');
-		$this->db->from('lowonganpekerjaan');
-		$this->db->where('username',$username);
+	function getDataLowker(){
+		$this->db->select('*');	
+		$this->db->from('lowongan_pekerjaan');
+		$this->db->join('informasi','lowongan_pekerjaan.id_informasi = informasi.id_informasi');
 		$query = $this->db->get();
 		return $query->result();
 	}
-	public function dataPeminjamanMahasiswa($id){
-		$this->db->select('*');
-		$this->db->from('lowonganpekerjaan');
-		$this->db->where('lowonganpekerjaan.id_lowongan',$id);
+		
+	function getDataInformasiPekerjaanBy($id_penulis,$nama_informasi,$tanggal_informasi,$jenis_informasi){
+		$this->db->select('*');	
+		$this->db->from('informasi');
+		$this->db->where('id_penulis',$id_penulis);
+		$this->db->where('nama_informasi',$nama_informasi);
+		$this->db->where('tanggal_informasi',$tanggal_informasi);
+		$this->db->where('jenis_informasi',$jenis_informasi);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataLowkerByName(){
+		$id_penulis = $this->session->userdata('username');
+		$this->db->select('*');	
+		$this->db->from('lowongan_pekerjaan');
+		$this->db->join('informasi','lowongan_pekerjaan.id_informasi = informasi.id_informasi');
+		$this->db->where('informasi.id_penulis',$id_penulis);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataLowkerById($id){
+		$id_penulis = $this->session->userdata('username');
+		$this->db->select('*');	
+		$this->db->from('lowongan_pekerjaan');
+		$this->db->join('informasi','lowongan_pekerjaan.id_informasi = informasi.id_informasi');
+		$this->db->where('lowongan_pekerjaan.id_lowongan',$id);
 		$query = $this->db->get();
 		return $query->result();
 	}
 	
-	public function historyalumni(){
-		$username = $this->session->userdata('nama_login');
-		$this->db->select('*');
-		$this->db->from('lowonganpekerjaan');
-		$this->db->where('lowonganpekerjaan.username',$username);
-		$query = $this->db->get();
-		return $query->result();
-	}
 }

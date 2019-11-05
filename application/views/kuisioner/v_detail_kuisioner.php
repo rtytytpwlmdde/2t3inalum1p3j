@@ -10,8 +10,9 @@
   <div class="row pt-2">
     <div class="col-sm-6">
       <h1 class="h3 mb-2 text-gray-800">Detail Kuisioner</h1> 
-      <h5 class="h5 mb-1 text-gray-600"><?= $nama_kuisioner; ?></h5>
-  <?php foreach($jumPertanyaan as $s){  $nomor =  $s->jumPertanyaan+1; } ?>
+      <h5 class="h5 mb-1 text-gray-600"><?= $nama_kuisioner; ?>
+      <a class="btn btn-sm btn-primary" href="<?php echo base_url('kuisioner/reportKuisioner/'.$id_kuisioner.'/'.$nama_kuisioner);?>">Tanggapan</a></h5>
+      <?php foreach($jumPertanyaan as $s){  $nomor =  $s->jumPertanyaan+1; } ?>
     </div>
     <div class="col-sm-2">
     <button class="btn btn-sm btn-danger scrool-down ">Scrool Down</button> 
@@ -20,6 +21,7 @@
       <div class="d-flex flex-row-reverse bd-highlight mb-1">
             <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url('kuisioner/previewKuisioner/'.$id_kuisioner.'/'.$id_section); ?>"><i class="fas fa-eye"></i> Preview</a>
             <a class="btn btn-sm btn-primary text-white "  data-toggle="modal" data-target="#modalTambahPertanyaan">Tambah Pertanyaan</a>
+            <a class="btn btn-sm btn-info text-white "  data-toggle="modal" data-target="#modalTambahSplitPertanyaan">Tambah Split</a>
             
       </div>
     </div>
@@ -29,7 +31,7 @@
   <div class="row">
     <div class="col-md-10">
     <?php foreach ($kuisioner as $u){?>
-        <?php if($u->jenis_pertanyaan == '1'){?>
+      <?php if($u->jenis_pertanyaan == '1'){?>
         <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
               <div class="row">
                   <!-- Earnings (Monthly) Card Example -->
@@ -624,6 +626,92 @@
             </div>
         <?php } ?>
       <?php } ?>
+
+      
+      <?php if($u->jenis_pertanyaan == '0'){?>
+        <?php if($status_operator == 'operator_fakultas' || $operator_prodi == $u->id_prodi){?>
+              <div class="row">
+                  <!-- Earnings (Monthly) Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-2">
+                    <div class="card  bg-disabled h-100 ">
+                      <div class="card-body">
+                        <div class=" no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <div class=" no-gutters align-items-center">
+                                  <div class="row profile-rows">
+                                    <div class="col-md-1"  style="max-width: 50px">
+                                        <div class="text-gray-800 py-2" style="font-size: 1.4em;">
+                                          <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
+                                            data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nomor_pertanyaan;?></a>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="text-gray-800" >
+                                        <a data-toggle="modal"  style="cursor: pointer;" data-id_kuisioner="<?= $u->id_kuisioner; ?>" data-id_pertanyaan="<?= $u->id_pertanyaan; ?>" 
+                                            data-nama_pertanyaan="<?= $u->nama_pertanyaan; ?>" data-nomor_pertanyaan="<?= $u->nomor_pertanyaan; ?>" class="open-modalEditPertanyaan text-dark" href="#modalEditPertanyaan"><?= $u->nama_pertanyaan;?></a>
+                                      </div>
+                                      
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-gray-800 py-4 " style="font-size: 0.8em;"><span class="badge badge-warning"><?= $u->nama_jenis_pertanyaan; ?></span><br>
+                                          <?php if($u->level_pertanyaan == 'operator_fakultas'){?>
+                                            <span class="text-danger"><?= $u->level_pertanyaan; ?> </span>
+                                          <?php }else{?>
+                                            <span class="text-danger"><?= $u->prodi; ?> </span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="text-center  py-3 align-items-right d-flex flex-row-reverse bd-highlight">
+                                            <a title="hapus pertanyaan ini" href="<?php echo base_url('kuisioner/hapusPertanyaan/'.$u->id_kuisioner.'/'.$u->id_pertanyaan.'/'.$u->id_section);?>" class="btn btn-sm btn-danger text-white "><i class="fas fa-trash"></i> </a>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        <?php }else{?>
+          <div class="row">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-12 col-md-12 mb-2">
+                  <div class="card border-left-secondary  h-100 ">
+                    <div class="card-body bg-disabled">
+                      <div class=" no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class=" no-gutters align-items-center">
+                                <div class="row profile-rows">
+                                  <div class="col-md-1"  style="max-width: 50px">
+                                      <div class="text-gray-800 py-2" style="font-size: 1.4em;">
+                                        <a><?= $u->nomor_pertanyaan;?></a>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-11">
+                                    <div class="text-gray-800" >
+                                      <a  class="text-dark" ><?= $u->nama_pertanyaan;?></a>
+                                    </div>
+                                      <div class="text-gray-600" >
+                                        <h6 style="font-size:12px"><?= $u->keterangan_pertanyaan?></h6>
+                                      </div>
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        <?php } ?>
+      <?php } ?>
+
+
    <?php } ?>
     </div>
     <div class="col-md-2 mb-2">
@@ -814,9 +902,67 @@
   </div>
 
 
+<!-- modal tambah pertanyaan -------------------------------------------------------------------------------------------------------- -->
+<div class="modal fade" id="modalTambahSplitPertanyaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Split Pertanyaan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="<?php echo base_url(). 'kuisioner/tambahPertanyaan'; ?>" method="POST">
+        <div class="modal-body">
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Nama Split</label>
+                  <div class="col-md-9">
+                  <?php if($this->session->userdata('status') == 'operator_fakultas'){?>
+                    <input type="hidden" name="id_prodi" id="id_prodi" value="0"/>
+                    <input type="hidden" name="level_pertanyaan" value="fakultas"/>
+                   <?php }else{?>
+                    <input type="hidden" name="id_prodi" id="id_prodi" value="<?= $this->session->userdata('id_prodi') ?>"/>
+                    <input type="hidden" name="level_pertanyaan" value="prodi"/>
+                   <?php }?>
+                    <input type="hidden" name="id_section" id="id_section" value="<?= $id_section; ?>"/>
+                    <textarea class="form-control"  name="nama_pertanyaan" rows="3"></textarea>
+                  </div>
+              </div>
+                    <input type="hidden" name="jenis_pertanyaan"  value="0" class="form-control">
+                    <input type="hidden" name="id_kuisioner"  value="<?= $id_kuisioner; ?>" class="form-control">
+                    <input type="hidden" name="nomor_pertanyaan"  value="<?= $nomor; ?>" class="form-control">
+                 
+              
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Keterangan</label>
+                  <div class="col-md-9"> 
+                    <input type="text " name="keterangan_pertanyaan"  class="form-control">
+                  </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button  type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- modal tambah split -------------------------------------------------------------------------------------------------------- -->
+
 
 <script>
 $(document).on("click", ".open-modalTambahPilihanJawaban", function () {
+     var id_kuisioner = $(this).data('id_kuisioner');
+     $(".modal-body #id_kuisioner").val( id_kuisioner );
+     var id_pertanyaan = $(this).data('id_pertanyaan');
+     $(".modal-body #id_pertanyaan").val( id_pertanyaan );
+     var jenis = $(this).data('jenis');
+     $(".modal-body #jenis").val( jenis );
+});
+</script>
+<script>
+$(document).on("click", ".open-modalTambahSplitPertanyaan", function () {
      var id_kuisioner = $(this).data('id_kuisioner');
      $(".modal-body #id_kuisioner").val( id_kuisioner );
      var id_pertanyaan = $(this).data('id_pertanyaan');

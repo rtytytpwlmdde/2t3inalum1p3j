@@ -257,29 +257,52 @@ class Kuisioner extends CI_Controller {
 			$id_jawaban = null;
 			$kuisioner = $this->m_kuisioner->getPertanyaanKuisioner($id_kuisioner,$id_section);
 			foreach($kuisioner as $u){
-				$id_pertanyaan = $u->id_pertanyaan;
-				$tanggapan = $this->input->post('pertanyaan'.$id_pertanyaan);
-				if($tanggapan == null){
-				}else{
-					if($u->jenis_pertanyaan == '4'){
-						$pieces = explode("~", $tanggapan);
-						"dropdown";
-						$id_jawaban = $pieces[0];
-						$tanggapan = $pieces[1];
+				if($u->jenis_pertanyaan != '3'){
+					$id_pertanyaan = $u->id_pertanyaan;
+					$tanggapan = $this->input->post('pertanyaan'.$id_pertanyaan);
+					if($tanggapan == null){
 					}else{
-						$tanggapan = $tanggapan;
-						$id_jawaban = null;
+						if($u->jenis_pertanyaan == '4'){
+							$pieces = explode("~", $tanggapan);
+							"dropdown";
+							$id_jawaban = $pieces[0];
+							$tanggapan = $pieces[1];
+						}else{
+							$tanggapan = $tanggapan;
+							$id_jawaban = null;
+						}
+						$data = array(
+							'id_kuisioner' => $id_kuisioner,
+							'id_section' => $id_section,
+							'id_pertanyaan' => $id_pertanyaan,
+							'id_responden' => $id_responden,
+							'id_jawaban' => $id_jawaban,
+							'tanggapan' => $tanggapan
+						);
+						$this->m_admin->tambahdata($data,'tanggapan');
 					}
-					$data = array(
-						'id_kuisioner' => $id_kuisioner,
-						'id_section' => $id_section,
-						'id_pertanyaan' => $id_pertanyaan,
-						'id_responden' => $id_responden,
-						'id_jawaban' => $id_jawaban,
-						'tanggapan' => $tanggapan
-					);
-					$this->m_admin->tambahdata($data,'tanggapan');
-
+				}else{
+					$no = 1;
+					$cekbox = $this->m_kuisioner->getDataCekBox($u->id_pertanyaan);
+					foreach($cekbox as $c){
+							$id_pertanyaan = $u->id_pertanyaan;
+							$tanggapan = $this->input->post('pertanyaan'.$id_pertanyaan.'~'.$no);
+							if($tanggapan == null){
+							}else{
+								$tanggapan = $tanggapan;
+								$id_jawaban = null;
+								$data = array(
+									'id_kuisioner' => $id_kuisioner,
+									'id_section' => $id_section,
+									'id_pertanyaan' => $id_pertanyaan,
+									'id_responden' => $id_responden,
+									'id_jawaban' => $id_jawaban,
+									'tanggapan' => $tanggapan
+								);
+								$this->m_admin->tambahdata($data,'tanggapan');
+							}
+							$no++;
+						}
 				}
 			}
 			
@@ -404,6 +427,49 @@ class Kuisioner extends CI_Controller {
 			$this->m_admin->update_data($where,$data_online,'kuisioner');
 			redirect('kuisioner/listKuisioner/');
 
+		}
+
+		function reportKuisioner($id_kuisioner,$nama_kuisioner){
+			$data['id_kuisioner'] = $id_kuisioner;
+			$data['nama_kuisioner'] = $nama_kuisioner;
+			$data['jumlahPertanyaan'] = $this->m_kuisioner->getJumlahPertanyaanByKuisioner($id_kuisioner);
+			$data['jumlahAlumni'] = $this->m_kuisioner->getJumlahAlumni();
+			$data['jumlahResponden'] = $this->m_kuisioner->getJummlahRespondenByKuisioner($id_kuisioner);
+			$data['jumlahResponden'] = $this->m_kuisioner->getJummlahRespondenByKuisioner($id_kuisioner);
+			$data['rekapTanggapan'] = $this->m_kuisioner->getJumlahRekapTanggapan($id_kuisioner);
+			$data['tanggapan1'] = $this->m_kuisioner->getDataTanggapan1($id_kuisioner);
+			$data['tanggapan2'] = $this->m_kuisioner->getDataTanggapan2($id_kuisioner);
+			$data['tanggapan3'] = $this->m_kuisioner->getDataTanggapan3($id_kuisioner);
+			$data['tanggapan5'] = $this->m_kuisioner->getDataTanggapan5($id_kuisioner);
+			$data['tanggapan4'] = $this->m_kuisioner->getDataTanggapan4($id_kuisioner);
+			$data['tanggapan6'] = $this->m_kuisioner->getDataTanggapan6($id_kuisioner);
+			$data['kuisioner'] = $this->m_kuisioner->getDataReportKuisioner($id_kuisioner);
+			$data['main_view'] = 'kuisioner/v_report';
+			if($this->session->userdata('username') == 'admin'){
+				$this->load->view('template/template_admin', $data);
+			}else if($this->session->userdata('status') == 'operator_fakultas' || $this->session->userdata('status') == 'operator_prodi'){
+				$this->load->view('template/template_operator', $data);
+			}else{
+				$id_kuisioner = 0;
+				$id_section = 0;
+				$kuisioner = $this->m_kuisioner->getDataListKuisioner();
+				foreach($kuisioner as $u){
+					$id_kuisioner = $u->id_kuisioner;
+				}
+				redirect('kuisioner/detailKuisioner/'.$id_kuisioner.'/0');
+			}
+		}
+		
+		function detailTanggapan($id_pertanyaan,$nama_pertanyaan){
+			$data['nama_pertanyaan'] = $nama_pertanyaan;
+			$data['id_pertanyaan'] = $id_pertanyaan;
+			$data['kuisioner'] = $this->m_kuisioner->getDataTanggapanByPertanyaan($id_pertanyaan);
+			$data['jumlahAlumni'] = $this->m_kuisioner->getJumlahAlumni();
+			$data['jumlahResponden'] = $this->m_kuisioner->getJummlahRespondenByKuisioner($id_kuisioner);
+			$data['jumlahResponden'] = $this->m_kuisioner->getJummlahRespondenByKuisioner($id_kuisioner);
+			$data['tanggapan4'] = $this->m_kuisioner->getDataTanggapan4($id_kuisioner);
+			$data['main_view'] = 'kuisioner/v_detail_tanggapan';
+				$this->load->view('template/template_operator', $data);
 		}
 
 

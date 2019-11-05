@@ -65,19 +65,36 @@ class M_alumni extends CI_Model{
 	}
 	
 	
-	 function dataalumni($nim){
+	 function dataAlumni($nim){
 		$this->db->select('*');
 		$this->db->from('alumni');
+		$this->db->join('jurusan','alumni.id_jurusan= jurusan.id_jurusan');
+		$this->db->join('prodi','alumni.id_prodi= prodi.id_prodi');
 		//$this->db->join('riwayat_pekerjaan','alumni.nim= riwayat_pekerjaan.nim');
 		$this->db->where('alumni.nim',$nim);
 		$query = $this->db->get();
 		return $query->result();
 	}
-	 function riwayatpekerjaan($nim){
+	 function getDataRiwayatPekerjaan($nim){
 		$this->db->select('*');
 		$this->db->from('riwayat_pekerjaan');
-		$this->db->join('alumni','alumni.nim= riwayat_pekerjaan.nim');
 		$this->db->where('riwayat_pekerjaan.nim',$nim);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataRiwayatPendidikan($nim){
+		$this->db->select('*');
+		$this->db->from('pendidikan');
+		$this->db->where('username',$nim);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataIjazahByNim($nim){
+		$this->db->select('*');
+		$this->db->from('alumni');
+		$this->db->where('username',$nim);
 		$query = $this->db->get();
 		return $query->result();
 	}

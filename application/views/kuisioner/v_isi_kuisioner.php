@@ -110,17 +110,19 @@ foreach($idsection as $u){
                                   <div class="text-gray-800 mb-1 h5" >
                                   <a ><?= $u->nama_pertanyaan;?></a>
                                 </div>
-                                <?php foreach ($pilihan_jawaban as $cb){
+                                <?php 
+                                $cekbox=1;
+                                foreach ($pilihan_jawaban as $cb){
                                   if($cb->id_pertanyaan == $u->id_pertanyaan){?>
                                   <div class="text-gray-800 ml-3" >
                                     <div class="form-check">
-                                      <input class="form-check-input" value="<?= $cb->nama_pilihan_jawaban; ?>" name="pertanyaan<?=$u->id_pertanyaan?>" type="checkbox" value="" id="defaultCheck1">
-                                      <label class="form-check-label" for="defaultCheck1">
-                                        <a ><?= $cb->nama_pilihan_jawaban; ?></a>
+                                      <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="pertanyaan<?=$u->id_pertanyaan?>~<?= $cekbox?>" value="<?= $cb->nama_pilihan_jawaban; ?>"><?= $cb->nama_pilihan_jawaban; ?>
                                       </label>
                                     </div>
                                   </div>
-                                <?php } } ?>
+                                <?php $cekbox++;
+                                } } ?>
                               </div>
                             </div>
                       </div>
@@ -195,9 +197,8 @@ foreach($idsection as $u){
                                   if($cb->id_pertanyaan == $u->id_pertanyaan){?>
                                   <div class="text-gray-800 ml-3" >
                                     <div class="form-check">
-                                      <input class="form-check-input" value="<?= $cb->nama_pilihan_jawaban; ?>" type="radio" name="pertanyaan<?=$u->id_pertanyaan?>" id="defaultCheck1">
-                                      <label class="form-check-label" for="defaultCheck1">
-                                        <?= $cb->nama_pilihan_jawaban; ?> 
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="pertanyaan<?=$u->id_pertanyaan?>" value="<?= $cb->nama_pilihan_jawaban; ?>"><?= $cb->nama_pilihan_jawaban; ?>
                                       </label>
                                     </div>
                                   </div>

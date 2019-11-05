@@ -27,7 +27,6 @@
             <?php if($status_operator == 'admin' || $status_operator == 'operator_fakultas' || $status_operator == 'operator_prodi'){ ?>
             <th>Aksi</th>
             <th>Status</th>
-            <th>Report</th>
               <?php }?>
           </tr>
         </thead>
@@ -65,7 +64,6 @@
                   <?php } ?>
                 </td>
                 <?php }?>
-                <td><a href="<?php echo site_url('report/exportReport/'.$u->id_kuisioner); ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-file-export"></i> Report</a></td>
             </tr>
         
             <?php } ?>

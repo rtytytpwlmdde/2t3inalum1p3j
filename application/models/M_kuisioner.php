@@ -37,6 +37,17 @@ class M_kuisioner extends CI_Model{
 		return $query->result();
 	}
 
+	function getDataReportKuisioner($id_kuisioner){
+		$this->db->select('*');
+		$this->db->from('pertanyaan');
+		$this->db->join('jenis_pertanyaan','pertanyaan.jenis_pertanyaan= jenis_pertanyaan.id_jenis_pertanyaan');
+		//$this->db->join('tanggapan','tanggapan.id_kuisioner= pertanyaan.id_kuisioner');
+		//$this->db->join('alumni','alumni.nim= tanggapan.id_responden');
+		$this->db->where('pertanyaan.id_kuisioner',$id_kuisioner);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function getPertanyaanKuisioner($id,$section){
 		$this->db->select('*');
 		$this->db->from('kuisioner');
@@ -130,6 +141,14 @@ class M_kuisioner extends CI_Model{
 		return $query->result();
 	}
 
+	function getDataCekBox($id){
+		$this->db->select('*');
+		$this->db->from('pilihan_jawaban');
+		$this->db->where('pilihan_jawaban.id_pertanyaan',$id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function cekPertanyaanByIdKuisioner($id){
 		$this->db->select('*');
 		$this->db->from('kuisioner');
@@ -199,6 +218,126 @@ class M_kuisioner extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function getJumlahPertanyaanByKuisioner($id_kuisioner){
+		$this->db->select('count(id_pertanyaan) as jumPertanyaan');
+		$this->db->from('pertanyaan');
+		$this->db->where('pertanyaan.id_kuisioner',$id_kuisioner);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getJummlahRespondenByKuisioner($id_kuisioner){
+		$this->db->select('id_responden');
+		$this->db->from('tanggapan');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+        $this->db->group_by('id_responden');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getJumlahAlumni(){
+		$this->db->select('count(nim) as jumAlumni');
+		$this->db->from('alumni');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan1($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','1');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan2($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','2');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan3($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','3');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan4($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','4');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan5($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','5');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataTanggapan6($id_kuisioner){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('pertanyaan.jenis_pertanyaan','6');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getJumlahRekapTanggapan($id_kuisioner){
+		$this->db->select('count(tanggapan.id_responden) as jumResponden');
+		$this->db->select('tanggapan.id_tanggapan, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, pertanyaan.nama_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('tanggapan.id_kuisioner',$id_kuisioner);
+		$this->db->group_by('tanggapan.tanggapan'); 
+		$this->db->order_by('tanggapan.id_pertanyaan', 'asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+
+	function getDataTanggapanByPertanyaan($id_pertanyaan){
+		$this->db->select('alumni.nim, alumni.nama, tanggapan.tanggapan, pertanyaan.jenis_pertanyaan, tanggapan.id_pertanyaan');
+		$this->db->from('tanggapan');
+		$this->db->join('alumni','tanggapan.id_responden= alumni.nim');
+		$this->db->join('pertanyaan','pertanyaan.id_pertanyaan= tanggapan.id_pertanyaan');
+		$this->db->where('tanggapan.id_pertanyaan',$id_pertanyaan);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	
 
 }

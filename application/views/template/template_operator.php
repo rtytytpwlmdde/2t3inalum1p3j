@@ -9,25 +9,23 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Alumni - FEB</title><script src= 
-"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
-    </script> 
+  <title>Alumni - FEB</title>
   <link rel="icon" href="<?php echo base_url() ?>/assets/images/ub.png">
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url() ?>/assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- Custom styles for this template-->
  
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-
   <link href="<?php echo base_url() ?>/assets/alumni/sb-admin-2.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url() ?>/assets/alumni/alumni-style.css" rel="stylesheet" type="text/css">
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-   
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Include JS file. -->
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js'></script>
+
+
 </head>
 
 <body id="page-top">
@@ -39,15 +37,24 @@
     <ul class="navbar-nav bg-gradient-lighst sidebar sidebar-light accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand  d-flex align-items-center justify-content-center bg-biru" href="<?php echo base_url('legalisir/transaksi'); ?>">
+      <a class="sidebar-brand  d-flex align-items-center justify-content-center bg-biru" href="index.html">
         <div class="sidebar-brand-icon ">
           <img src="<?php echo base_url(); ?>/assets/images/ub.png" width="35" height="35" alt="">
         </div>
-        <div class="sidebar-brand-text mx-3 text-light">FISH <sup>FEB UB</sup></div>
+        <div class="sidebar-brand-text mx-3 text-light">Alumni <sup>FEB UB</sup></div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
+
+     
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('info/timeline'); ?>">
+            <i class="fas fa-circle-notch"></i>
+          <span>Beranda</span></a>
+      </li>
       <!-- Nav Item - Tables -->
     <?php if($this->session->userdata('status') == 'recording'){ ?>
       <li class="nav-item">
@@ -86,25 +93,27 @@
     <?php if($this->session->userdata('status') == 'operator_fakultas'){ ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('tracer/dashboard'); ?>">
-            <i class="fas fa-circle-notch"></i>
+          <i class="fas fa-user-friends"></i>
           <span>Dashboard</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/alumni'); ?>">
+        <a class="nav-link" href="<?php echo base_url('alumni'); ?>">
           <i class="fas fa-user-friends"></i>
           <span>Alumni</span></a>
       </li>
-	  
+
+      
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('kuisioner/listKuisioner'); ?>">
-        <i class="fas fa-poll-h"></i>
+        <i class="fas fa-fw fa fa-book"></i>
           <span>Kuisioner</span></a>
-      </li> 
+      </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/lowker'); ?>">
+        <a class="nav-link" href="<?php echo base_url('lowker/listLowker'); ?>">
           <i class="fas fa-briefcase"></i>
           <span>Lowongan Pekerjaan</span></a>
       </li>
+     
 		<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoMasterData" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
@@ -120,44 +129,6 @@
         </div>
       </li>
     <?php } ?>
-    <?php if($this->session->userdata('status') == 'operator_prodi'){ ?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/alumni'); ?>">
-          <i class="fas fa-user-friends"></i>
-          <span>Alumni</span></a>
-      </li>
-	  
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('kuisioner/listKuisioner'); ?>">
-        <i class="fas fa-chalkboard-teacher"></i>
-          <span>Kuisioner</span></a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/lowker'); ?>">
-          <i class="fas fa-briefcase"></i>
-          <span>Lowongan Pekerjaan</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('operator_fakultas/laporan'); ?>">
-          <i class="fas fa-print"></i>
-          <span>Print Laporan</span></a>
-      </li>
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoMasterData" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Master Data</span>
-        </a>
-        <div id="collapseTwoMasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Master Data:</h6>
-            <a class="collapse-item" href="<?php echo base_url('operator_fakultas/obrolan'); ?>">Forum Komunikasi</a>
-            <a class="collapse-item" href="<?php echo base_url('operator_fakultas/alumni/reset_password'); ?>">Reset Password</a>
-            <a class="collapse-item" href="<?php echo base_url('operator_fakultas/obrolan/reset_obrolan'); ?>">Reset Obrolan</a>
-          </div>
-        </div>
-      </li>
-    <?php } ?>
-    
 
 
       <!-- Divider -->
@@ -220,40 +191,6 @@
               </div>
             </li>
 
-            <?php if($this->session->userdata('status') == 'keuangan' || $this->session->userdata('status') == 'recording'){ ?>
-            <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <?php $transaksi_baru = 0;
-                                foreach($jumlah_transaksi_baru as $a){ ?>
-                                    <?php if($a->jumlah_transaksi_baru != '0'){?>
-                                      <span class="badge badge-danger badge-counter" title="terdapat <?= $transaksi_baru = $a->jumlah_transaksi_baru?> transaksi baru">
-                                      <?= $a->jumlah_transaksi_baru; ?>
-                                      </span>
-                                    <?php } else {?>                     
-                                      <span class="badge badge-danger badge-counter" title="terdapat <?= $transaksi_baru = $a->jumlah_transaksi_baru?> transaksi baru">
-                                      <?= $a->jumlah_transaksi_baru; ?>
-                                      </span>
-                                    <?php } ?>
-                                <?php } ?>
-              </a>
-              <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  Terdapat <?= $transaksi_baru ?> transaksi yang belum diproses
-                </h6>
-                <form action="<?php echo base_url('legalisir/transaksi/' )?>" method="post">
-                      <?php if($this->session->userdata('status') == 'keuangan'){?>
-                          <input type="text" name="status_pesanan" hidden value="3"><button class="dropdown-item text-center small text-gray-500" type="submit">lihat semua</button>
-                      <?php }else{ ?>
-                              <input type="text" name="status_pesanan" hidden value="4"><button class="dropdown-item text-center small text-gray-500" type="submit">lihat semua</button>
-                      <?php } ?>
-                  </form>
-              </div>
-            </li>
-            <?php } ?>
             
 
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -261,7 +198,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-200 small"><?= $this->session->userdata('username'); ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-200 small"><?= $this->session->userdata('status'); ?></span>
                 
               </a>
               <!-- Dropdown - User Information -->
@@ -340,8 +277,15 @@
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url()?>/assets/admin/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->">
-    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="<?php echo base_url()?>/assets/admin/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-area-demo.js"></script>
+  <script src="<?php echo base_url()?>/assets/admin/js/demo/chart-pie-demo.js"></script>
+  <script type="text/javascript" src="<?php echo base_url().'/assets/select/js/jquery-2.2.3.min.js'?>"></script>
+
+  
 
 </body>
 

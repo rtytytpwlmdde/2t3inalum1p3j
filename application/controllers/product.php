@@ -34,5 +34,27 @@ class Product extends CI_Controller{
 		$data=$this->product_model->delete_product();
 		echo json_encode($data);
 	}
+	function produk(){
+		$data['produk'] = $this->m_produk->tampilProduk()->result();
+		$data['main_view'] = 'admin/v_data_produk';
+		$this->load->view('template/template_admin', $data);
+	}
 
+	function tambah_produk(){
+		$data['main_view'] = 'admin/v_tambah_produk';
+		$this->load->view('template/template_admin', $data);
+	}
+
+	function tambahProduk(){
+		$nama_produk = $this->input->post('nama_produk');
+		$harga = $this->input->post('harga');
+		
+		$data = array(
+			'nama_produk' => $nama_produk,
+			'harga' => $harga
+		);
+		$this->m_admin->tambahdata($data,'produk');
+		$this->session->set_flashdata('notif', "data $nama_produk berhasil ditambahkan");
+		redirect('admin/produk');
+	}
 }

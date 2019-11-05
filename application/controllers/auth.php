@@ -29,11 +29,11 @@ class auth extends CI_Controller {
 					}else if ($status == "operator_fakultas"){
 						redirect('tracer/dashboard');
 					}else if ($status == "operator_jurusan"){
-						redirect('operator_jurusan/dashboard');
+						redirect('tracer/dashboard');
 					}else if ($status == "operator_prodi"){
-						redirect('operator_prodi/dashboard');
+						redirect('tracer/dashboard');
 					}else if ($status == "gugusjaminanmutu"){
-						redirect('gugusjaminanmutu/dashboard');
+						redirect('tracer/dashboard');
 					}else if ($status == "recording"){
 						redirect('legalisir/dashboard');
 					}else{
@@ -59,7 +59,7 @@ class auth extends CI_Controller {
 					$nama_kota = $this->session->userdata('nama_kota');
 					$status_alumni =$this->session->userdata('status_alumni');
 					if($status_alumni == "aktif"){
-					redirect('alumni/dashboard');
+					redirect('info/timeline');
 					}else{
 						redirect('auth/logout_non_aktif');
 					}
